@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { SearchInput } from '../../ui/SearchInput';
+import { SearchInput } from '../../components/ui/SearchInput';
 import { PubChem } from '../../lib/pubchem';
 import { useAppStore } from '../../store/useAppStore';
 import { MOLECULES } from '../../data/molecules';

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
-import { Panel } from '../../ui/Panel';
-import { PropertyGrid, PropertyItem } from '../../ui/PropertyGrid';
-import { EmptyState } from '../../ui/EmptyState';
-import { Spinner } from '../../ui/Spinner';
+import { Panel } from '../../components/ui/Panel';
+import { PropertyGrid, PropertyItem } from '../../components/ui/PropertyGrid';
+import { EmptyState } from '../../components/ui/EmptyState';
+import { Spinner } from '../../components/ui/Spinner';
 import { Search, ExternalLink, Copy } from 'lucide-react';
 
 export function CompoundInfo() {

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { MoleculeViewer } from '../../three/MoleculeViewer';
 import { SkeletalView } from '../../two/SkeletalView';
-import { SegmentedControl } from '../../ui/SegmentedControl';
-import { Badge } from '../../ui/Badge';
+import { SegmentedControl } from '../../components/ui/SegmentedControl';
+import { Badge } from '../../components/ui/Badge';
 
 export function CompoundVisualizer() {
   const { compoundView, setCompoundView, activeCompound } = useAppStore();

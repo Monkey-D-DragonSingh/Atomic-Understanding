@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ELEMENTS } from '../../data/elements';
 import { CATEGORY_COLORS } from '../../data/constants';
 import { useAppStore } from '../../store/useAppStore';
-import { SearchInput } from '../../ui/SearchInput';
-import { Tooltip } from '../../ui/Tooltip';
+import { SearchInput } from '../../components/ui/SearchInput';
+import { Tooltip } from '../../components/ui/Tooltip';
 import { fmt } from '../../lib/format';
 
 export function PeriodicTable() {

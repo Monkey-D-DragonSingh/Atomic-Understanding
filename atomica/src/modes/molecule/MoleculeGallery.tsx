@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { MOLECULES } from '../../data/molecules';
 import { useAppStore } from '../../store/useAppStore';
-import { Badge } from '../../ui/Badge';
-import { SearchInput } from '../../ui/SearchInput';
+import { Badge } from '../../components/ui/Badge';
+import { SearchInput } from '../../components/ui/SearchInput';
 import { Molecule } from '../../types/molecule';
 
 export function MoleculeGallery() {

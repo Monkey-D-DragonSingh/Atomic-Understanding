@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
-import { Panel } from '../../ui/Panel';
-import { PropertyGrid, PropertyItem } from '../../ui/PropertyGrid';
-import { EmptyState } from '../../ui/EmptyState';
+import { Panel } from '../../components/ui/Panel';
+import { PropertyGrid, PropertyItem } from '../../components/ui/PropertyGrid';
+import { EmptyState } from '../../components/ui/EmptyState';
 import { Droplets } from 'lucide-react';
 import { toCelsius } from '../../lib/format';
 
@@ -23,7 +23,7 @@ export function MoleculeInfo() {
     { label: 'Bond Angle', value: mol.bondAngle },
     { label: 'Polarity', value: mol.polarity },
     { label: 'Dipole Moment', value: mol.dipoleMoment, suffix: ' D' },
-    { label: 'State (RT)', value: mol.stateAtRT },
+    { label: 'State (RT)', value: mol.state },
     { label: 'Melting Point', value: toCelsius(mol.meltingPoint), suffix: ' °C' },
     { label: 'Boiling Point', value: toCelsius(mol.boilingPoint), suffix: ' °C' },
   ];
