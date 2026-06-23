@@ -3,7 +3,6 @@ import { useAppStore } from '../../store/useAppStore';
 import { Panel } from '../../components/ui/Panel';
 import { PropertyGrid, PropertyItem } from '../../components/ui/PropertyGrid';
 import { EmptyState } from '../../components/ui/EmptyState';
-import { Spinner } from '../../components/ui/Spinner';
 import { Search, ExternalLink, Copy } from 'lucide-react';
 
 export function CompoundInfo() {
@@ -22,7 +21,7 @@ export function CompoundInfo() {
     );
   }
 
-  const props = activeCompound.properties || {};
+  const props = (activeCompound as any).properties || {};
 
   const handleCopy = () => {
     if (props.CanonicalSMILES) {

@@ -66,7 +66,7 @@ export function PeriodicTable() {
 
             const isCategoryMatch = !hoverCategory || el.category === hoverCategory;
             const isDimmed = !isMatch || !isCategoryMatch;
-            const isSelected = selectedElement?.id === el.id;
+            const isSelected = selectedElement?.atomicNumber === el.atomicNumber;
 
             const categoryColor = CATEGORY_COLORS[el.category] || CATEGORY_COLORS['unknown'];
 
@@ -81,7 +81,7 @@ export function PeriodicTable() {
             );
 
             return (
-              <Tooltip key={el.id} content={tooltipContent}>
+              <Tooltip key={el.atomicNumber} content={tooltipContent}>
                 <button
                   onClick={() => selectElement(el)}
                   className={`relative flex flex-col items-center justify-center border transition-all animate-fade-in-up origin-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:z-10`}
