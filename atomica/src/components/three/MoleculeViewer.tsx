@@ -43,8 +43,7 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
         x: (a.x - cx) * SCENE_SCALE,
         y: (a.y - cy) * SCENE_SCALE,
         z: (a.z - cz) * SCENE_SCALE,
-      })),
-      })),
+      }))
     };
   }, [atoms]);
 
