@@ -228,6 +228,7 @@ export function BuilderWorkspace() {
     const atoms = useAppStore.getState().canvasAtoms;
     for (let i = atoms.length - 1; i >= 0; i--) {
       const atom = atoms[i];
+      if (!atom) continue;
       const dx = x - atom.x;
       const dy = y - atom.y;
       if (Math.sqrt(dx * dx + dy * dy) <= ATOM_BASE_RADIUS) {
@@ -264,6 +265,7 @@ export function BuilderWorkspace() {
     const atoms = useAppStore.getState().canvasAtoms;
     for (let i = atoms.length - 1; i >= 0; i--) {
       const atom = atoms[i];
+      if (!atom) continue;
       const dx = x - atom.x;
       const dy = y - atom.y;
       if (Math.sqrt(dx * dx + dy * dy) <= ATOM_BASE_RADIUS) {
