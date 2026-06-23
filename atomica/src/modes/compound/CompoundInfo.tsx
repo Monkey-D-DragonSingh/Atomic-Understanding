@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { Panel } from '../../components/ui/Panel';
 import { PropertyGrid, PropertyItem } from '../../components/ui/PropertyGrid';
@@ -33,7 +33,7 @@ export function CompoundInfo() {
   };
 
   const propertyItems: PropertyItem[] = [
-    { label: 'PubChem CID', value: activeCompound.pubchemCid },
+    { label: 'PubChem CID', value: (activeCompound as any).pubchemCid },
     { label: 'Molecular Weight', value: props.MolecularWeight, suffix: ' g/mol' },
     { label: 'XLogP3', value: props.XLogP },
     { label: 'H-Bond Donors', value: props.HBondDonorCount },
@@ -89,7 +89,7 @@ export function CompoundInfo() {
 
         <div className="mt-auto pt-4 border-t border-border text-center">
           <a 
-            href={`https://pubchem.ncbi.nlm.nih.gov/compound/${activeCompound.pubchemCid}`} 
+            href={`https://pubchem.ncbi.nlm.nih.gov/compound/${(activeCompound as any).pubchemCid}`} 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm text-accent hover:underline"

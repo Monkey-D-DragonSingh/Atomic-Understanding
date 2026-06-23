@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import { useRef, useMemo } from 'react';
 import { useAppStore, AtomViewMode } from '../../store/useAppStore';
 import { SegmentedControl } from '../../components/ui/SegmentedControl';
 import { Canvas, useFrame } from '@react-three/fiber';

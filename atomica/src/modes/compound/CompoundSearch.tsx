@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SearchInput } from '../../components/ui/SearchInput';
-import { PubChem } from '../../lib/pubchem';
+import * as PubChem from '../../lib/pubchem';
 import { useAppStore } from '../../store/useAppStore';
 import { MOLECULES } from '../../data/molecules';
 
@@ -60,7 +60,7 @@ export function CompoundSearch() {
           formula: props.MolecularFormula || '',
           atoms: parsed.atoms,
           bonds: parsed.bonds,
-          has3DCoords: parsed.has3DCoords,
+          has3DCoords: !!parsed.atoms.some(a => a.z !== 0),
           properties: props
         };
 

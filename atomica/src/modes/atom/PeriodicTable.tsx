@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ELEMENTS } from '../../data/elements';
 import { CATEGORY_COLORS } from '../../data/constants';
 import { useAppStore } from '../../store/useAppStore';

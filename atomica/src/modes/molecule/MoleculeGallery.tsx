@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MOLECULES } from '../../data/molecules';
 import { useAppStore } from '../../store/useAppStore';
 import { Badge } from '../../components/ui/Badge';

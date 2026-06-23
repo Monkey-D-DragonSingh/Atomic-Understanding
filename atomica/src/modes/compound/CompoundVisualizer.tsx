@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { MoleculeViewer } from '../../components/three/MoleculeViewer';
 import { SkeletalView } from '../../components/two/SkeletalView';

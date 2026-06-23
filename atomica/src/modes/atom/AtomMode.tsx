@@ -1,4 +1,3 @@
-import React from 'react';
 import { ThreePanelLayout } from '../../components/layout/ThreePanelLayout';
 import { PeriodicTable } from './PeriodicTable';
 import { AtomVisualizer } from './AtomVisualizer';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { Panel } from '../../components/ui/Panel';
 import { PropertyGrid, PropertyItem } from '../../components/ui/PropertyGrid';
