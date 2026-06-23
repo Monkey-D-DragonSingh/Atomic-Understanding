@@ -103,8 +103,8 @@ export function BuilderWorkspace() {
       
       const rect = containerRef.current?.getBoundingClientRect();
       if (!rect) return;
-      const clientX = (e as any).clientX || 0;
-      const clientY = (e as any).clientY || 0;
+      const clientX = detail?.clientX || 0;
+      const clientY = detail?.clientY || 0;
 
       const newAtom: PlacedAtom = {
         id: nextAtomId,
