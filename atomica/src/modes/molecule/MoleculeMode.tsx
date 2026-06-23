@@ -1,4 +1,3 @@
-import React from 'react';
 import { ThreePanelLayout } from '../../components/layout/ThreePanelLayout';
 import { MoleculeGallery } from './MoleculeGallery';
 import { MoleculeInfo } from './MoleculeInfo';

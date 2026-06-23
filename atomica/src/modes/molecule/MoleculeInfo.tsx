@@ -42,12 +42,16 @@ export function MoleculeInfo() {
           <PropertyGrid items={properties} />
         </div>
 
-        {mol.uses && mol.uses.length > 0 && (
+        {mol.uses && (
           <div>
             <h3 className="text-xs uppercase tracking-wider text-text-dim font-semibold mb-2">Primary Uses</h3>
-            <ul className="list-disc list-inside text-sm text-text">
-              {mol.uses.map((use, i) => <li key={i}>{use}</li>)}
-            </ul>
+            {Array.isArray(mol.uses) ? (
+              <ul className="list-disc list-inside text-sm text-text">
+                {mol.uses.map((use: string, i: number) => <li key={i}>{use}</li>)}
+              </ul>
+            ) : (
+              <p className="text-sm text-text">{mol.uses}</p>
+            )}
           </div>
         )}
 
