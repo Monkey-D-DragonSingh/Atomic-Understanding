@@ -131,7 +131,6 @@ export function SkeletalView({ atoms, bonds }: SkeletalViewProps) {
       if (!isCarbon && !isHydrogen) {
         // Heteroatom
         const text = atom.element;
-        const width = ctx.measureText(text).width;
         
         // Clear background for text to overlap bonds cleanly
         ctx.fillStyle = 'var(--bg, #080B14)'; // matches theme bg
