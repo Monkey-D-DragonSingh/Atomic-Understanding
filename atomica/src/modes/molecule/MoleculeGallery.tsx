@@ -3,7 +3,6 @@ import { MOLECULES } from '../../data/molecules';
 import { useAppStore } from '../../store/useAppStore';
 import { Badge } from '../../components/ui/Badge';
 import { SearchInput } from '../../components/ui/SearchInput';
-import { Molecule } from '../../types/molecule';
 
 export function MoleculeGallery() {
   const [search, setSearch] = useState('');

@@ -47,6 +47,9 @@ export function CompoundSearch() {
       // 2. Fetch from PubChem
       try {
         const cid = await PubChem.searchCidByName(debouncedQuery);
+        if (!cid) {
+          throw new Error('Compound not found');
+        }
         const [props, structure] = await Promise.all([
           PubChem.fetchProperties(cid),
           PubChem.fetch3DRecord(cid).catch(() => PubChem.fetch2DRecord(cid))
