@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
-import { MoleculeViewer } from '../../three/MoleculeViewer';
-import { SkeletalView } from '../../two/SkeletalView';
+import { MoleculeViewer } from '../../components/three/MoleculeViewer';
+import { SkeletalView } from '../../components/two/SkeletalView';
 import { SegmentedControl } from '../../components/ui/SegmentedControl';
 import { Badge } from '../../components/ui/Badge';
 
@@ -18,8 +18,8 @@ export function CompoundVisualizer() {
       {/* Top Bar Overlay */}
       <div className="absolute top-4 left-4 right-4 z-10 flex justify-between items-start pointer-events-none">
         <div className="flex flex-col gap-2 pointer-events-auto">
-          <Badge variant={activeCompound.has3DCoords ? 'accent' : 'warning'}>
-            {activeCompound.has3DCoords ? '✓ Real 3D geometry' : '⚠ 2D projection only'}
+          <Badge variant={(activeCompound as any).has3DCoords ? 'accent' : 'warning'}>
+            {(activeCompound as any).has3DCoords ? '✓ Real 3D geometry' : '⚠ 2D projection only'}
           </Badge>
         </div>
         

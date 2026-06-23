@@ -23,7 +23,7 @@ export function MoleculeInfo() {
     { label: 'Bond Angle', value: mol.bondAngle },
     { label: 'Polarity', value: mol.polarity },
     { label: 'Dipole Moment', value: mol.dipoleMoment, suffix: ' D' },
-    { label: 'State (RT)', value: mol.state },
+    { label: 'State (RT)', value: mol.standardState },
     { label: 'Melting Point', value: toCelsius(mol.meltingPoint), suffix: ' °C' },
     { label: 'Boiling Point', value: toCelsius(mol.boilingPoint), suffix: ' °C' },
   ];
