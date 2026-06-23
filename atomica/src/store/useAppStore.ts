@@ -8,8 +8,20 @@ export type AppMode = 'atom' | 'molecule' | 'compound' | 'reaction';
 export type AtomViewMode = 'bohr' | 'cloud' | 'orbital';
 export type CompoundViewMode = 'skeletal' | 'ball-stick' | 'space-fill';
 
-export interface PlacedAtom extends MoleculeAtom {
-  // Part 2 extended properties
+export interface PlacedAtom {
+  id: number;
+  symbol: string;
+  x: number;
+  y: number;
+  bonds: number[]; // bond ids
+  bondsUsed: number;
+}
+
+export interface PlacedBond {
+  id: number;
+  from: number;
+  to: number;
+  order: number;
 }
 
 export interface AppState {
@@ -21,8 +33,11 @@ export interface AppState {
   atomView: AtomViewMode;
   setAtomView: (v: AtomViewMode) => void;
 
-  canvasAtoms: PlacedAtom[]; // molecule-builder state (Part 2)
+  canvasAtoms: PlacedAtom[];
   setCanvasAtoms: (atoms: PlacedAtom[]) => void;
+  canvasBonds: PlacedBond[];
+  setCanvasBonds: (bonds: PlacedBond[]) => void;
+  clearBuilder: () => void;
 
   activeCompound: Molecule | null; // compound-mode search result (Part 3)
   setActiveCompound: (c: Molecule | null) => void;
@@ -40,6 +55,11 @@ export interface AppState {
   setLeftDrawerOpen: (open: boolean) => void;
   rightDrawerOpen: boolean;
   setRightDrawerOpen: (open: boolean) => void;
+
+  onboardingSeen: boolean;
+  setOnboardingSeen: (seen: boolean) => void;
+  helpOpen: boolean;
+  setHelpOpen: (open: boolean) => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -55,6 +75,9 @@ export const useAppStore = create<AppState>()(
 
       canvasAtoms: [],
       setCanvasAtoms: (canvasAtoms) => set({ canvasAtoms }),
+      canvasBonds: [],
+      setCanvasBonds: (canvasBonds) => set({ canvasBonds }),
+      clearBuilder: () => set({ canvasAtoms: [], canvasBonds: [] }),
 
       activeCompound: null,
       setActiveCompound: (activeCompound) => set({ activeCompound }),
@@ -78,10 +101,18 @@ export const useAppStore = create<AppState>()(
       setLeftDrawerOpen: (leftDrawerOpen) => set({ leftDrawerOpen }),
       rightDrawerOpen: false,
       setRightDrawerOpen: (rightDrawerOpen) => set({ rightDrawerOpen }),
+
+      onboardingSeen: false,
+      setOnboardingSeen: (onboardingSeen) => set({ onboardingSeen }),
+      helpOpen: false,
+      setHelpOpen: (helpOpen) => set({ helpOpen }),
     }),
     {
       name: 'atomica-storage',
-      partialize: (state) => ({ searchHistory: state.searchHistory }),
+      partialize: (state) => ({ 
+        searchHistory: state.searchHistory,
+        onboardingSeen: state.onboardingSeen
+      }),
     }
   )
 );
