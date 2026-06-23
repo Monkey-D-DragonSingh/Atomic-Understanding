@@ -1,12 +1,12 @@
 import React from 'react';
-import { useAppStore } from '../../../store/useAppStore';
+import { useAppStore } from '../../store/useAppStore';
 import { Panel } from '../../ui/Panel';
 import { PropertyGrid, PropertyItem } from '../../ui/PropertyGrid';
 import { Badge } from '../../ui/Badge';
 import { EmptyState } from '../../ui/EmptyState';
 import { Atom } from 'lucide-react';
-import { CATEGORY_COLORS } from '../../../data/constants';
-import { toCelsius } from '../../../lib/format';
+import { CATEGORY_COLORS } from '../../data/constants';
+import { toCelsius } from '../../lib/format';
 
 export function ElementInfo() {
   const { selectedElement } = useAppStore();

@@ -2,8 +2,8 @@ import React, { useMemo, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Bounds, useBounds, AdaptiveDpr, Html } from '@react-three/drei';
 import * as THREE from 'three';
-import { CPK_COLORS, COVALENT_RADII, VDW_RADII } from '../../../data/constants';
-import { MoleculeAtom, MoleculeBond } from '../../../types/molecule';
+import { CPK_COLORS, COVALENT_RADII, VDW_RADII } from '../../data/constants';
+import { MoleculeAtom, MoleculeBond } from '../../types/molecule';
 
 export interface MoleculeViewerProps {
   atoms: MoleculeAtom[];

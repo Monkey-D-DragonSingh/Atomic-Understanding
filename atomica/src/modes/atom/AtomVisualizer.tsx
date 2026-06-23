@@ -1,10 +1,10 @@
 import React, { useRef, useMemo } from 'react';
-import { useAppStore, AtomViewMode } from '../../../store/useAppStore';
+import { useAppStore, AtomViewMode } from '../../store/useAppStore';
 import { SegmentedControl } from '../../ui/SegmentedControl';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Html, AdaptiveDpr } from '@react-three/drei';
 import * as THREE from 'three';
-import { CATEGORY_COLORS } from '../../../data/constants';
+import { CATEGORY_COLORS } from '../../data/constants';
 
 function Nucleus({ atomicNumber, atomicMass, categoryColor }: { atomicNumber: number, atomicMass: number, categoryColor: string }) {
   const meshRef = useRef<THREE.Group>(null);

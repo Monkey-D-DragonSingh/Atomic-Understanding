@@ -1,5 +1,5 @@
 import React from 'react';
-import { fmt } from '../../../lib/format';
+import { fmt } from '../../lib/format';
 
 export interface PropertyItem {
   label: string;

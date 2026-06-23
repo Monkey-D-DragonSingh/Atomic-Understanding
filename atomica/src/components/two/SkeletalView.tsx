@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { MoleculeAtom, MoleculeBond } from '../../../types/molecule';
-import { CPK_COLORS } from '../../../data/constants';
+import { MoleculeAtom, MoleculeBond } from '../../types/molecule';
+import { CPK_COLORS } from '../../data/constants';
 
 interface SkeletalViewProps {
   atoms: MoleculeAtom[];

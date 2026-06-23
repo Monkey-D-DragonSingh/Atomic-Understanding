@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAppStore } from '../../../store/useAppStore';
+import { useAppStore } from '../../store/useAppStore';
 import { MoleculeViewer } from '../../three/MoleculeViewer';
 import { SkeletalView } from '../../two/SkeletalView';
 import { SegmentedControl } from '../../ui/SegmentedControl';
