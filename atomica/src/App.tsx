@@ -8,6 +8,7 @@ import { AtomMode } from './modes/atom/AtomMode';
 import { MoleculeMode } from './modes/molecule/MoleculeMode';
 import { CompoundMode } from './modes/compound/CompoundMode';
 
+function App() {
   const { mode, setMode, helpOpen, setHelpOpen } = useAppStore();
 
   useEffect(() => {
