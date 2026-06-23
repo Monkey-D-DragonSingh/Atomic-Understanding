@@ -45,8 +45,8 @@ export function BuilderWorkspace() {
 
     // Simple BFS to check if connected component includes all atoms
     const visited = new Set<number>();
-    const queue = [canvasAtoms[0].id];
-    visited.add(canvasAtoms[0].id);
+    const queue = [canvasAtoms[0]!.id];
+    visited.add(canvasAtoms[0]!.id);
     while(queue.length > 0) {
       const curr = queue.shift()!;
       for (const neighbor of graph.get(curr) || []) {

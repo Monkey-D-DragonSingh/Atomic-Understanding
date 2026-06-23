@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { Play, Pause, RotateCcw } from 'lucide-react';
-import { MOLECULES } from '../../data/molecules';
+// MOLECULES removed since unused
 
 // Helper to parse "H₂O" into {H: 2, O: 1}
 function parseFormula(formula: string): Record<string, number> {
@@ -105,16 +105,16 @@ export function ReactionStage() {
 
   // Generate participant cards
   const renderParticipant = (p: typeof activeReaction.reactants[0], i: number, isProduct: boolean) => {
-    // We can try to fetch the molecule's CPK color or just render a generic orb
-    // MOLECULES list is available if we have moleculeId
-    // const molInfo = p.moleculeId ? MOLECULES.find(m => m.id === p.moleculeId) : null;
-    
+    const opacity = isProduct ? Math.pow(progress, 2) : Math.pow(1 - progress, 2);
+    const scale = isProduct ? 0.8 + progress * 0.2 : 1 - progress * 0.2;
+    const tx = isProduct ? (1 - progress) * -50 : progress * 50;
+
     return (
       <div 
         key={i} 
         className="flex items-center gap-2 transition-transform duration-75"
         style={{ 
-          opacity: progress > 0.5 ? (isProduct ? 1 : 0) : (isProduct ? 0 : 1), 
+          opacity, 
           transform: `scale(${scale}) translateX(${tx}px)` 
         }}
       >
