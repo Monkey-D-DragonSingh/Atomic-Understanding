@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Bounds, useBounds, AdaptiveDpr, Html } from '@react-three/drei';
 import * as THREE from 'three';
@@ -31,8 +31,8 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
   const isSpaceFill = viewMode === 'space-fill';
 
   // Center the molecule manually to be safe, though Bounds will fit it
-  const { centeredAtoms, center } = useMemo(() => {
-    if (atoms.length === 0) return { centeredAtoms: [], center: new THREE.Vector3() };
+  const { centeredAtoms } = useMemo(() => {
+    if (atoms.length === 0) return { centeredAtoms: [] };
     const cx = atoms.reduce((sum, a) => sum + a.x, 0) / atoms.length;
     const cy = atoms.reduce((sum, a) => sum + a.y, 0) / atoms.length;
     const cz = atoms.reduce((sum, a) => sum + a.z, 0) / atoms.length;
@@ -44,7 +44,7 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
         y: (a.y - cy) * SCENE_SCALE,
         z: (a.z - cz) * SCENE_SCALE,
       })),
-      center: new THREE.Vector3(cx, cy, cz)
+      })),
     };
   }, [atoms]);
 
@@ -53,15 +53,7 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
   // But rule says: "Use InstancedMesh grouped by element when atom count > 80".
   // Let's do InstancedMesh for performance.
   
-  const instancedData = useMemo(() => {
-    const groups: Record<string, { positions: THREE.Vector3[], ids: number[] }> = {};
-    centeredAtoms.forEach(a => {
-      if (!groups[a.element]) groups[a.element] = { positions: [], ids: [] };
-      groups[a.element].positions.push(new THREE.Vector3(a.x, a.y, a.z));
-      groups[a.element].ids.push(a.id);
-    });
-    return groups;
-  }, [centeredAtoms]);
+
 
   // Prepare bond geometry instances
   const bondInstances = useMemo(() => {
