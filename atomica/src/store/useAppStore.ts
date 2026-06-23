@@ -35,6 +35,11 @@ export interface AppState {
 
   activeReaction: Reaction | null;
   setActiveReaction: (r: Reaction | null) => void;
+
+  leftDrawerOpen: boolean;
+  setLeftDrawerOpen: (open: boolean) => void;
+  rightDrawerOpen: boolean;
+  setRightDrawerOpen: (open: boolean) => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -68,6 +73,11 @@ export const useAppStore = create<AppState>()(
 
       activeReaction: null,
       setActiveReaction: (activeReaction) => set({ activeReaction }),
+
+      leftDrawerOpen: false,
+      setLeftDrawerOpen: (leftDrawerOpen) => set({ leftDrawerOpen }),
+      rightDrawerOpen: false,
+      setRightDrawerOpen: (rightDrawerOpen) => set({ rightDrawerOpen }),
     }),
     {
       name: 'atomica-storage',
