@@ -76,10 +76,10 @@ export function OnboardingTour() {
           </div>
 
           <h2 className="text-xl font-bold text-text mb-2 text-center">
-            {TOUR_STEPS[step].title}
+            {TOUR_STEPS[step]?.title}
           </h2>
           <p className="text-text-dim text-center min-h-[60px]">
-            {TOUR_STEPS[step].content}
+            {TOUR_STEPS[step]?.content}
           </p>
 
           <div className="mt-8 flex justify-between items-center">

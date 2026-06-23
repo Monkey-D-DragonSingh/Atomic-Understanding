@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppStore } from '../../store/useAppStore';
-import { X, Keyboard, MousePointer2, FlaskConical, Share2 } from 'lucide-react';
+import { X, Keyboard, MousePointer2, FlaskConical } from 'lucide-react';
 
 export function HelpOverlay() {
   const { helpOpen, setHelpOpen } = useAppStore();

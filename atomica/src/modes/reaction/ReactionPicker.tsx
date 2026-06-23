@@ -3,7 +3,6 @@ import { useAppStore } from '../../store/useAppStore';
 import { REACTIONS } from '../../data/reactions';
 import { ReactionType } from '../../types/reaction';
 import { SearchInput } from '../../components/ui/SearchInput';
-import { Badge } from '../../components/ui/Badge';
 import { Panel } from '../../components/ui/Panel';
 
 export function ReactionPicker() {

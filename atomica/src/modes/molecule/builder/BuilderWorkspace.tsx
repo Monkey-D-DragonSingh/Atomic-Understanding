@@ -3,7 +3,7 @@ import { useAppStore, PlacedAtom, PlacedBond } from '../../../store/useAppStore'
 import { ELEMENTS } from '../../../data/elements';
 import { MOLECULES } from '../../../data/molecules';
 import { bondsNeeded, classifyBond } from '../../../lib/chemistry';
-import { CPK_COLORS, COVALENT_RADII } from '../../../data/constants';
+import { CPK_COLORS } from '../../../data/constants';
 
 const BOND_DISTANCE = 110; // pixels
 const BREAK_DISTANCE = 180; // pixels
@@ -103,12 +103,14 @@ export function BuilderWorkspace() {
       
       const rect = containerRef.current?.getBoundingClientRect();
       if (!rect) return;
+      const clientX = (e as any).clientX || 0;
+      const clientY = (e as any).clientY || 0;
 
       const newAtom: PlacedAtom = {
         id: nextAtomId,
         symbol: el.symbol,
-        x: detail.clientX - rect.left,
-        y: detail.clientY - rect.top,
+        x: clientX - rect.left,
+        y: clientY - rect.top,
         bonds: [],
         bondsUsed: 0
       };
@@ -162,12 +164,14 @@ export function BuilderWorkspace() {
         // BREAK BOND?
         if (dist > BREAK_DISTANCE) {
           const removedBond = bonds[existingBondIdx];
-          bonds.splice(existingBondIdx, 1);
-          movingAtom.bonds = movingAtom.bonds.filter(id => id !== removedBond.id);
-          targetAtom.bonds = targetAtom.bonds.filter(id => id !== removedBond.id);
-          movingAtom.bondsUsed -= removedBond.order;
-          targetAtom.bondsUsed -= removedBond.order;
-          stateChanged = true;
+          if (removedBond) {
+            bonds.splice(existingBondIdx, 1);
+            movingAtom.bonds = movingAtom.bonds.filter(id => id !== removedBond.id);
+            targetAtom.bonds = targetAtom.bonds.filter(id => id !== removedBond.id);
+            movingAtom.bondsUsed -= removedBond.order;
+            targetAtom.bondsUsed -= removedBond.order;
+            stateChanged = true;
+          }
         }
       } else {
         // FORM NEW BOND?

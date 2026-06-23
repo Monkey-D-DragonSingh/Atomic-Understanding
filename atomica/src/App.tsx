@@ -7,6 +7,7 @@ import { HelpOverlay } from './components/ui/HelpOverlay';
 import { AtomMode } from './modes/atom/AtomMode';
 import { MoleculeMode } from './modes/molecule/MoleculeMode';
 import { CompoundMode } from './modes/compound/CompoundMode';
+import { ReactionMode } from './modes/reaction/ReactionMode';
 
 function App() {
   const { mode, setMode, helpOpen, setHelpOpen } = useAppStore();
@@ -39,20 +40,12 @@ function App() {
           {mode === 'atom' && <AtomMode />}
           {mode === 'molecule' && <MoleculeMode />}
           {mode === 'compound' && <CompoundMode />}
-          {mode === 'reaction' && <ReactionModeStub />}
+          {mode === 'reaction' && <ReactionMode />}
         </ErrorBoundary>
       </main>
       
       <OnboardingTour />
       <HelpOverlay />
-    </div>
-  );
-}
-
-function ReactionModeStub() {
-  return (
-    <div className="flex items-center justify-center h-full text-text-dim text-lg">
-      Reaction Simulator (Part 3)
     </div>
   );
 }

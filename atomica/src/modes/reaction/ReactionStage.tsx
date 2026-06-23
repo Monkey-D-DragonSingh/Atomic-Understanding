@@ -14,6 +14,7 @@ function parseFormula(formula: string): Record<string, number> {
   let match;
   while ((match = regex.exec(normalized)) !== null) {
     const sym = match[1];
+    if (!sym) continue;
     const count = match[2] ? parseInt(match[2]) : 1;
     counts[sym] = (counts[sym] || 0) + count;
   }
@@ -104,17 +105,9 @@ export function ReactionStage() {
 
   // Generate participant cards
   const renderParticipant = (p: typeof activeReaction.reactants[0], i: number, isProduct: boolean) => {
-    // If it's a product, it appears as progress approaches 1
-    // If it's a reactant, it fades/merges as progress approaches 1
-    const opacity = isProduct ? Math.pow(progress, 2) : Math.pow(1 - progress, 2);
-    const scale = isProduct ? 0.8 + progress * 0.2 : 1 - progress * 0.2;
-    
-    // Position offset to simulate them moving towards center
-    const tx = isProduct ? (1 - progress) * -50 : progress * 50;
-    
     // We can try to fetch the molecule's CPK color or just render a generic orb
     // MOLECULES list is available if we have moleculeId
-    const molInfo = p.moleculeId ? MOLECULES.find(m => m.id === p.moleculeId) : null;
+    // const molInfo = p.moleculeId ? MOLECULES.find(m => m.id === p.moleculeId) : null;
     
     return (
       <div 
