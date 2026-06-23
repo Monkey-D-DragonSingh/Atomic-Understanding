@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #080B14;
+    --panel: #0D1117;
+    --border: #1E2A3A;
+    --text: #E8EDF5;
+    --text-dim: #7A8FA6;
+    --accent: #4FC3F7;
+    --accent-glow: rgba(79, 195, 247, 0.35);
+
+    /* Category Colors */
+    --alkali-metal: #F87171;
+    --alkaline-earth-metal: #FBBF24;
+    --transition-metal: #FCD34D;
+    --post-transition-metal: #A7F3D0;
+    --metalloid: #34D399;
+    --reactive-nonmetal: #60A5FA;
+    --noble-gas: #C084FC;
+    --halogen: #818CF8;
+    --lanthanide: #F472B6;
+    --actinide: #FB7185;
+    --unknown: #9CA3AF;
+  }
+
+  body {
+    @apply bg-bg text-text;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
