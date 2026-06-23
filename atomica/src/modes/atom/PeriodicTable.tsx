@@ -18,11 +18,11 @@ export function PeriodicTable() {
         setSearch('');
       } else if (e.key === 'ArrowRight' && selectedElement) {
         if (selectedElement.atomicNumber < 118) {
-          selectElement(ELEMENTS[selectedElement.atomicNumber]); // index is Z-1
+          selectElement(ELEMENTS[selectedElement.atomicNumber] || null); // index is Z-1
         }
       } else if (e.key === 'ArrowLeft' && selectedElement) {
         if (selectedElement.atomicNumber > 1) {
-          selectElement(ELEMENTS[selectedElement.atomicNumber - 2]);
+          selectElement(ELEMENTS[selectedElement.atomicNumber - 2] || null);
         }
       } else if (e.key === 'Enter' && search) {
         const matches = ELEMENTS.filter(
@@ -32,7 +32,7 @@ export function PeriodicTable() {
             el.atomicNumber.toString() === search
         );
         if (matches.length === 1) {
-          selectElement(matches[0]);
+          selectElement(matches[0] || null);
         }
       }
     };
