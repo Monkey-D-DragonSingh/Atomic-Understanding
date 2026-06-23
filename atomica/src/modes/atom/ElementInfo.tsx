@@ -90,10 +90,10 @@ export function ElementInfo() {
         </div>
 
         {/* Fact */}
-        {el.fact && (
+        {(el as any).fact && (
           <div className="bg-accent/10 border border-accent/20 p-4 rounded-lg">
             <h3 className="text-xs uppercase tracking-wider text-accent font-semibold mb-2">Did you know?</h3>
-            <p className="text-sm text-accent/80 italic">{el.fact}</p>
+            <p className="text-sm text-accent/80 italic">{(el as any).fact}</p>
           </div>
         )}
       </div>

@@ -206,7 +206,7 @@ function OrbitalsModel() {
   return (
     <group>
       {/* S Orbital (Sphere) */}
-      <mesh transparent opacity={0.2}>
+      <mesh>
         <sphereGeometry args={[1.5, 32, 32]} />
         <meshPhongMaterial color="#ef4444" transparent opacity={0.15} depthWrite={false} />
       </mesh>
