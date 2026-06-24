@@ -27,15 +27,19 @@ export function Header() {
   }
 
   return (
-    <header className="h-[52px] border-b border-border bg-panel flex items-center justify-between px-4 fixed top-0 left-0 right-0 z-50">
-      <div className="flex items-center gap-4">
-        <div className="flex items-baseline gap-2">
-          <h1 className="text-accent font-bold text-lg tracking-[0.2em] drop-shadow-[0_0_8px_var(--accent-glow)]">
-            ⚛ ATOMICA
-          </h1>
-          <span className="text-[10px] text-text-dim uppercase tracking-wider hidden md:inline-block">
-            Interactive Chemistry Explorer
-          </span>
+    <header className="h-[56px] glass-strong flex items-center justify-between px-4 md:px-5 fixed top-0 left-0 right-0 z-50 border-b border-border">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="flex items-center gap-2.5">
+          <div className="relative w-7 h-7 flex items-center justify-center">
+            <span className="absolute inset-0 rounded-full bg-accent/20 blur-md" />
+            <Atom className="relative w-5 h-5 text-accent" strokeWidth={2} />
+          </div>
+          <div className="flex items-baseline gap-2.5 min-w-0">
+            <h1 className="font-bold text-[15px] tracking-[0.22em] text-text">ATOMICA</h1>
+            <span className="text-[10px] text-text-dim uppercase tracking-[0.16em] hidden lg:inline-block truncate">
+              Interactive Chemistry Explorer
+            </span>
+          </div>
         </div>
       </div>
 
@@ -49,12 +53,11 @@ export function Header() {
         />
       </div>
 
-      <div className="w-32 flex justify-end">
-        <div className="bg-black/30 border border-border px-3 py-1 rounded-md text-sm font-mono text-accent whitespace-nowrap overflow-hidden text-ellipsis shadow-[inset_0_0_10px_rgba(79,195,247,0.05)]">
+      <div className="w-28 md:w-32 flex justify-end">
+        <div className="glass px-3.5 py-1.5 rounded-full text-sm font-mono text-accent whitespace-nowrap overflow-hidden text-ellipsis min-w-[3rem] text-center">
           {readout}
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
     </header>
   );
 }
