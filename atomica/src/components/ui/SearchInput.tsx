@@ -10,12 +10,12 @@ interface SearchInputProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
 export function SearchInput({ value, onChange, onClear, className = '', ...props }: SearchInputProps) {
   return (
     <div className={`relative flex items-center ${className}`}>
-      <Search className="absolute left-3 w-4 h-4 text-text-dim" />
+      <Search className="absolute left-3.5 w-4 h-4 text-text-dim pointer-events-none" />
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-black/20 border border-border rounded-lg py-2 pl-10 pr-10 text-sm text-text placeholder-text-dim focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all shadow-[inset_0_0_10px_rgba(0,0,0,0.5)]"
+        className="w-full glass rounded-full py-2.5 pl-10 pr-10 text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent/50 focus:shadow-[0_0_0_3px_var(--accent-glow)] transition-all duration-200"
         {...props}
       />
       {value && (

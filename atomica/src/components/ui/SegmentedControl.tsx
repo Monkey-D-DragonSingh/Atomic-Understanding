@@ -17,19 +17,19 @@ export function SegmentedControl<T extends string>({
 }: SegmentedControlProps<T>) {
   const isSm = size === 'sm';
   return (
-    <div className={`flex bg-black/30 p-1 rounded-lg border border-border/50 ${className}`}>
+    <div className={`flex glass p-1 rounded-full ${className}`}>
       {options.map((opt) => {
         const isActive = value === opt.value;
         return (
           <button
             key={opt.value}
             onClick={() => onChange(opt.value)}
-            className={`flex-1 transition-all rounded-md font-medium flex items-center justify-center whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-              isSm ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+            className={`flex-1 transition-all duration-200 rounded-full font-medium flex items-center justify-center whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
+              isSm ? 'px-3.5 py-1.5 text-xs' : 'px-4 py-2 text-sm'
             } ${
               isActive
-                ? 'bg-accent text-bg shadow-[0_0_10px_var(--accent-glow)]'
-                : 'text-text-dim hover:text-text hover:bg-white/5'
+                ? 'bg-surface-strong text-text shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_2px_10px_-2px_rgba(0,0,0,0.6)]'
+                : 'text-text-dim hover:text-text'
             }`}
           >
             {opt.label}
