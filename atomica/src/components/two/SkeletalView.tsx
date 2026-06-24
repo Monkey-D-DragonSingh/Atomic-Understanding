@@ -53,15 +53,16 @@ export function SkeletalView({ atoms, bonds }: SkeletalViewProps) {
 
     const molWidth = maxX - minX;
     const molHeight = maxY - minY;
-    
-    // Base scale to fit molecule inside canvas (leave 10% padding)
-    const padding = 40;
-    const baseScale = Math.min(
+
+    // Fit scale (pixels per Ångström) so the molecule fills the canvas with padding.
+    const padding = 60;
+    const fitScale = Math.min(
       (rect.width - padding * 2) / (molWidth || 1),
       (rect.height - padding * 2) / (molHeight || 1)
     );
 
-    const finalScale = baseScale * scale * 30; // 30 is a multiplier to make coords look good
+    // Cap so tiny molecules (e.g. H2, O2) don't zoom to absurd sizes; allow user zoom on top.
+    const finalScale = Math.min(fitScale, 90) * scale;
 
     const cx = (minX + maxX) / 2;
     const cy = (minY + maxY) / 2;
@@ -112,8 +113,11 @@ export function SkeletalView({ atoms, bonds }: SkeletalViewProps) {
       ctx.stroke();
     });
 
-    // Determine if molecule is entirely C and H
-    const allCandH = atoms.every(a => a.element === 'C' || a.element === 'H');
+    // Skeletal (line-angle) convention only makes sense for organic structures with a
+    // carbon backbone. For inorganic molecules (H2, O2, H2O, NH3, ...) or anything with
+    // no carbon, draw every atom labelled so diatomics/all-hydrogen species aren't blank.
+    const hasCarbon = atoms.some(a => a.element === 'C');
+    const isSkeletalOrganic = hasCarbon && atoms.length > 2;
 
     // Draw Atoms
     ctx.textAlign = 'center';
@@ -121,35 +125,42 @@ export function SkeletalView({ atoms, bonds }: SkeletalViewProps) {
     const fontSize = Math.max(12, finalScale * 0.3);
     ctx.font = `bold ${fontSize}px sans-serif`;
 
+    const drawLabeledAtom = (px: number, py: number, element: string) => {
+      // Clear background disc so the label overlaps bonds cleanly
+      ctx.fillStyle = '#080B14';
+      ctx.beginPath();
+      ctx.arc(px, py, fontSize * 0.7, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = CPK_COLORS[element] || '#ffffff';
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 2;
+      ctx.strokeText(element, px, py);
+      ctx.fillText(element, px, py);
+    };
+
     atoms.forEach(atom => {
       const { px, py } = project(atom.x, atom.y);
-
       const isCarbon = atom.element === 'C';
       const isHydrogen = atom.element === 'H';
 
-      // Skeletal convention: hide implicit C and H
-      if (!isCarbon && !isHydrogen) {
-        // Heteroatom
-        const text = atom.element;
-        
-        // Clear background for text to overlap bonds cleanly
-        ctx.fillStyle = 'var(--bg, #080B14)'; // matches theme bg
-        ctx.beginPath();
-        ctx.arc(px, py, fontSize * 0.7, 0, Math.PI * 2);
-        ctx.fill();
+      if (!isSkeletalOrganic) {
+        // Inorganic / diatomic / tiny molecule: label every atom (incl. H and C)
+        drawLabeledAtom(px, py, atom.element);
+        return;
+      }
 
-        ctx.fillStyle = CPK_COLORS[atom.element] || '#ffffff';
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 2;
-        ctx.strokeText(text, px, py);
-        ctx.fillText(text, px, py);
-      } else if (isCarbon && allCandH) {
-        // FIX: If it's an all-hydrocarbon (like methane), draw small grey dots so it's not blank
-        ctx.fillStyle = '#6B7280'; // grey-500
+      // Organic skeletal convention: show heteroatoms, imply carbons as vertices, hide H.
+      if (!isCarbon && !isHydrogen) {
+        drawLabeledAtom(px, py, atom.element);
+      } else if (isCarbon) {
+        // Implicit carbon vertex — a faint dot keeps lone/terminal carbons visible.
+        ctx.fillStyle = '#6B7280';
         ctx.beginPath();
         ctx.arc(px, py, Math.max(3, finalScale * 0.08), 0, Math.PI * 2);
         ctx.fill();
       }
+      // hydrogens on carbon are hidden (standard skeletal style)
     });
 
   }, [atoms, bonds, scale, offset]);

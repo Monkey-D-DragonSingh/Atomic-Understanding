@@ -182,8 +182,10 @@ export function BuilderWorkspace() {
           const freeT = capT - targetAtom.bondsUsed;
           
           if (freeM > 0 && freeT > 0) {
-            // Auto resolve bond order
-            const order = Math.min(freeM, freeT, 3);
+            // Form a single bond by default. Users raise the order by double-clicking the
+            // bond. Greedily maxing the order would saturate atoms instantly and make
+            // bent chains like ozone (O–O–O) impossible to build.
+            const order = 1;
             const newBond: PlacedBond = {
               id: nextBId++,
               from: movingId,
@@ -289,6 +291,44 @@ export function BuilderWorkspace() {
 
         setCanvasAtoms(newAtoms);
         setCanvasBonds(newBonds);
+        return;
+      }
+    }
+
+    // No atom hit — check if a bond was double-clicked to cycle its order (1 -> 2 -> 3 -> 1),
+    // respecting the remaining free valence of both endpoints.
+    const bonds = useAppStore.getState().canvasBonds;
+    for (const bond of bonds) {
+      const from = atoms.find(a => a.id === bond.from);
+      const to = atoms.find(a => a.id === bond.to);
+      if (!from || !to) continue;
+      // Distance from click to the bond segment
+      const vx = to.x - from.x;
+      const vy = to.y - from.y;
+      const segLen2 = vx * vx + vy * vy || 1;
+      let t = ((x - from.x) * vx + (y - from.y) * vy) / segLen2;
+      t = Math.max(0, Math.min(1, t));
+      const projX = from.x + t * vx;
+      const projY = from.y + t * vy;
+      const distToBond = Math.hypot(x - projX, y - projY);
+
+      if (distToBond <= 12) {
+        const freeFrom = bondsNeeded(from.symbol) - from.bondsUsed;
+        const freeTo = bondsNeeded(to.symbol) - to.bondsUsed;
+        // Can we raise the order? need 1 more free on each end.
+        const canIncrease = bond.order < 3 && freeFrom > 0 && freeTo > 0;
+        const newOrder = canIncrease ? bond.order + 1 : 1; // wrap back to single
+        const delta = newOrder - bond.order;
+
+        const updatedBonds = bonds.map(b => b.id === bond.id ? { ...b, order: newOrder } : b);
+        const updatedAtoms = atoms.map(a => {
+          if (a.id === from.id || a.id === to.id) {
+            return { ...a, bondsUsed: a.bondsUsed + delta };
+          }
+          return a;
+        });
+        setCanvasBonds(updatedBonds);
+        setCanvasAtoms(updatedAtoms);
         return;
       }
     }
