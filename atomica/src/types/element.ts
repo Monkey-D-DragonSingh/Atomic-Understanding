@@ -1,3 +1,9 @@
+// Element type definitions. Data lives in src/data/elements.ts.
+
+export type StandardState = 'solid' | 'liquid' | 'gas';
+
+export type ElementBlock = 's' | 'p' | 'd' | 'f';
+
 export type ElementCategory =
   | 'alkali-metal'
   | 'alkaline-earth-metal'
@@ -6,43 +12,38 @@ export type ElementCategory =
   | 'metalloid'
   | 'reactive-nonmetal'
   | 'noble-gas'
-  | 'halogen'
   | 'lanthanide'
   | 'actinide'
   | 'unknown';
 
-export type Block = 's' | 'p' | 'd' | 'f';
-export type StandardState = 'solid' | 'liquid' | 'gas' | 'unknown';
-
 export interface Element {
-  atomicNumber: number; // 1–118
-  symbol: string; // "H"
-  name: string; // "Hydrogen"
-  atomicMass: number; // standard atomic weight (u)
-  category: ElementCategory;
-  block: Block;
-  period: number; // 1–7
-  group: number | null; // 1–18; null for lanthanides/actinides
-  xpos: number; // grid column 1–18 (for table layout)
-  ypos: number; // grid row 1–10 (8/9 = f-block rows)
-  electronConfiguration: string; // full, e.g. "1s² 2s² 2p⁶"
-  electronConfigurationSemantic: string; // noble-gas shorthand, e.g. "[Ne] 3s¹"
-  electronsPerShell: number[]; // e.g. [2, 8, 1]
+  atomicNumber: number;
+  symbol: string;
+  name: string;
+  atomicMass: number;
+  category: ElementCategory | string;
+  block: ElementBlock;
+  period: number;
+  group: number | null;
+  xpos: number;
+  ypos: number;
+  electronConfiguration: string;
+  electronConfigurationSemantic: string;
+  electronsPerShell: number[];
   valenceElectrons: number;
-  electronegativity: number | null; // Pauling scale
-  electronAffinity: number | null; // kJ/mol
-  ionizationEnergy: number | null; // first, kJ/mol
-  atomicRadius: number | null; // pm (empirical)
-  covalentRadius: number | null; // pm
-  vanDerWaalsRadius: number | null; // pm
-  meltingPoint: number | null; // Kelvin (store in K; convert in UI)
-  boilingPoint: number | null; // Kelvin
-  density: number | null; // g/cm³ (at STP)
+  electronegativity: number | null;
+  electronAffinity: number | null;
+  ionizationEnergy: number | null;
+  atomicRadius: number | null;
+  covalentRadius: number | null;
+  vanDerWaalsRadius: number | null;
+  meltingPoint: number | null;
+  boilingPoint: number | null;
+  density: number | null;
   standardState: StandardState;
-  oxidationStates: number[]; // common oxidation states
-  yearDiscovered: number | string | null; // number or "Ancient"
+  oxidationStates: number[];
+  yearDiscovered: number | null;
   discoveredBy: string | null;
-  cpkColor: string; // hex, standard CPK
-  funFact: string; // one engaging sentence, accurate
-  group_name?: string; // e.g. "Chalcogens", optional
+  cpkColor: string;
+  funFact: string;
 }
