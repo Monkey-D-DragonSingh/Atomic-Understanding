@@ -6,11 +6,12 @@ interface ThreePanelLayoutProps {
   leftPanel: React.ReactNode;
   centerPanel: React.ReactNode;
   rightPanel: React.ReactNode;
+  offsetTop?: number;
 }
 
 const HEADER = 56;
 
-export function ThreePanelLayout({ leftPanel, centerPanel, rightPanel }: ThreePanelLayoutProps) {
+export function ThreePanelLayout({ leftPanel, centerPanel, rightPanel, offsetTop = HEADER }: ThreePanelLayoutProps) {
   const {
     leftDrawerOpen, setLeftDrawerOpen,
     rightDrawerOpen, setRightDrawerOpen,
@@ -34,7 +35,7 @@ export function ThreePanelLayout({ leftPanel, centerPanel, rightPanel }: ThreePa
   }, [setLeftDrawerOpen, setRightDrawerOpen]);
 
   return (
-    <div className="flex h-full w-full overflow-hidden bg-bg relative" style={{ paddingTop: HEADER }}>
+    <div className="flex h-full w-full overflow-hidden bg-bg relative" style={{ paddingTop: offsetTop }}>
       {/* Mobile drawer toggles */}
       {hasLeft && (
         <button
