@@ -1,7 +1,8 @@
 // VERIFIED: 118 elements, shells sum == atomicNumber for each.
 import { Element } from '../types';
+import { PERIODIC_PROPS } from './elementProperties';
 
-export const ELEMENTS: Element[] = [
+const RAW_ELEMENTS: Element[] = [
   {
     "atomicNumber": 1,
     "symbol": "H",
