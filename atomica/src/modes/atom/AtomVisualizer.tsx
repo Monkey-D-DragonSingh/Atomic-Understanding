@@ -18,16 +18,19 @@ function Nucleus({ atomicNumber, atomicMass, categoryColor }: { atomicNumber: nu
   const nucleons = useMemo(() => {
     const points = [];
     const phi = Math.PI * (3 - Math.sqrt(5)); // golden angle
+    // Spread radius of the nucleon cluster (0 for a single nucleon so it sits dead center)
+    const clusterRadius = renderCount <= 1 ? 0 : 0.5 + Math.pow(renderCount, 0.33) * 0.15;
     for (let i = 0; i < renderCount; i++) {
-      const y = 1 - (i / (renderCount - 1)) * 2; // y goes from 1 to -1
-      const radiusAtY = Math.sqrt(1 - y * y);
+      // Guard against divide-by-zero when renderCount === 1 (e.g. hydrogen: 1 proton, 0 neutrons)
+      const y = renderCount === 1 ? 0 : 1 - (i / (renderCount - 1)) * 2; // y goes from 1 to -1
+      const radiusAtY = Math.sqrt(Math.max(0, 1 - y * y));
       const theta = phi * i;
       const x = Math.cos(theta) * radiusAtY;
       const z = Math.sin(theta) * radiusAtY;
-      
+
       const isProton = i % 2 === 0; // simple alternating distribution
       points.push({
-        position: new THREE.Vector3(x, y, z).multiplyScalar(0.5 + Math.pow(renderCount, 0.33) * 0.15),
+        position: new THREE.Vector3(x, y, z).multiplyScalar(clusterRadius),
         color: isProton ? categoryColor : '#607D8B'
       });
     }
