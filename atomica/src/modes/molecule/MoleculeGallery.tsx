@@ -14,7 +14,7 @@ export function MoleculeGallery() {
   );
 
   return (
-    <div className="flex flex-col h-full bg-bg">
+    <div className="flex flex-col h-full">
       <div className="p-4 border-b border-border shrink-0">
         <SearchInput value={search} onChange={setSearch} placeholder="Filter gallery..." />
       </div>

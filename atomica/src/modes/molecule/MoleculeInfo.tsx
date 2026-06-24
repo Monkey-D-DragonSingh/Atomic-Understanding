@@ -61,15 +61,6 @@ export function MoleculeInfo() {
           </div>
         )}
       </div>
-
-      {/* Part 3 Builder Stub */}
-      <div className="shrink-0 mt-6 pt-4 border-t border-border">
-        <div className="border border-dashed border-accent/40 bg-accent/5 rounded-lg p-4 text-center">
-          <div className="text-xl mb-2 text-accent">🔧</div>
-          <h4 className="text-sm font-semibold text-accent mb-1">Interactive Builder</h4>
-          <p className="text-xs text-text-dim">Drag-and-drop molecule bonding engine coming in Part 3.</p>
-        </div>
-      </div>
     </Panel>
   );
 }
