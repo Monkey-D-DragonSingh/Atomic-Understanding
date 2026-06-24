@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "cd atomica && npm install && npm run build",
+  "outputDirectory": "atomica/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
