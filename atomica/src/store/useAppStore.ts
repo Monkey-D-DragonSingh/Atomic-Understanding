@@ -56,6 +56,11 @@ export interface AppState {
   rightDrawerOpen: boolean;
   setRightDrawerOpen: (open: boolean) => void;
 
+  leftCollapsed: boolean;
+  setLeftCollapsed: (c: boolean) => void;
+  rightCollapsed: boolean;
+  setRightCollapsed: (c: boolean) => void;
+
   onboardingSeen: boolean;
   setOnboardingSeen: (seen: boolean) => void;
   helpOpen: boolean;
@@ -102,6 +107,11 @@ export const useAppStore = create<AppState>()(
       rightDrawerOpen: false,
       setRightDrawerOpen: (rightDrawerOpen) => set({ rightDrawerOpen }),
 
+      leftCollapsed: false,
+      setLeftCollapsed: (leftCollapsed) => set({ leftCollapsed }),
+      rightCollapsed: false,
+      setRightCollapsed: (rightCollapsed) => set({ rightCollapsed }),
+
       onboardingSeen: false,
       setOnboardingSeen: (onboardingSeen) => set({ onboardingSeen }),
       helpOpen: false,
@@ -111,7 +121,9 @@ export const useAppStore = create<AppState>()(
       name: 'atomica-storage',
       partialize: (state) => ({ 
         searchHistory: state.searchHistory,
-        onboardingSeen: state.onboardingSeen
+        onboardingSeen: state.onboardingSeen,
+        leftCollapsed: state.leftCollapsed,
+        rightCollapsed: state.rightCollapsed
       }),
     }
   )
