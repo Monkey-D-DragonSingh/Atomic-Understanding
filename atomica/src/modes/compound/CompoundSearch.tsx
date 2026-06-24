@@ -55,7 +55,8 @@ export function CompoundSearch() {
           PubChem.fetch3DRecord(cid).catch(() => PubChem.fetch2DRecord(cid))
         ]);
 
-        const parsed = PubChem.parseRecord(structure);
+        // fetch3DRecord / fetch2DRecord already return a ParsedStructure — do NOT parse again.
+        const parsed = structure ?? { atoms: [], bonds: [] };
         const compound = {
           id: `pubchem-${cid}`,
           name: debouncedQuery,

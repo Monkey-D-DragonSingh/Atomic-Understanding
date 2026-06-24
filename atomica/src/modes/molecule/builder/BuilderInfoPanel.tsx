@@ -48,12 +48,12 @@ export function BuilderInfoPanel() {
       bonds = [{ id: 1, from: 1, to: 2, order: 1 }];
     } else if (formula === 'O₃') {
       atoms = [
-        { id: 1, symbol: 'O', x: 200, y: 150, bonds: [1, 2], bondsUsed: 3 },
-        { id: 2, symbol: 'O', x: 130, y: 220, bonds: [1], bondsUsed: 2 },
+        { id: 1, symbol: 'O', x: 200, y: 150, bonds: [1, 2], bondsUsed: 2 },
+        { id: 2, symbol: 'O', x: 130, y: 220, bonds: [1], bondsUsed: 1 },
         { id: 3, symbol: 'O', x: 270, y: 220, bonds: [2], bondsUsed: 1 }
       ];
       bonds = [
-        { id: 1, from: 1, to: 2, order: 2 },
+        { id: 1, from: 1, to: 2, order: 1 },
         { id: 2, from: 1, to: 3, order: 1 }
       ];
     } else if (formula === 'H₂O₂') {

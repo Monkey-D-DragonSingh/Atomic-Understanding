@@ -54,8 +54,8 @@ export function PeriodicTable() {
 
       <div className="flex-1 min-h-[500px] flex justify-center pb-8">
         <div 
-          className="grid gap-[2px] w-full max-w-full" 
-          style={{ gridTemplateColumns: 'repeat(18, minmax(0, 1fr))', gridAutoRows: 'minmax(24px, 4.5vw)' }}
+          className="grid gap-[3px] w-full max-w-full" 
+          style={{ gridTemplateColumns: 'repeat(18, minmax(0, 1fr))', gridAutoRows: 'minmax(30px, 3vw)' }}
         >
           {ELEMENTS.map((el, index) => {
             const isMatch =
@@ -94,6 +94,8 @@ export function PeriodicTable() {
                     opacity: isDimmed ? 0.15 : 1,
                     transform: isSelected ? 'scale(1.05)' : 'scale(1)',
                     zIndex: isSelected ? 10 : 1,
+                    // Separate the f-block (lanthanide/actinide) strip from the main table
+                    marginTop: el.ypos === 8 ? '12px' : undefined,
                     // Pass index as custom property for staggered animation if added in CSS
                     ['--cell-index' as any]: index,
                     animationDelay: `${index * 5}ms`,
@@ -106,14 +108,11 @@ export function PeriodicTable() {
                     <div className="absolute inset-[-2px] border-2 border-accent rounded-sm shadow-[0_0_10px_var(--accent-glow)] pointer-events-none" />
                   )}
 
-                  <span className="absolute top-0.5 left-1 text-[8px] md:text-[9px] font-medium opacity-80 leading-none">
+                  <span className="absolute top-0.5 left-1 text-[8px] md:text-[9px] font-medium opacity-70 leading-none">
                     {el.atomicNumber}
                   </span>
-                  <span className="text-xs md:text-sm font-bold tracking-tight">
+                  <span className="text-sm md:text-base font-bold tracking-tight leading-none">
                     {el.symbol}
-                  </span>
-                  <span className="absolute bottom-0.5 text-[6px] md:text-[7px] opacity-60 leading-none truncate w-full text-center px-0.5">
-                    {el.atomicMass ? el.atomicMass.toFixed(2) : ''}
                   </span>
                 </button>
               </Tooltip>
