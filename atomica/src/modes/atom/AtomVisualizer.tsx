@@ -363,7 +363,7 @@ export function AtomVisualizer() {
             )}
 
             {atomView === 'orbital' && (
-              <OrbitalsModel />
+              <OrbitalsModel block={selectedElement.block} symbol={selectedElement.symbol} />
             )}
             
           </Canvas>
