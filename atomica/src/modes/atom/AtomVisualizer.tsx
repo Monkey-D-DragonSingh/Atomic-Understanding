@@ -146,33 +146,46 @@ function CloudModel({ shells }: { shells: number[] }) {
     const positions: number[] = [];
     const colors: number[] = [];
     const colorObj = new THREE.Color();
-    
+
+    // Box-Muller gaussian for realistic radial probability spread around each shell.
+    const gaussian = (mean: number, stdev: number) => {
+      const u = 1 - Math.random();
+      const v = Math.random();
+      const z = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+      return mean + z * stdev;
+    };
+
     shells.forEach((count, i) => {
+      if (count <= 0) return;
       const radius = (1.5 + i * 1.2) / scaleFactor;
-      const numPoints = count * 200; // More points for a denser cloud
-      
-      // Color gradient per shell
-      colorObj.setHSL((i * 0.15) % 1, 0.8, 0.6);
-      
+      // Dense enough that even 1-electron shells read as a cloud, scaled by occupancy.
+      const numPoints = 1200 + count * 600;
+
+      // Cool-to-warm gradient per shell so layers are distinguishable.
+      colorObj.setHSL(0.6 - (i / Math.max(1, shells.length)) * 0.6, 0.85, 0.6);
+
+      // Shell thickness ~ a fraction of its radius (inner shells tighter).
+      const stdev = radius * 0.16 + 0.05;
+
       for (let j = 0; j < numPoints; j++) {
-        // Random point on sphere surface + gaussian noise for fuzziness
+        // Uniform direction on the unit sphere.
         const u = Math.random();
         const v = Math.random();
         const theta = 2 * Math.PI * u;
         const phi = Math.acos(2 * v - 1);
-        
-        // Spread variance based on radius
-        const rSpread = radius + (Math.random() - 0.5) * 0.8;
-        
-        const x = rSpread * Math.sin(phi) * Math.cos(theta);
-        const y = rSpread * Math.sin(phi) * Math.sin(theta);
-        const z = rSpread * Math.cos(phi);
-        
-        positions.push(x, y, z);
+
+        // Radius drawn from a gaussian centred on the shell radius -> fuzzy probability shell.
+        const r = Math.max(0.05, gaussian(radius, stdev));
+
+        positions.push(
+          r * Math.sin(phi) * Math.cos(theta),
+          r * Math.sin(phi) * Math.sin(theta),
+          r * Math.cos(phi)
+        );
         colors.push(colorObj.r, colorObj.g, colorObj.b);
       }
     });
-    
+
     return {
       positions: new Float32Array(positions),
       colors: new Float32Array(colors)
@@ -183,7 +196,7 @@ function CloudModel({ shells }: { shells: number[] }) {
     if (pointsRef.current) {
       pointsRef.current.rotation.y = state.clock.elapsedTime * 0.05;
       const mat = pointsRef.current.material as THREE.PointsMaterial;
-      mat.opacity = 0.4 + Math.sin(state.clock.elapsedTime * 2) * 0.1;
+      mat.opacity = 0.32 + Math.sin(state.clock.elapsedTime * 1.5) * 0.06;
     }
   });
 
@@ -194,7 +207,7 @@ function CloudModel({ shells }: { shells: number[] }) {
           <bufferAttribute attach="attributes-position" count={particles.positions.length / 3} array={particles.positions} itemSize={3} />
           <bufferAttribute attach="attributes-color" count={particles.colors.length / 3} array={particles.colors} itemSize={3} />
         </bufferGeometry>
-        <pointsMaterial size={0.03} vertexColors transparent opacity={0.5} sizeAttenuation depthWrite={false} blending={THREE.AdditiveBlending} />
+        <pointsMaterial size={0.045} vertexColors transparent opacity={0.35} sizeAttenuation depthWrite={false} blending={THREE.AdditiveBlending} />
       </points>
       <Html position={[0, -4, 0]} center>
         <div className="bg-black/60 px-3 py-1.5 rounded-lg border border-white/10 text-xs text-text-dim whitespace-nowrap backdrop-blur-md pointer-events-none">
@@ -205,46 +218,94 @@ function CloudModel({ shells }: { shells: number[] }) {
   );
 }
 
-function OrbitalsModel() {
+function Dumbbell({ axis, color }: { axis: 'x' | 'y' | 'z'; color: string }) {
+  const rot: [number, number, number] =
+    axis === 'x' ? [0, 0, Math.PI / 2] : axis === 'z' ? [Math.PI / 2, 0, 0] : [0, 0, 0];
+  return (
+    <group rotation={rot}>
+      <mesh position={[0, 1.1, 0]}>
+        <sphereGeometry args={[0.6, 24, 24]} />
+        <meshPhongMaterial color={color} transparent opacity={0.22} depthWrite={false} />
+      </mesh>
+      <mesh position={[0, -1.1, 0]}>
+        <sphereGeometry args={[0.6, 24, 24]} />
+        <meshPhongMaterial color={color} transparent opacity={0.22} depthWrite={false} />
+      </mesh>
+    </group>
+  );
+}
+
+// A four-lobed (cloverleaf) d-type orbital lying in a plane, lobes between the axes.
+function Cloverleaf({ rotation, color }: { rotation: [number, number, number]; color: string }) {
+  const lobes: [number, number, number][] = [
+    [0.95, 0.95, 0],
+    [-0.95, 0.95, 0],
+    [0.95, -0.95, 0],
+    [-0.95, -0.95, 0],
+  ];
+  return (
+    <group rotation={rotation}>
+      {lobes.map((p, i) => (
+        <mesh key={i} position={p}>
+          <sphereGeometry args={[0.5, 20, 20]} />
+          <meshPhongMaterial color={color} transparent opacity={0.2} depthWrite={false} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+function OrbitalsModel({ block, symbol }: { block: string; symbol: string }) {
+  const showP = block === 'p' || block === 'd' || block === 'f';
+  const showD = block === 'd' || block === 'f';
+  const showF = block === 'f';
+
+  const label =
+    block === 's'
+      ? `${symbol}: spherical s valence orbital`
+      : block === 'p'
+      ? `${symbol}: s + p valence orbitals (p-block)`
+      : block === 'd'
+      ? `${symbol}: s, p & four-lobed d orbitals (d-block)`
+      : `${symbol}: s, p, d & complex f orbitals (f-block)`;
+
   return (
     <group>
-      {/* S Orbital (Sphere) */}
+      {/* s orbital — spherical, present for every element */}
       <mesh>
-        <sphereGeometry args={[1.5, 32, 32]} />
-        <meshPhongMaterial color="#ef4444" transparent opacity={0.15} depthWrite={false} />
+        <sphereGeometry args={[1.3, 32, 32]} />
+        <meshPhongMaterial color="#ef4444" transparent opacity={0.16} depthWrite={false} />
       </mesh>
-      
-      {/* P Orbitals (Dumbbells) */}
-      <mesh position={[1.8, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-        <capsuleGeometry args={[0.5, 2, 16, 16]} />
-        <meshPhongMaterial color="#3b82f6" transparent opacity={0.2} depthWrite={false} />
-      </mesh>
-      <mesh position={[-1.8, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-        <capsuleGeometry args={[0.5, 2, 16, 16]} />
-        <meshPhongMaterial color="#3b82f6" transparent opacity={0.2} depthWrite={false} />
-      </mesh>
-      
-      <mesh position={[0, 1.8, 0]}>
-        <capsuleGeometry args={[0.5, 2, 16, 16]} />
-        <meshPhongMaterial color="#22c55e" transparent opacity={0.2} depthWrite={false} />
-      </mesh>
-      <mesh position={[0, -1.8, 0]}>
-        <capsuleGeometry args={[0.5, 2, 16, 16]} />
-        <meshPhongMaterial color="#22c55e" transparent opacity={0.2} depthWrite={false} />
-      </mesh>
-      
-      <mesh position={[0, 0, 1.8]} rotation={[Math.PI / 2, 0, 0]}>
-        <capsuleGeometry args={[0.5, 2, 16, 16]} />
-        <meshPhongMaterial color="#eab308" transparent opacity={0.2} depthWrite={false} />
-      </mesh>
-      <mesh position={[0, 0, -1.8]} rotation={[Math.PI / 2, 0, 0]}>
-        <capsuleGeometry args={[0.5, 2, 16, 16]} />
-        <meshPhongMaterial color="#eab308" transparent opacity={0.2} depthWrite={false} />
-      </mesh>
+
+      {/* p orbitals — three orthogonal dumbbells */}
+      {showP && (
+        <>
+          <Dumbbell axis="x" color="#3b82f6" />
+          <Dumbbell axis="y" color="#22c55e" />
+          <Dumbbell axis="z" color="#eab308" />
+        </>
+      )}
+
+      {/* d orbitals — four-lobed cloverleaves in different planes */}
+      {showD && (
+        <>
+          <Cloverleaf rotation={[0, 0, 0]} color="#a855f7" />
+          <Cloverleaf rotation={[Math.PI / 2, 0, 0]} color="#ec4899" />
+          <Cloverleaf rotation={[0, Math.PI / 2, Math.PI / 4]} color="#f97316" />
+        </>
+      )}
+
+      {/* f orbitals — schematic extra lobes along the diagonals */}
+      {showF && (
+        <>
+          <Cloverleaf rotation={[Math.PI / 4, Math.PI / 4, 0]} color="#14b8a6" />
+          <Cloverleaf rotation={[-Math.PI / 4, Math.PI / 4, Math.PI / 2]} color="#06b6d4" />
+        </>
+      )}
 
       <Html position={[0, -4, 0]} center>
         <div className="bg-black/60 px-3 py-1.5 rounded-lg border border-white/10 text-xs text-text-dim whitespace-nowrap backdrop-blur-md pointer-events-none">
-          Schematic visualization of s and p valence orbitals
+          {label}
         </div>
       </Html>
     </group>
