@@ -4400,3 +4400,17 @@ const RAW_ELEMENTS: Element[] = [
     "funFact": "Oganesson is the heaviest synthesized element and the only noble gas predicted to be a solid at room temperature."
   }
 ];
+
+// Enrich elements with canonical periodic properties (electronegativity + radii).
+// Existing non-null values in RAW_ELEMENTS take precedence; only gaps are filled.
+export const ELEMENTS: Element[] = RAW_ELEMENTS.map((el) => {
+  const props = PERIODIC_PROPS[el.atomicNumber];
+  if (!props) return el;
+  return {
+    ...el,
+    electronegativity: el.electronegativity ?? props.electronegativity,
+    atomicRadius: el.atomicRadius ?? props.atomicRadius,
+    covalentRadius: el.covalentRadius ?? props.covalentRadius,
+    vanDerWaalsRadius: el.vanDerWaalsRadius ?? props.vanDerWaalsRadius,
+  };
+});
