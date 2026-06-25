@@ -24,7 +24,7 @@ export function AtomDetailPanel() {
         <AtomVisualizer />
       </div>
       {/* Scrollable properties */}
-      <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar">
+      <div className="flex-1 min-h-0">
         <ElementInfo />
       </div>
     </div>

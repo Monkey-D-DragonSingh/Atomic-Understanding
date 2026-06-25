@@ -23,7 +23,7 @@ export function CompoundVisualizer() {
           </Badge>
         </div>
         
-        <div className="w-64 pointer-events-auto">
+        <div className="w-[340px] max-w-[60vw] pointer-events-auto">
           <SegmentedControl
             options={[
               { label: 'Skeletal', value: 'skeletal' },
@@ -32,6 +32,7 @@ export function CompoundVisualizer() {
             ]}
             value={compoundView}
             onChange={setCompoundView}
+            size="sm"
           />
         </div>
       </div>
