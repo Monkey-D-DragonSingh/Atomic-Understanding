@@ -81,22 +81,28 @@ export function PeriodicTable() {
               );
 
               return (
-                <Tooltip key={el.atomicNumber} content={tooltipContent}>
+                <Tooltip
+                  key={el.atomicNumber}
+                  content={tooltipContent}
+                  className="aspect-square animate-fade-in-up"
+                  style={{
+                    gridColumn: el.xpos,
+                    gridRow: el.ypos,
+                    marginTop: el.ypos === 8 ? '14px' : undefined,
+                    opacity: isDimmed ? 0.12 : 1,
+                    zIndex: isSelected ? 10 : 1,
+                    animationDelay: `${Math.min(index * 4, 500)}ms`,
+                  }}
+                >
                   <button
                     onClick={() => selectElement(el)}
-                    className="relative flex flex-col items-center justify-center rounded-md border aspect-square transition-all duration-150 animate-fade-in-up origin-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:z-10 hover:z-10 hover:-translate-y-0.5"
+                    className="relative w-full h-full flex flex-col items-center justify-center rounded-md border transition-transform duration-150 origin-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent hover:-translate-y-0.5"
                     style={{
-                      gridColumn: el.xpos,
-                      gridRow: el.ypos,
                       backgroundColor: isSelected ? `${categoryColor}33` : `${categoryColor}1A`,
                       borderColor: isSelected ? 'var(--accent)' : `${categoryColor}33`,
                       color: categoryColor,
-                      opacity: isDimmed ? 0.12 : 1,
                       transform: isSelected ? 'scale(1.08)' : undefined,
-                      zIndex: isSelected ? 10 : 1,
                       boxShadow: isSelected ? '0 0 0 1px var(--accent), 0 6px 20px -6px var(--accent-glow)' : undefined,
-                      marginTop: el.ypos === 8 ? '14px' : undefined,
-                      animationDelay: `${Math.min(index * 4, 500)}ms`,
                     }}
                   >
                     <div className="absolute inset-0 rounded-md transition-opacity opacity-0 group-hover:opacity-100 bg-white/[0.06] pointer-events-none" />

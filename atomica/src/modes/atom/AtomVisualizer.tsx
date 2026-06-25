@@ -65,9 +65,10 @@ function Nucleus({ atomicNumber, atomicMass, categoryColor }: { atomicNumber: nu
 function BohrModel({ shells, categoryColor }: { shells: number[], categoryColor: string }) {
   const groupRef = useRef<THREE.Group>(null);
   
-  // Scale down heavily so 7 shells fit nicely
+  // Scale so the outermost shell always fits the (small) viewport, regardless of shell count.
   const maxShells = shells.length;
-  const scaleFactor = Math.max(1, maxShells / 3);
+  const maxRadius = 1.5 + (maxShells - 1) * 1.2;
+  const scaleFactor = maxRadius / 2.3;
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -130,8 +131,8 @@ function BohrShell({ n, count, radius, speed, color }: { n: number, count: numbe
       ))}
       {/* Shell label */}
       <Html position={[radius, 0, 0]} center zIndexRange={[100, 0]}>
-        <div className="text-[9px] text-white/50 px-1 select-none pointer-events-none" style={{ transform: 'translateY(-100%)' }}>
-          n={n} ({count}e⁻)
+        <div className="text-[8px] text-white/40 px-1 select-none pointer-events-none whitespace-nowrap" style={{ transform: 'translateY(-130%)' }}>
+          n{n}
         </div>
       </Html>
     </group>
@@ -140,7 +141,8 @@ function BohrShell({ n, count, radius, speed, color }: { n: number, count: numbe
 
 function CloudModel({ shells }: { shells: number[] }) {
   const pointsRef = useRef<THREE.Points>(null);
-  const scaleFactor = Math.max(1, shells.length / 3);
+  const maxRadius = 1.5 + (shells.length - 1) * 1.2;
+  const scaleFactor = maxRadius / 2.3;
 
   const particles = useMemo(() => {
     const positions: number[] = [];
