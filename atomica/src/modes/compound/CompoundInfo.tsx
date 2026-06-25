@@ -4,6 +4,7 @@ import { Panel } from '../../components/ui/Panel';
 import { PropertyGrid, PropertyItem } from '../../components/ui/PropertyGrid';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { Search, ExternalLink, Copy } from 'lucide-react';
+import { toSubscript } from '../../lib/format';
 
 export function CompoundInfo() {
   const { activeCompound } = useAppStore();
@@ -45,20 +46,18 @@ export function CompoundInfo() {
 
   return (
     <Panel className="h-full border-0 lg:border-l rounded-none">
-      <div className="flex flex-col h-full gap-6">
-        <div>
-          <h2 className="text-2xl font-bold text-accent break-words">{activeCompound.name}</h2>
-          <div className="text-xl font-bold mt-1 text-text">{activeCompound.formula}</div>
+      <div className="flex flex-col gap-6">
+        <div className="space-y-1.5">
+          <h2 className="text-xl font-bold text-text leading-tight break-words capitalize">{activeCompound.name}</h2>
+          <div className="text-lg font-mono text-accent leading-tight break-words">{toSubscript(activeCompound.formula)}</div>
           {props.IUPACName && (
-            <div className="text-xs text-text-dim mt-2 line-clamp-2" title={props.IUPACName}>
+            <div className="text-xs text-text-dim pt-1 line-clamp-2 leading-snug" title={props.IUPACName}>
               {props.IUPACName}
             </div>
           )}
         </div>
 
-        <hr className="border-border" />
-
-        <div className="bg-black/30 p-4 rounded-lg border border-border">
+        <div className="glass rounded-xl p-4">
           <PropertyGrid items={propertyItems} />
           
           <div className="mt-4 pt-4 border-t border-border flex justify-between text-xs text-text-dim">

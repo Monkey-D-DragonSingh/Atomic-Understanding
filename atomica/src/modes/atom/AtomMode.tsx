@@ -1,14 +1,13 @@
 import { ThreePanelLayout } from '../../components/layout/ThreePanelLayout';
 import { PeriodicTable } from './PeriodicTable';
-import { AtomVisualizer } from './AtomVisualizer';
-import { ElementInfo } from './ElementInfo';
+import { AtomDetailPanel } from './AtomDetailPanel';
 
 export function AtomMode() {
   return (
     <ThreePanelLayout
-      leftPanel={<PeriodicTable />}
-      centerPanel={<AtomVisualizer />}
-      rightPanel={<ElementInfo />}
+      leftPanel={null}
+      centerPanel={<PeriodicTable />}
+      rightPanel={<AtomDetailPanel />}
     />
   );
 }
