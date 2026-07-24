@@ -4,7 +4,7 @@ import { X, ChevronRight, Check } from 'lucide-react';
 
 const TOUR_STEPS = [
   {
-    title: 'Welcome to ATOMICA',
+    title: 'Welcome to Atomic Understanding',
     content: 'An interactive chemistry platform. Discover elements, build molecules, and simulate reactions.',
   },
   {

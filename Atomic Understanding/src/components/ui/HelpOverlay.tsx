@@ -25,7 +25,7 @@ export function HelpOverlay() {
         <div className="px-6 py-4 border-b border-border flex justify-between items-center bg-bg/50">
           <h2 className="text-lg font-bold text-text flex items-center gap-2">
             <span className="w-8 h-8 rounded-lg bg-accent/20 text-accent flex items-center justify-center text-xl">?</span>
-            ATOMICA Guide
+            Atomic Understanding Guide
           </h2>
           <button 
             onClick={() => setHelpOpen(false)}

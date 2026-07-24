@@ -1,6 +1,6 @@
-# ATOMICA
+# Atomic Understanding
 
-ATOMICA is a production-grade, interactive chemistry learning platform designed for students. It visualizes atomic structures, enables freeform molecule building with dynamic bonding logic, and simulates chemical reactions accurately.
+Atomic Understanding is a production-grade, interactive chemistry learning platform designed for students. It visualizes atomic structures, enables freeform molecule building with dynamic bonding logic, and simulates chemical reactions accurately.
 
 ## Features
 
@@ -67,7 +67,7 @@ npm run preview
 ```
 
 ### Deployment
-ATOMICA is a static Single Page Application (SPA). The `dist/` folder can be deployed to any static host (Vercel, Netlify, GitHub Pages, AWS S3).
+Atomic Understanding is a static Single Page Application (SPA). The `dist/` folder can be deployed to any static host (Vercel, Netlify, GitHub Pages, AWS S3).
 If deploying to a subdirectory, be sure to set the `base` configuration in `vite.config.ts`.
 
 ## Global Shortcuts

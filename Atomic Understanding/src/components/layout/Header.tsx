@@ -1,7 +1,8 @@
 import React from 'react';
 import { useAppStore, AppMode } from '../../store/useAppStore';
 import { SegmentedControl } from '../ui/SegmentedControl';
-import { Atom, Droplets, FlaskConical, TestTube2 } from 'lucide-react';
+import { Atom, Droplets, FlaskConical, TestTube2, BookOpen } from 'lucide-react';
+
 
 export function Header() {
   const { mode, setMode, selectedElement, activeCompound } = useAppStore();
@@ -15,6 +16,7 @@ export function Header() {
     { label: <div className="flex items-center gap-2"><Droplets className="w-4 h-4" /> Molecule</div>, value: 'molecule' },
     { label: <div className="flex items-center gap-2"><FlaskConical className="w-4 h-4" /> Compound</div>, value: 'compound' },
     { label: <div className="flex items-center gap-2"><TestTube2 className="w-4 h-4" /> Reaction</div>, value: 'reaction' },
+    { label: <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Quiz</div>, value: 'quiz' },
   ];
 
   let readout = '—';
@@ -35,7 +37,7 @@ export function Header() {
             <Atom className="relative w-5 h-5 text-accent" strokeWidth={2} />
           </div>
           <div className="flex items-baseline gap-2.5 min-w-0">
-            <h1 className="font-bold text-[15px] tracking-[0.22em] text-text">ATOMICA</h1>
+            <h1 className="font-bold text-[15px] tracking-[0.22em] text-text">ATOMIC UNDERSTANDING</h1>
             <span className="text-[10px] text-text-dim uppercase tracking-[0.16em] hidden lg:inline-block truncate">
               Interactive Chemistry Explorer
             </span>
@@ -43,7 +45,7 @@ export function Header() {
         </div>
       </div>
 
-      <div className="flex-1 max-w-md mx-4 flex justify-center">
+      <div className="flex-1 max-w-x1 mx-4 flex justify-center">
         <SegmentedControl
           value={mode}
           onChange={handleModeChange}

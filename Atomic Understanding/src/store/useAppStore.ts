@@ -4,7 +4,7 @@ import { Element } from '../types/element';
 import { Molecule } from '../types/molecule';
 import { Reaction } from '../types/reaction';
 
-export type AppMode = 'atom' | 'molecule' | 'compound' | 'reaction';
+export type AppMode = 'atom' | 'molecule' | 'compound' | 'reaction' | 'quiz';
 export type AtomViewMode = 'bohr' | 'cloud' | 'orbital';
 export type CompoundViewMode = 'skeletal' | 'ball-stick' | 'space-fill';
 

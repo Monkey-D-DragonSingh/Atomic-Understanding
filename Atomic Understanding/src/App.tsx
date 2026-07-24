@@ -8,6 +8,8 @@ import { AtomMode } from './modes/atom/AtomMode';
 import { MoleculeMode } from './modes/molecule/MoleculeMode';
 import { CompoundMode } from './modes/compound/CompoundMode';
 import { ReactionMode } from './modes/reaction/ReactionMode';
+import { QuizMode } from './modes/quiz/QuizMode';
+
 
 function App() {
   const { mode, setMode, helpOpen, setHelpOpen } = useAppStore();
@@ -41,6 +43,8 @@ function App() {
           {mode === 'molecule' && <MoleculeMode />}
           {mode === 'compound' && <CompoundMode />}
           {mode === 'reaction' && <ReactionMode />}
+          {mode === 'quiz' && <QuizMode />}
+          
         </ErrorBoundary>
       </main>
       
