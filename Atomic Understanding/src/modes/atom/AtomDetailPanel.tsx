@@ -23,8 +23,9 @@ export function AtomDetailPanel() {
       <div className="h-[300px] shrink-0 border-b border-border relative">
         <AtomVisualizer />
       </div>
-      {/* Scrollable properties */}
-      <div className="flex-1 min-h-0">
+      {/* Scrollable properties panel — fills whatever width the outer
+          ThreePanelLayout drag handle gives the whole side panel */}
+      <div className="overflow-auto flex-1 min-h-0">
         <ElementInfo />
       </div>
     </div>

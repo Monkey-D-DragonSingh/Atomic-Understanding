@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { useAppStore, PlacedAtom, PlacedBond } from '../../../store/useAppStore';
 import { ELEMENTS } from '../../../data/elements';
 import { MOLECULES } from '../../../data/molecules';
-import { bondsNeeded, classifyBond } from '../../../lib/chemistry';
+import { bondsNeeded, classifyBond, neutronCount } from '../../../lib/chemistry';
 import { CPK_COLORS } from '../../../data/constants';
 
 const BOND_DISTANCE = 110; // pixels
@@ -257,7 +257,9 @@ export function BuilderWorkspace() {
 
   const handlePointerUp = (e: React.PointerEvent) => {
     if (dragState) {
-      try { (e.target as Element).releasePointerCapture(e.pointerId); } catch {}
+      try { (e.target as Element).releasePointerCapture(e.pointerId); } catch {
+  // pointer capture may already be released — safe to ignore
+}
       setDragState(null);
     }
   };
@@ -364,9 +366,14 @@ export function BuilderWorkspace() {
         const to = store.canvasAtoms.find(a => a.id === bond.to);
         if (!from || !to) return;
 
-        const en1 = ELEMENTS.find(e => e.symbol === from.symbol)?.electronegativity || null;
-        const en2 = ELEMENTS.find(e => e.symbol === to.symbol)?.electronegativity || null;
-        const type = classifyBond(en1, en2);
+        const elFrom = ELEMENTS.find(e => e.symbol === from.symbol);
+        const elTo = ELEMENTS.find(e => e.symbol === to.symbol);
+        const type = classifyBond(
+          elFrom?.electronegativity ?? null,
+          elTo?.electronegativity ?? null,
+          elFrom?.category,
+          elTo?.category
+        );
 
         ctx.beginPath();
         ctx.moveTo(from.x, from.y);
@@ -384,23 +391,45 @@ export function BuilderWorkspace() {
         ctx.setLineDash([]);
 
         // Animate Electrons
+        // NOTE: this block previously used the along-bond unit vector (nx, ny) to offset the
+        // electron dots, which made them wiggle ON TOP of the bond line instead of beside it,
+        // and it always drew exactly one electron pair regardless of bond order. Fixed below:
+        // - use the perpendicular vector (px, py) for the wiggle, so pairs sit beside the bond
+        // - draw one electron pair PER bond.order (1 pair for single, 2 for double, 3 for triple)
+        // - space multiple pairs out along the bond length so they don't overlap
+        // This applies uniformly to every bond on the canvas, not any specific molecule.
         if (type !== 'ionic') {
-          // Covalent oscillating dots
           const dx = to.x - from.x;
           const dy = to.y - from.y;
-          const len = Math.sqrt(dx*dx + dy*dy);
-          const nx = dx / len;
+          const len = Math.sqrt(dx * dx + dy * dy) || 1;
+          const nx = dx / len;   // unit vector along the bond
           const ny = dy / len;
+          const px = -ny;        // unit vector perpendicular to the bond
+          const py = nx;
+
           const midX = from.x + dx * 0.5;
           const midY = from.y + dy * 0.5;
 
-          const offset = Math.sin(time * 2) * 15;
-          
-          ctx.beginPath();
-          ctx.arc(midX + nx * offset, midY + ny * offset, 3, 0, Math.PI * 2);
-          ctx.arc(midX - nx * offset + ny*8, midY - ny * offset - nx*8, 3, 0, Math.PI * 2); // pair
+          const wiggle = Math.sin(time * 2) * 6;   // side-to-side motion (perpendicular to bond)
+          const pairSpread = 8;                     // gap between the 2 dots of one electron pair
+          const spacing = 18;                       // gap between multiple pairs (double/triple bonds)
+          const startOffset = -((bond.order - 1) * spacing) / 2;
+
           ctx.fillStyle = '#4FC3F7';
-          ctx.fill();
+
+          for (let i = 0; i < bond.order; i++) {
+            const along = startOffset + i * spacing;
+            const cx = midX + nx * along;
+            const cy = midY + ny * along;
+
+            const wx = px * wiggle;
+            const wy = py * wiggle;
+
+            ctx.beginPath();
+            ctx.arc(cx + px * (pairSpread / 2) + wx, cy + py * (pairSpread / 2) + wy, 3, 0, Math.PI * 2);
+            ctx.arc(cx - px * (pairSpread / 2) + wx, cy - py * (pairSpread / 2) + wy, 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
         }
       });
 
@@ -435,6 +464,13 @@ export function BuilderWorkspace() {
         ctx.fillStyle = '#9CA3AF';
         ctx.font = '10px monospace';
         ctx.fillText(`${atom.bondsUsed}/${capacity}`, atom.x, atom.y + 35);
+
+        if (el) {
+          const neutrons = neutronCount(el.atomicNumber, el.atomicMass);
+          ctx.font = '9px monospace';
+          ctx.fillStyle = '#6B7280';
+          ctx.fillText(`p${el.atomicNumber} n${neutrons}`, atom.x, atom.y + 46);
+        }
       });
 
       animationFrameId = requestAnimationFrame(render);

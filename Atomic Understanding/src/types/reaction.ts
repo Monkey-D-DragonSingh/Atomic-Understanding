@@ -1,30 +1,33 @@
-export type ReactionType =
-  | 'synthesis'
-  | 'decomposition'
-  | 'single-displacement'
-  | 'double-displacement'
-  | 'combustion'
-  | 'acid-base'
-  | 'redox'
-  | 'precipitation';
+export type CatalystType = 'heat' | 'metal-catalyst' | 'enzyme' | 'light' | 'pressure';
+
+export interface Catalyst {
+  id: string;
+  name: string;          // "Platinum", "Manganese Dioxide", "Heat"
+  symbol: string;        // shown above the reaction arrow, e.g. "Δ", "Pt", "MnO₂"
+  type: CatalystType;
+  description: string;   // shown in a tooltip/info card
+}
 
 export interface ReactionParticipant {
-  moleculeId?: string; // link to molecules.ts if available
-  formula: string; // "H₂"
-  coefficient: number; // stoichiometric coefficient
-  state: 's' | 'l' | 'g' | 'aq';
+  moleculeId: string;    // references Molecule.id in data/molecules.ts
+  coefficient: number;   // stoichiometric coefficient, for display only
 }
 
 export interface Reaction {
   id: string;
-  name: string; // "Formation of Water"
-  type: ReactionType;
+  name: string;                       // "Combustion of Hydrogen"
   reactants: ReactionParticipant[];
+  requiredCatalyst?: string | null;   // Catalyst.id, or null/undefined if none needed
   products: ReactionParticipant[];
-  balancedEquation: string; // "2H₂ + O₂ → 2H₂O"
-  enthalpy: number | null; // ΔH kJ/mol (negative = exothermic)
-  isExothermic: boolean | null;
-  conditions: string; // "spark / combustion", "room temp", etc.
-  description: string; // what happens, accurate
-  realWorldContext: string; // where this matters in real life
+  reactionType: string;               // "combustion", "synthesis", "acid-base", "decomposition", "hydrogenation", ...
+  conditions?: string;                // short human-readable note, e.g. "Exothermic, requires a spark to start"
+  balancedEquation: string;           // "2H₂ + O₂ →(Δ) 2H₂O" for direct display
 }
+
+// Result of trying to react a chosen set of reactants (+ optional catalyst)
+export type ReactionMatchResult =
+  | { status: 'valid'; reaction: Reaction }
+  | { status: 'catalyst-missing'; reaction: Reaction; neededCatalystId: string }
+  | { status: 'wrong-catalyst'; reaction: Reaction; neededCatalystId: string }
+  | { status: 'invalid' }
+  | { status: 'empty' };

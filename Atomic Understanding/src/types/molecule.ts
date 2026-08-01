@@ -54,6 +54,7 @@ export interface Molecule {
   uses: string; // one sentence, real
   fact: string; // accurate, engaging
   isSpecial?: boolean; // true for O₃, H₂O₂, etc.
+  has3DCoords?: boolean; // false = coordinates are a schematic 2D layout, not real geometry (mainly ionic salts). Ball & Stick / Space Fill should be disabled for these. Undefined/true = real geometry.
   atoms: MoleculeAtom[]; // real 3D geometry (see §5 accuracy rule)
   bonds: MoleculeBond[];
 }

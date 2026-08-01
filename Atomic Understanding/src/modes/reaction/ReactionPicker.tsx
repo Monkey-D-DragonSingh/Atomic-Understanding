@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
-import { REACTIONS } from '../../data/reactions';
-import { ReactionType } from '../../types/reaction';
+import { CURATED_REACTIONS } from '../../data/curatedReactions';
+import { CuratedReactionType } from '../../types/curatedReaction';
 import { SearchInput } from '../../components/ui/SearchInput';
 import { Panel } from '../../components/ui/Panel';
 
 export function ReactionPicker() {
   const [search, setSearch] = useState('');
-  const { activeReaction, setActiveReaction } = useAppStore();
+  const { activeCuratedReaction, setActiveCuratedReaction } = useAppStore();
 
-  const filtered = REACTIONS.filter(r => 
+  const filtered = CURATED_REACTIONS.filter(r => 
     r.name.toLowerCase().includes(search.toLowerCase()) || 
     r.balancedEquation.toLowerCase().includes(search.toLowerCase())
   );
@@ -18,7 +18,7 @@ export function ReactionPicker() {
     if (!acc[r.type]) acc[r.type] = [];
     acc[r.type].push(r);
     return acc;
-  }, {} as Record<ReactionType, typeof REACTIONS>);
+  }, {} as Record<CuratedReactionType, typeof CURATED_REACTIONS>);
 
   return (
     <Panel className="h-full border-0 md:border-r rounded-none flex flex-col">
@@ -35,11 +35,11 @@ export function ReactionPicker() {
             </h3>
             <ul className="space-y-1">
               {list.map(r => {
-                const isActive = activeReaction?.id === r.id;
+                const isActive = activeCuratedReaction?.id === r.id;
                 return (
                   <li key={r.id}>
                     <button
-                      onClick={() => setActiveReaction(r)}
+                      onClick={() => setActiveCuratedReaction(r)}
                       className={`w-full text-left px-3 py-2 rounded-lg transition-all ${
                         isActive 
                           ? 'bg-accent/20 border border-accent/40 shadow-[0_0_10px_rgba(79,195,247,0.15)]' 

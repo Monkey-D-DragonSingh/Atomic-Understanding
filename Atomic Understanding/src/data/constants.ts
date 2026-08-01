@@ -114,8 +114,8 @@ export const CPK_COLORS: Record<string, string> = {
 export const CATEGORY_COLORS: Record<string, string> = {
   'alkali-metal': '#F87171',
   'alkaline-earth-metal': '#FBBF24',
-  'transition-metal': '#FCD34D',
-  'post-transition-metal': '#A7F3D0',
+  'transition-metal': '#67E8F9',
+  'post-transition-metal': '#A3E635',
   metalloid: '#34D399',
   'reactive-nonmetal': '#60A5FA',
   'noble-gas': '#C084FC',

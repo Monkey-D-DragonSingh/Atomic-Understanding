@@ -77,7 +77,7 @@ export function deriveElectronConfig(atomicNumber: number): {
     const semanticSubshells = orderedSubshells.filter((sub) => {
       return (configObj[sub] || 0) > (ngConfigObj[sub] || 0);
     });
-    
+
     // Some exceptions might have *fewer* electrons in an inner shell than the noble gas
     // (e.g. Pd 4d10 vs Kr ...), but Kr has 4d0. This simple diff works for all known cases.
 
@@ -112,32 +112,71 @@ function deriveElectronConfigObj(atomicNumber: number): Record<string, number> {
   return configObj;
 }
 
+// Bonding capacity: how many total bonds (counting order) an atom can form.
+// Main-group values follow standard valence. Transition/lanthanide/actinide metals
+// use their most common oxidation state. N, P, S, Cl, I, Xe are raised above the
+// "ideal" Lewis value so expanded-octet molecules already in MOLECULES.ts
+// (SF6, PCl5, HNO3, KClO3, XeF4, KMnO4, etc.) remain buildable by hand in the canvas.
+const BOND_CAPACITY: Record<string, number> = {
+  // Period 1
+  H: 1, He: 0,
+  // Period 2
+  Li: 1, Be: 2, B: 3, C: 4, N: 4, O: 2, F: 1, Ne: 0,
+  // Period 3
+  Na: 1, Mg: 2, Al: 3, Si: 4, P: 5, S: 6, Cl: 7, Ar: 0,
+  // Period 4
+  K: 1, Ca: 2,
+  Sc: 3, Ti: 4, V: 5, Cr: 3, Mn: 7, Fe: 3, Co: 2, Ni: 2, Cu: 2, Zn: 2,
+  Ga: 3, Ge: 4, As: 3, Se: 2, Br: 1, Kr: 0,
+  // Period 5
+  Rb: 1, Sr: 2,
+  Y: 3, Zr: 4, Nb: 5, Mo: 6, Tc: 7, Ru: 3, Rh: 3, Pd: 2, Ag: 1, Cd: 2,
+  In: 3, Sn: 4, Sb: 3, Te: 2, I: 7, Xe: 4,
+  // Period 6
+  Cs: 1, Ba: 2,
+  La: 3, Ce: 3, Pr: 3, Nd: 3, Pm: 3, Sm: 3, Eu: 3, Gd: 3, Tb: 3,
+  Dy: 3, Ho: 3, Er: 3, Tm: 3, Yb: 3, Lu: 3,
+  Hf: 4, Ta: 5, W: 6, Re: 7, Os: 4, Ir: 3, Pt: 2, Au: 3, Hg: 2,
+  Tl: 3, Pb: 4, Bi: 3, Po: 2, At: 1, Rn: 0,
+  // Period 7
+  Fr: 1, Ra: 2,
+  Ac: 3, Th: 4, Pa: 5, U: 6, Np: 5, Pu: 4, Am: 3, Cm: 3,
+  Bk: 3, Cf: 3, Es: 3, Fm: 3, Md: 3, No: 2, Lr: 3,
+  Rf: 4, Db: 5, Sg: 6, Bh: 7, Hs: 4, Mt: 3, Ds: 2, Rg: 1, Cn: 2,
+  Nh: 3, Fl: 4, Mc: 3, Lv: 2, Ts: 1, Og: 0,
+};
+
 export function bondsNeeded(symbol: string): number {
-  const needs: Record<string, number> = {
-    H: 1,
-    C: 4,
-    N: 3,
-    O: 2,
-    F: 1,
-    Cl: 1,
-    Br: 1,
-    I: 1,
-    S: 2, // or 6 depending on hypervalence, but default to 2
-    P: 3, // or 5
-    He: 0,
-    Ne: 0,
-    Ar: 0,
-    Kr: 0,
-    Xe: 0,
-    Rn: 0,
-  };
-  return needs[symbol] !== undefined ? needs[symbol] : 0;
+  // Fallback of 2 instead of 0 — 0 silently made every unlisted atom impossible
+  // to bond at all, which was the root cause of unbuildable metal-based molecules.
+  return BOND_CAPACITY[symbol] ?? 2;
 }
 
-export function classifyBond(en1: number | null, en2: number | null): string {
-  if (en1 === null || en2 === null) return 'unknown';
-  const diff = Math.abs(en1 - en2);
-  if (diff < 0.4) return 'nonpolar-covalent';
-  if (diff <= 1.7) return 'polar-covalent';
-  return 'ionic';
+export function classifyBond(
+  en1: number | null,
+  en2: number | null,
+  cat1?: string,
+  cat2?: string
+): string {
+  if (en1 !== null && en2 !== null) {
+    const diff = Math.abs(en1 - en2);
+    if (diff < 0.4) return 'nonpolar-covalent';
+    if (diff <= 1.7) return 'polar-covalent';
+    return 'ionic';
+  }
+  // Fallback when electronegativity data is missing: coarse metal/nonmetal rule.
+  if (cat1 && cat2) {
+    const isMetal = (c: string) => c.includes('metal') && !c.includes('metalloid');
+    if (isMetal(cat1) !== isMetal(cat2)) return 'ionic';
+    return 'polar-covalent';
+  }
+  return 'unknown';
+}
+
+// Approximate neutron count using the most abundant/longest-lived isotope's mass number.
+// atomicMass in your data is a decimal isotopic average for stable elements (e.g. Cl = 35.45)
+// and the longest-lived isotope's mass number for elements with no stable isotope
+// (e.g. Tc = 98), so rounding works as a reasonable approximation in both cases.
+export function neutronCount(atomicNumber: number, atomicMass: number): number {
+  return Math.max(0, Math.round(atomicMass) - atomicNumber);
 }

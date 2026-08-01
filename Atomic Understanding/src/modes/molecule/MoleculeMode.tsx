@@ -7,6 +7,7 @@ import { ElementTray } from './builder/ElementTray';
 import { BuilderWorkspace } from './builder/BuilderWorkspace';
 import { BuilderInfoPanel } from './builder/BuilderInfoPanel';
 import { SegmentedControl } from '../../components/ui/SegmentedControl';
+import { Molecule3DModal } from './builder/Molecule3DModal';
 
 export function MoleculeMode() {
   const [subMode, setSubMode] = useState<'gallery' | 'builder'>('builder');
@@ -26,29 +27,35 @@ export function MoleculeMode() {
 
   if (subMode === 'gallery') {
     return (
-      <ThreePanelLayout
-        leftPanel={<MoleculeGallery />}
-        centerPanel={
-          <>
-            {switcher}
-            <CompoundVisualizer />
-          </>
-        }
-        rightPanel={<MoleculeInfo />}
-      />
+      <>
+        <ThreePanelLayout
+          leftPanel={<MoleculeGallery />}
+          centerPanel={
+            <>
+              {switcher}
+              <CompoundVisualizer />
+            </>
+          }
+          rightPanel={<MoleculeInfo />}
+        />
+        <Molecule3DModal />
+      </>
     );
   }
 
   return (
-    <ThreePanelLayout
-      leftPanel={<ElementTray />}
-      centerPanel={
-        <>
-          {switcher}
-          <BuilderWorkspace />
-        </>
-      }
-      rightPanel={<BuilderInfoPanel />}
-    />
+    <>
+      <ThreePanelLayout
+        leftPanel={<ElementTray />}
+        centerPanel={
+          <>
+            {switcher}
+            <BuilderWorkspace />
+          </>
+        }
+        rightPanel={<BuilderInfoPanel />}
+      />
+      <Molecule3DModal />
+    </>
   );
 }

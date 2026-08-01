@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { Play, Pause, RotateCcw } from 'lucide-react';
-// MOLECULES removed since unused
 
 // Helper to parse "H₂O" into {H: 2, O: 1}
 function parseFormula(formula: string): Record<string, number> {
@@ -22,7 +21,7 @@ function parseFormula(formula: string): Record<string, number> {
 }
 
 export function ReactionStage() {
-  const { activeReaction } = useAppStore();
+  const { activeCuratedReaction } = useAppStore();
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0); // 0 to 1
   const rafRef = useRef<number>();
@@ -32,7 +31,7 @@ export function ReactionStage() {
     setIsPlaying(false);
     setProgress(0);
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
-  }, [activeReaction]);
+  }, [activeCuratedReaction]);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -59,19 +58,19 @@ export function ReactionStage() {
 
   // Compute Conservation Banner
   const conservation = useMemo(() => {
-    if (!activeReaction) return null;
+    if (!activeCuratedReaction) return null;
 
     const left: Record<string, number> = {};
     const right: Record<string, number> = {};
 
-    activeReaction.reactants.forEach(r => {
+    activeCuratedReaction.reactants.forEach(r => {
       const parts = parseFormula(r.formula);
       for (const [sym, count] of Object.entries(parts)) {
         left[sym] = (left[sym] || 0) + count * r.coefficient;
       }
     });
 
-    activeReaction.products.forEach(p => {
+    activeCuratedReaction.products.forEach(p => {
       const parts = parseFormula(p.formula);
       for (const [sym, count] of Object.entries(parts)) {
         right[sym] = (right[sym] || 0) + count * p.coefficient;
@@ -89,9 +88,9 @@ export function ReactionStage() {
     const isBalanced = leftStr === rightStr;
 
     return { leftStr, rightStr, isBalanced };
-  }, [activeReaction]);
+  }, [activeCuratedReaction]);
 
-  if (!activeReaction) {
+  if (!activeCuratedReaction) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center p-8 bg-bg relative">
         <div className="text-6xl mb-4 opacity-50">⚖️</div>
@@ -104,7 +103,7 @@ export function ReactionStage() {
   }
 
   // Generate participant cards
-  const renderParticipant = (p: typeof activeReaction.reactants[0], i: number, isProduct: boolean) => {
+  const renderParticipant = (p: typeof activeCuratedReaction.reactants[0], i: number, isProduct: boolean) => {
     const opacity = isProduct ? Math.pow(progress, 2) : Math.pow(1 - progress, 2);
     const scale = isProduct ? 0.8 + progress * 0.2 : 1 - progress * 0.2;
     const tx = isProduct ? (1 - progress) * -50 : progress * 50;
@@ -135,7 +134,7 @@ export function ReactionStage() {
       <div className="p-6 text-center z-10 bg-gradient-to-b from-bg to-transparent">
         <div className="inline-block px-6 py-3 bg-black/40 border border-border rounded-2xl backdrop-blur">
           <h2 className="text-2xl font-mono font-bold text-text tracking-wider">
-            {activeReaction.balancedEquation}
+            {activeCuratedReaction.balancedEquation}
           </h2>
         </div>
       </div>
@@ -159,7 +158,7 @@ export function ReactionStage() {
           
           {/* Reactants */}
           <div className="flex gap-4 flex-wrap justify-center flex-1">
-            {activeReaction.reactants.map((r, i) => (
+            {activeCuratedReaction.reactants.map((r, i) => (
               <div key={`r-${i}`} className="flex items-center gap-4">
                 {i > 0 && <span className="text-2xl font-bold text-text-dim" style={{ opacity: 1 - progress }}>+</span>}
                 {renderParticipant(r, i, false)}
@@ -172,7 +171,7 @@ export function ReactionStage() {
 
           {/* Products */}
           <div className="flex gap-4 flex-wrap justify-center flex-1">
-            {activeReaction.products.map((p, i) => (
+            {activeCuratedReaction.products.map((p, i) => (
               <div key={`p-${i}`} className="flex items-center gap-4">
                 {i > 0 && <span className="text-2xl font-bold text-text-dim" style={{ opacity: progress }}>+</span>}
                 {renderParticipant(p, i, true)}

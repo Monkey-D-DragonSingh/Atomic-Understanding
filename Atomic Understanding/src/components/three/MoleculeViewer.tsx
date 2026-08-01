@@ -8,7 +8,10 @@ import { MoleculeAtom, MoleculeBond } from '../../types/molecule';
 export interface MoleculeViewerProps {
   atoms: MoleculeAtom[];
   bonds: MoleculeBond[];
-  viewMode: 'ball-stick' | 'space-fill';
+  // 'skeletal' added: previously missing from the type entirely, which meant
+  // any 'skeletal' string passed in from the Gallery fell through to the
+  // ball-stick render path with no visual difference at all.
+  viewMode: 'skeletal' | 'ball-stick' | 'space-fill';
   highlightId?: number | null;
   onAtomClick?: (id: number) => void;
   resetTrigger?: number; // pass a random number to trigger view reset
@@ -29,6 +32,7 @@ function FitBounds({ resetTrigger }: { resetTrigger?: number }) {
 export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClick, resetTrigger }: MoleculeViewerProps) {
   const isHighAtomCount = atoms.length > 100;
   const isSpaceFill = viewMode === 'space-fill';
+  const isSkeletal = viewMode === 'skeletal';
 
   // Center the molecule manually to be safe, though Bounds will fit it
   const { centeredAtoms } = useMemo(() => {
@@ -54,7 +58,10 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
   
 
 
-  // Prepare bond geometry instances
+  // Prepare bond geometry instances.
+  // Skeletal mode also renders bonds (as thin lines, not fat cylinders), so this
+  // now only skips generating bond geometry for space-fill, where bonds are hidden
+  // entirely because the touching/overlapping spheres already imply connectivity.
   const bondInstances = useMemo(() => {
     if (isSpaceFill) return [];
     const instances: { position: THREE.Vector3, quaternion: THREE.Quaternion, scale: THREE.Vector3 }[] = [];
@@ -72,8 +79,10 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
       const direction = p2.clone().sub(p1).normalize();
       const quaternion = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction);
 
-      // Handle bond orders
-      const order = Math.min(3, Math.max(1, Math.round(bond.order)));
+      // Handle bond orders. Skeletal mode always draws a single thin line per bond
+      // regardless of order — showing 2-3 parallel thick cylinders for double/triple
+      // bonds defeats the point of a minimalist skeletal view.
+      const order = isSkeletal ? 1 : Math.min(3, Math.max(1, Math.round(bond.order)));
       const offset = 0.12;
 
       for (let i = 0; i < order; i++) {
@@ -96,7 +105,20 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
       }
     });
     return instances;
-  }, [centeredAtoms, bonds, isSpaceFill]);
+  }, [centeredAtoms, bonds, isSpaceFill, isSkeletal]);
+
+  // Radius per atom, depending on view mode:
+  // - space-fill: full Van der Waals radius (atoms touch/overlap, no visible bonds)
+  // - ball-stick: small covalent-radius spheres with cylinder bonds
+  // - skeletal: atoms shrink to tiny points/vertices, so the thin bond lines dominate
+  const getRadiusScale = (element: string) => {
+    if (isSpaceFill) return (VDW_RADII[element] || 170) / 100;
+    if (isSkeletal) return 0.05; // tiny vertex dot, not a filled ball
+    return (COVALENT_RADII[element] || 70) / 100 * 0.35; // slim stick-figure atom
+  };
+
+  // Bond cylinder thickness, depending on view mode
+  const bondRadius = isSkeletal ? 0.025 : 0.08;
 
   return (
     <div className="w-full h-full relative" style={{ backgroundImage: 'radial-gradient(circle at center, rgba(79, 195, 247, 0.05) 0%, transparent 70%)' }}>
@@ -124,7 +146,7 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
           */}
           {centeredAtoms.map(atom => {
             const isHighlighted = highlightId === atom.id;
-            const radiusScale = isSpaceFill ? (VDW_RADII[atom.element] || 170) / 100 : (COVALENT_RADII[atom.element] || 70) / 100;
+            const radiusScale = getRadiusScale(atom.element);
             const finalRadius = (radiusScale * SCENE_SCALE) * (isHighlighted ? 1.1 : 1);
             const color = CPK_COLORS[atom.element] || '#FF1493';
             
@@ -166,7 +188,7 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
           {/* Bonds mapped as simple meshes for easier implementation */}
           {bondInstances.map((bond, i) => (
             <mesh key={i} position={bond.position} quaternion={bond.quaternion} scale={bond.scale}>
-              <cylinderGeometry args={[0.08, 0.08, 1, isHighAtomCount ? 8 : 12]} />
+              <cylinderGeometry args={[bondRadius, bondRadius, 1, isHighAtomCount ? 8 : 12]} />
               <meshStandardMaterial color="#9CA3AF" roughness={0.3} metalness={0.4} />
             </mesh>
           ))}
