@@ -14,6 +14,7 @@ export type MoleculeGeometry =
   | 't-shaped'
   | 'square-planar'
   | 'diatomic'
+  | 'atomic'
   | 'none';
 
 export interface MoleculeAtom {

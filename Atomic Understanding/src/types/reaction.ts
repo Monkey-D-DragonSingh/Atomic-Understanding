@@ -1,33 +1,26 @@
-export type CatalystType = 'heat' | 'metal-catalyst' | 'enzyme' | 'light' | 'pressure';
+import { CuratedReaction } from './curatedReaction';
 
+export type Reaction = CuratedReaction;
+
+export type CatalystKind = 'heat' | 'metal-catalyst' | 'enzyme' | 'light' | 'pressure';
+
+// UI-only list of selectable catalysts for the reaction builder. CuratedReaction
+// doesn't store a structured catalyst field (it's embedded as text in
+// balancedEquation, e.g. "→(Δ)"), so this is purely for the picker UI + display;
+// see lib/reactionMatcher.ts for how the required catalyst is detected.
 export interface Catalyst {
   id: string;
-  name: string;          // "Platinum", "Manganese Dioxide", "Heat"
-  symbol: string;        // shown above the reaction arrow, e.g. "Δ", "Pt", "MnO₂"
-  type: CatalystType;
-  description: string;   // shown in a tooltip/info card
-}
-
-export interface ReactionParticipant {
-  moleculeId: string;    // references Molecule.id in data/molecules.ts
-  coefficient: number;   // stoichiometric coefficient, for display only
-}
-
-export interface Reaction {
-  id: string;
-  name: string;                       // "Combustion of Hydrogen"
-  reactants: ReactionParticipant[];
-  requiredCatalyst?: string | null;   // Catalyst.id, or null/undefined if none needed
-  products: ReactionParticipant[];
-  reactionType: string;               // "combustion", "synthesis", "acid-base", "decomposition", "hydrogenation", ...
-  conditions?: string;                // short human-readable note, e.g. "Exothermic, requires a spark to start"
-  balancedEquation: string;           // "2H₂ + O₂ →(Δ) 2H₂O" for direct display
+  name: string;
+  symbol: string;      // must match the text used inside CuratedReaction.balancedEquation, e.g. "Δ", "Pt", "Fe"
+  type: CatalystKind;
+  description: string;
 }
 
 // Result of trying to react a chosen set of reactants (+ optional catalyst)
+// against the curated reaction database.
 export type ReactionMatchResult =
-  | { status: 'valid'; reaction: Reaction }
-  | { status: 'catalyst-missing'; reaction: Reaction; neededCatalystId: string }
-  | { status: 'wrong-catalyst'; reaction: Reaction; neededCatalystId: string }
+  | { status: 'valid'; reaction: CuratedReaction }
+  | { status: 'catalyst-missing'; reaction: CuratedReaction; neededSymbol: string }
+  | { status: 'wrong-catalyst'; reaction: CuratedReaction; neededSymbol: string }
   | { status: 'invalid' }
   | { status: 'empty' };

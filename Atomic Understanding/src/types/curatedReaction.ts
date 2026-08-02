@@ -3,6 +3,10 @@ export type CuratedReactionType =
   | 'synthesis'
   | 'decomposition'
   | 'acid-base'
+  | 'single-displacement'
+  | 'double-displacement'
+  | 'precipitation'
+  | 'redox'
   | 'hydrogenation'
   | 'esterification';
 
@@ -10,6 +14,7 @@ export interface ReactionParticipant {
   formula: string;
   coefficient: number;
   state: 's' | 'l' | 'g' | 'aq';
+  moleculeId?: string;
 }
 
 export interface CuratedReaction {

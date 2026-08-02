@@ -2,13 +2,12 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Element } from '../types/element';
 import { Molecule } from '../types/molecule';
-import { Reaction, ReactionMatchResult } from '../types/reaction';
 import { CuratedReaction } from '../types/curatedReaction';
+import { ReactionMatchResult } from '../types/reaction';
 
 export type AppMode = 'atom' | 'molecule' | 'compound' | 'reaction' | 'quiz';
 export type AtomViewMode = 'bohr' | 'cloud' | 'orbital';
 export type CompoundViewMode = 'skeletal' | 'ball-stick' | 'space-fill';
-export type ReactionSubMode = 'browse' | 'build';
 
 export interface PlacedAtom {
   id: number;
@@ -49,12 +48,12 @@ export interface AppState {
   show3DModal: boolean;
   setShow3DModal: (open: boolean) => void;
 
-  // --- Reaction Mode: sub-mode toggle (Browse curated reactions vs Build your own) ---
-  reactionSubMode: ReactionSubMode;
-  setReactionSubMode: (m: ReactionSubMode) => void;
+  // --- Reaction Picker (browse/search curated reactions) ---
+  activeCuratedReaction: CuratedReaction | null;
+  setActiveCuratedReaction: (r: CuratedReaction | null) => void;
 
-  // --- Reaction Mode: "Build" (drag molecules together, match against curated set) ---
-  selectedReactantIds: string[];               // Molecule ids chosen as reactants
+  // --- Reaction Builder (interactive: pick reactants + catalyst, see what forms) ---
+  selectedReactantIds: string[];
   addReactant: (moleculeId: string) => void;
   removeReactant: (moleculeId: string) => void;
   clearReactants: () => void;
@@ -62,15 +61,8 @@ export interface AppState {
   selectedCatalystId: string | null;
   setCatalystId: (id: string | null) => void;
 
-  reactionResult: ReactionMatchResult | null;   // null = haven't hit "React" yet
+  reactionResult: ReactionMatchResult | null;
   setReactionResult: (result: ReactionMatchResult | null) => void;
-
-  activeReaction: Reaction | null;              // kept for any legacy reaction-detail views
-  setActiveReaction: (r: Reaction | null) => void;
-
-  // --- Reaction Mode: "Browse" (pick a reaction from a curated list, watch it animate) ---
-  activeCuratedReaction: CuratedReaction | null;
-  setActiveCuratedReaction: (r: CuratedReaction | null) => void;
 
   searchHistory: string[];
   addSearchHistory: (query: string) => void;
@@ -120,15 +112,14 @@ export const useAppStore = create<AppState>()(
       show3DModal: false,
       setShow3DModal: (show3DModal) => set({ show3DModal }),
 
-      // --- Reaction Mode: sub-mode toggle ---
-      reactionSubMode: 'browse',
-      setReactionSubMode: (reactionSubMode) => set({ reactionSubMode }),
+      // --- Reaction Picker ---
+      activeCuratedReaction: null,
+      setActiveCuratedReaction: (activeCuratedReaction) => set({ activeCuratedReaction }),
 
-      // --- Reaction Mode: Build ---
+      // --- Reaction Builder ---
       selectedReactantIds: [],
       addReactant: (moleculeId) =>
         set((state) => ({
-          // avoid duplicate entries; resets any stale result once the mix changes
           selectedReactantIds: state.selectedReactantIds.includes(moleculeId)
             ? state.selectedReactantIds
             : [...state.selectedReactantIds, moleculeId],
@@ -147,13 +138,6 @@ export const useAppStore = create<AppState>()(
 
       reactionResult: null,
       setReactionResult: (reactionResult) => set({ reactionResult }),
-
-      activeReaction: null,
-      setActiveReaction: (activeReaction) => set({ activeReaction }),
-
-      // --- Reaction Mode: Browse ---
-      activeCuratedReaction: null,
-      setActiveCuratedReaction: (activeCuratedReaction) => set({ activeCuratedReaction }),
 
       searchHistory: [],
       addSearchHistory: (query) =>
@@ -175,8 +159,6 @@ export const useAppStore = create<AppState>()(
       rightCollapsed: false,
       setRightCollapsed: (rightCollapsed) => set({ rightCollapsed }),
 
-      // Small on every fresh load. Not persisted (see partialize below) —
-      // the user can drag it wider per-session, but it always starts small.
       rightPanelWidth: 320,
       setRightPanelWidth: (rightPanelWidth) => set({ rightPanelWidth }),
 
@@ -192,8 +174,6 @@ export const useAppStore = create<AppState>()(
         onboardingSeen: state.onboardingSeen,
         leftCollapsed: state.leftCollapsed,
         rightCollapsed: state.rightCollapsed,
-        // rightPanelWidth intentionally NOT persisted — the panel should
-        // always start small on load; user can resize it per-session.
       }),
     }
   )

@@ -1,5 +1,5 @@
 import { X, ArrowRight, FlaskConical, RotateCcw } from 'lucide-react';
-import { MOLECULES } from '../../data/molecules';
+import { ALL_REACTANTS } from '../../data/allReactants';
 import { CATALYSTS } from '../../data/catalysts';
 import { useAppStore } from '../../store/useAppStore';
 import { matchReaction } from '../../lib/reactionMatcher';
@@ -15,7 +15,7 @@ export function ReactionWorkspace() {
   } = useAppStore();
 
   const reactantMolecules = selectedReactantIds
-    .map((id) => MOLECULES.find((m) => m.id === id))
+    .map((id) => ALL_REACTANTS.find((m) => m.id === id))
     .filter((m): m is NonNullable<typeof m> => !!m);
 
   const catalyst = CATALYSTS.find((c) => c.id === selectedCatalystId) ?? null;
