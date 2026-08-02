@@ -19,6 +19,14 @@ const CHECKBOX_CATEGORIES = [
   { key: 'actinide', label: 'Actinides', color: CATEGORY_COLORS['actinide'] },
 ];
 
+// Elements whose classification is genuinely disputed across periodic tables and
+// should therefore glow/match under more than one category filter.
+// Polonium (Po) is commonly classified as either a post-transition metal or a metalloid
+// depending on the source, so it belongs to both for filtering purposes.
+const DUAL_CATEGORY_OVERRIDES: Record<string, string[]> = {
+  Po: ['post-transition-metal', 'metalloid'],
+};
+
 export function PeriodicTable() {
   const { selectedElement, selectElement } = useAppStore();
   const [search, setSearch] = useState('');
@@ -95,20 +103,34 @@ export function PeriodicTable() {
                 el.symbol.toLowerCase().includes(search.toLowerCase()) ||
                 el.atomicNumber.toString() === search;
 
-              // Group 17 is treated as Halogens
-              const elCategory = el.group === 17 ? 'halogen' : el.category;
+              // Group 17 is treated as Halogens. Some elements (e.g. Polonium) are
+              // genuinely classified under more than one category depending on source,
+              // so they get a list of categories instead of a single one.
+              const baseCategory = el.group === 17 ? 'halogen' : el.category;
+              const elCategories = DUAL_CATEGORY_OVERRIDES[el.symbol] || [baseCategory];
+              // Primary category still drives the default (non-filtered) display color.
+              const elCategory = elCategories[0];
               const categoryColor = (CATEGORY_COLORS[elCategory] || CATEGORY_COLORS['unknown'] || '#9CA3AF') as string;
 
-              // Check if category is active (checked or hovered) when not showing normal colors
-              const isActiveCategory = !showNormalColors && (checkedCategories[elCategory] || hoverCategory === elCategory);
+              // Check if ANY of this element's categories is active (checked or hovered)
+              // when not showing normal colors.
+              const activeMatchedCategory = !showNormalColors
+                ? elCategories.find((c) => checkedCategories[c] || hoverCategory === c)
+                : undefined;
+              const isActiveCategory = !!activeMatchedCategory;
+              // Use the color of whichever matched category so hovering/checking
+              // "Metalloids" glows Po in metalloid color, and "Post-Transition Metals" glows it in that color.
+              const activeCategoryColor = activeMatchedCategory
+                ? ((CATEGORY_COLORS[activeMatchedCategory] || categoryColor) as string)
+                : categoryColor;
 
               // Dim elements if they don't match the search filter.
               // Also, if search is empty and any filter is active, dim non-matching categories.
               const isAnyFilterActive = Object.values(checkedCategories).some(v => v) || hoverCategory !== null;
-              
+
               let isCategoryMatch = true;
               if (showNormalColors) {
-                isCategoryMatch = !hoverCategory || elCategory === hoverCategory;
+                isCategoryMatch = !hoverCategory || elCategories.includes(hoverCategory);
               } else {
                 isCategoryMatch = !isAnyFilterActive || isActiveCategory;
               }
@@ -139,12 +161,12 @@ export function PeriodicTable() {
                 btnShadow = isSelected ? '0 0 0 1px var(--accent), 0 6px 20px -6px var(--accent-glow)' : undefined;
               } else if (isActiveCategory) {
                 // Glowing colored representation for filtered/hovered category
-                btnBg = isSelected ? `${categoryColor}4D` : `${categoryColor}26`;
-                btnBorder = isSelected ? 'var(--accent)' : categoryColor;
-                btnColor = categoryColor;
-                btnShadow = isSelected 
-                  ? `0 0 0 1px var(--accent), 0 6px 20px -6px var(--accent-glow), 0 0 14px ${categoryColor}B3, inset 0 0 4px ${categoryColor}66` 
-                  : `0 0 14px ${categoryColor}B3, inset 0 0 4px ${categoryColor}4D`;
+                btnBg = isSelected ? `${activeCategoryColor}4D` : `${activeCategoryColor}26`;
+                btnBorder = isSelected ? 'var(--accent)' : activeCategoryColor;
+                btnColor = activeCategoryColor;
+                btnShadow = isSelected
+                  ? `0 0 0 1px var(--accent), 0 6px 20px -6px var(--accent-glow), 0 0 14px ${activeCategoryColor}B3, inset 0 0 4px ${activeCategoryColor}66`
+                  : `0 0 14px ${activeCategoryColor}B3, inset 0 0 4px ${activeCategoryColor}4D`;
               } else {
                 // White representation (default state)
                 btnBg = isSelected ? 'rgba(255, 255, 255, 0.16)' : 'rgba(255, 255, 255, 0.04)';

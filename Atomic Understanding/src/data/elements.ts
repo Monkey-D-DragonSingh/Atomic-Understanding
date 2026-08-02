@@ -4131,7 +4131,7 @@ const RAW_ELEMENTS: Element[] = [
     "symbol": "Cn",
     "name": "Copernicium",
     "atomicMass": 285,
-    "category": "post-transition-metal",
+    "category": "transition-metal",
     "block": "d",
     "period": 7,
     "group": 12,

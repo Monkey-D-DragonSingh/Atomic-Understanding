@@ -12,11 +12,11 @@ export function Header() {
   };
 
   const modeOptions: { label: React.ReactNode; value: AppMode }[] = [
-    { label: <div className="flex items-center gap-2"><Atom className="w-4 h-4" /> Atom</div>, value: 'atom' },
-    { label: <div className="flex items-center gap-2"><Droplets className="w-4 h-4" /> Molecule</div>, value: 'molecule' },
-    { label: <div className="flex items-center gap-2"><FlaskConical className="w-4 h-4" /> Compound</div>, value: 'compound' },
-    { label: <div className="flex items-center gap-2"><TestTube2 className="w-4 h-4" /> Reaction</div>, value: 'reaction' },
-    { label: <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Quiz</div>, value: 'quiz' },
+    { label: <div className="flex items-center gap-1.5 sm:gap-2"><Atom className="w-4 h-4 shrink-0" /> <span className="hidden sm:inline">Atom</span></div>, value: 'atom' },
+    { label: <div className="flex items-center gap-1.5 sm:gap-2"><Droplets className="w-4 h-4 shrink-0" /> <span className="hidden sm:inline">Molecule</span></div>, value: 'molecule' },
+    { label: <div className="flex items-center gap-1.5 sm:gap-2"><FlaskConical className="w-4 h-4 shrink-0" /> <span className="hidden sm:inline">Compound</span></div>, value: 'compound' },
+    { label: <div className="flex items-center gap-1.5 sm:gap-2"><TestTube2 className="w-4 h-4 shrink-0" /> <span className="hidden sm:inline">Reaction</span></div>, value: 'reaction' },
+    { label: <div className="flex items-center gap-1.5 sm:gap-2"><BookOpen className="w-4 h-4 shrink-0" /> <span className="hidden sm:inline">Quiz</span></div>, value: 'quiz' },
   ];
 
   let readout = '—';
@@ -29,15 +29,15 @@ export function Header() {
   }
 
   return (
-    <header className="h-[56px] glass-strong flex items-center justify-between px-4 md:px-5 fixed top-0 left-0 right-0 z-50 border-b border-border">
-      <div className="flex items-center gap-3 min-w-0">
+    <header className="h-[56px] glass-strong flex items-center justify-between px-2 sm:px-4 md:px-5 fixed top-0 left-0 right-0 z-50 border-b border-border gap-2">
+      <div className="flex items-center gap-3 min-w-0 shrink-0">
         <div className="flex items-center gap-2.5">
-          <div className="relative w-7 h-7 flex items-center justify-center">
+          <div className="relative w-7 h-7 flex items-center justify-center shrink-0">
             <span className="absolute inset-0 rounded-full bg-accent/20 blur-md" />
             <Atom className="relative w-5 h-5 text-accent" strokeWidth={2} />
           </div>
-          <div className="flex items-baseline gap-2.5 min-w-0">
-            <h1 className="font-bold text-[15px] tracking-[0.22em] text-text">ATOMIC UNDERSTANDING</h1>
+          <div className="hidden sm:flex items-baseline gap-2.5 min-w-0">
+            <h1 className="font-bold text-[15px] tracking-[0.22em] text-text whitespace-nowrap">ATOMIC UNDERSTANDING</h1>
             <span className="text-[10px] text-text-dim uppercase tracking-[0.16em] hidden lg:inline-block truncate">
               Interactive Chemistry Explorer
             </span>
@@ -45,7 +45,7 @@ export function Header() {
         </div>
       </div>
 
-      <div className="flex-1 max-w-x1 mx-4 flex justify-center">
+      <div className="flex-1 min-w-0 max-w-xl mx-1 sm:mx-4 flex justify-center overflow-x-auto">
         <SegmentedControl
           value={mode}
           onChange={handleModeChange}
@@ -55,7 +55,7 @@ export function Header() {
         />
       </div>
 
-      <div className="w-28 md:w-32 flex justify-end">
+      <div className="hidden sm:flex w-20 md:w-32 justify-end shrink-0">
         <div className="glass px-3.5 py-1.5 rounded-full text-sm font-mono text-accent whitespace-nowrap overflow-hidden text-ellipsis min-w-[3rem] text-center">
           {readout}
         </div>
