@@ -4,6 +4,7 @@ import { CATALYSTS } from '../../data/catalysts';
 import { useAppStore } from '../../store/useAppStore';
 import { matchReaction } from '../../lib/reactionMatcher';
 import { CatalystSelector } from './CatalystSelector';
+import type { Molecule } from '../../types/molecule';
 
 export function ReactionWorkspace() {
   const {
@@ -16,7 +17,7 @@ export function ReactionWorkspace() {
 
   const reactantMolecules = selectedReactantIds
     .map((id) => ALL_REACTANTS.find((m) => m.id === id))
-    .filter((m): m is NonNullable<typeof m> => !!m);
+    .filter((m): m is Molecule => m !== undefined);
 
   const catalyst = CATALYSTS.find((c) => c.id === selectedCatalystId) ?? null;
 

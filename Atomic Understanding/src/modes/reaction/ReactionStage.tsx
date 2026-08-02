@@ -36,7 +36,7 @@ export function ReactionStage() {
   useEffect(() => {
     if (!isPlaying) return;
 
-    let startTime = performance.now() - progress * 2000;
+    const startTime = performance.now() - progress * 2000;
     
     const animate = (time: number) => {
       let p = (time - startTime) / 2000;
