@@ -11,6 +11,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -286,
     realWorldContext: 'This reaction powers hydrogen fuel cells and rocket engines, including the Space Shuttle main engines.',
     balancedEquation: '2H₂ + O₂ →(Δ) 2H₂O',
+    reactants: [
+      { formula: 'H₂', coefficient: 2, state: 'g' },
+      { formula: 'O₂', coefficient: 1, state: 'g' },
+    ],
+    products: [{ formula: 'H₂O', coefficient: 2, state: 'g' }],
   },
   {
     id: 'combustion-methane',
@@ -22,6 +27,14 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -890,
     realWorldContext: 'This is the primary reaction in natural gas heating, stoves, and power plants.',
     balancedEquation: 'CH₄ + 2O₂ →(Δ) CO₂ + 2H₂O',
+    reactants: [
+      { formula: 'CH₄', coefficient: 1, state: 'g' },
+      { formula: 'O₂', coefficient: 2, state: 'g' },
+    ],
+    products: [
+      { formula: 'CO₂', coefficient: 1, state: 'g' },
+      { formula: 'H₂O', coefficient: 2, state: 'g' },
+    ],
   },
   {
     id: 'combustion-ethanol',
@@ -33,6 +46,14 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -1367,
     realWorldContext: 'Used in ethanol-blended fuels and alcohol lamps.',
     balancedEquation: 'C₂H₅OH + 3O₂ →(Δ) 2CO₂ + 3H₂O',
+    reactants: [
+      { formula: 'C₂H₅OH', coefficient: 1, state: 'l' },
+      { formula: 'O₂', coefficient: 3, state: 'g' },
+    ],
+    products: [
+      { formula: 'CO₂', coefficient: 2, state: 'g' },
+      { formula: 'H₂O', coefficient: 3, state: 'g' },
+    ],
   },
   {
     id: 'catalytic-co-oxidation',
@@ -44,6 +65,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -566,
     realWorldContext: 'Essential for reducing toxic emissions from car exhaust systems.',
     balancedEquation: '2CO + O₂ →(Pt) 2CO₂',
+    reactants: [
+      { formula: 'CO', coefficient: 2, state: 'g' },
+      { formula: 'O₂', coefficient: 1, state: 'g' },
+    ],
+    products: [{ formula: 'CO₂', coefficient: 2, state: 'g' }],
   },
   {
     id: 'haber-process',
@@ -55,6 +81,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -92,
     realWorldContext: "This process makes most of the world's ammonia, the basis of modern nitrogen fertilizers feeding billions of people.",
     balancedEquation: 'N₂ + 3H₂ →(Fe) 2NH₃',
+    reactants: [
+      { formula: 'N₂', coefficient: 1, state: 'g' },
+      { formula: 'H₂', coefficient: 3, state: 'g' },
+    ],
+    products: [{ formula: 'NH₃', coefficient: 2, state: 'g' }],
   },
   {
     id: 'peroxide-decomposition',
@@ -66,6 +97,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -98,
     realWorldContext: 'This is the basis of the popular "elephant toothpaste" science experiment and is also how our cells break down peroxide with the enzyme catalase.',
     balancedEquation: '2H₂O₂ →(MnO₂) 2H₂O + O₂',
+    reactants: [{ formula: 'H₂O₂', coefficient: 2, state: 'aq' }],
+    products: [
+      { formula: 'H₂O', coefficient: 2, state: 'l' },
+      { formula: 'O₂', coefficient: 1, state: 'g' },
+    ],
   },
   {
     id: 'chlorate-decomposition',
@@ -77,6 +113,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -78,
     realWorldContext: 'Historically used in oxygen generators and match heads.',
     balancedEquation: '2KClO₃ →(MnO₂, Δ) 2KCl + 3O₂',
+    reactants: [{ formula: 'KClO₃', coefficient: 2, state: 's' }],
+    products: [
+      { formula: 'KCl', coefficient: 2, state: 's' },
+      { formula: 'O₂', coefficient: 3, state: 'g' },
+    ],
   },
   {
     id: 'limestone-decomposition',
@@ -88,6 +129,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: 178,
     realWorldContext: 'This reaction is fundamental to cement and steel manufacturing worldwide.',
     balancedEquation: 'CaCO₃ →(Δ) CaO + CO₂',
+    reactants: [{ formula: 'CaCO₃', coefficient: 1, state: 's' }],
+    products: [
+      { formula: 'CaO', coefficient: 1, state: 's' },
+      { formula: 'CO₂', coefficient: 1, state: 'g' },
+    ],
   },
   {
     id: 'neutralization-hcl-naoh',
@@ -99,6 +145,14 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -57,
     realWorldContext: 'Neutralization reactions like this are used in antacids and wastewater treatment.',
     balancedEquation: 'HCl + NaOH → NaCl + H₂O',
+    reactants: [
+      { formula: 'HCl', coefficient: 1, state: 'aq' },
+      { formula: 'NaOH', coefficient: 1, state: 'aq' },
+    ],
+    products: [
+      { formula: 'NaCl', coefficient: 1, state: 'aq' },
+      { formula: 'H₂O', coefficient: 1, state: 'l' },
+    ],
   },
   {
     id: 'ammonia-hcl',
@@ -110,6 +164,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -176,
     realWorldContext: 'This reaction is a common lab demonstration and is used in some smoke-generating devices.',
     balancedEquation: 'NH₃ + HCl → NH₄Cl',
+    reactants: [
+      { formula: 'NH₃', coefficient: 1, state: 'g' },
+      { formula: 'HCl', coefficient: 1, state: 'g' },
+    ],
+    products: [{ formula: 'NH₄Cl', coefficient: 1, state: 's' }],
   },
   {
     id: 'lime-slaking',
@@ -121,6 +180,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -65,
     realWorldContext: 'Used in construction (mortar and plaster) and in treating acidic soils.',
     balancedEquation: 'CaO + H₂O → Ca(OH)₂',
+    reactants: [
+      { formula: 'CaO', coefficient: 1, state: 's' },
+      { formula: 'H₂O', coefficient: 1, state: 'l' },
+    ],
+    products: [{ formula: 'Ca(OH)₂', coefficient: 1, state: 's' }],
   },
   {
     id: 'ethene-hydrogenation',
@@ -132,6 +196,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -137,
     realWorldContext: 'This reaction is used industrially to convert unsaturated vegetable oils into solid margarine.',
     balancedEquation: 'C₂H₄ + H₂ →(Ni) C₂H₆',
+    reactants: [
+      { formula: 'C₂H₄', coefficient: 1, state: 'g' },
+      { formula: 'H₂', coefficient: 1, state: 'g' },
+    ],
+    products: [{ formula: 'C₂H₆', coefficient: 1, state: 'g' }],
   },
   {
     id: 'contact-process',
@@ -143,6 +212,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -197,
     realWorldContext: 'This is the key step in producing sulfuric acid, one of the most widely used industrial chemicals.',
     balancedEquation: '2SO₂ + O₂ →(V₂O₅) 2SO₃',
+    reactants: [
+      { formula: 'SO₂', coefficient: 2, state: 'g' },
+      { formula: 'O₂', coefficient: 1, state: 'g' },
+    ],
+    products: [{ formula: 'SO₃', coefficient: 2, state: 'g' }],
   },
   {
     id: 'nitrogen-oxidation',
@@ -154,6 +228,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: 180,
     realWorldContext: 'This occurs naturally during lightning strikes and inside car engine cylinders, contributing to smog formation.',
     balancedEquation: 'N₂ + O₂ →(Δ) 2NO',
+    reactants: [
+      { formula: 'N₂', coefficient: 1, state: 'g' },
+      { formula: 'O₂', coefficient: 1, state: 'g' },
+    ],
+    products: [{ formula: 'NO', coefficient: 2, state: 'g' }],
   },
   {
     id: 'no-oxidation',
@@ -165,6 +244,11 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: -114,
     realWorldContext: 'This reaction is responsible for the reddish-brown color of smog over polluted cities.',
     balancedEquation: '2NO + O₂ → 2NO₂',
+    reactants: [
+      { formula: 'NO', coefficient: 2, state: 'g' },
+      { formula: 'O₂', coefficient: 1, state: 'g' },
+    ],
+    products: [{ formula: 'NO₂', coefficient: 2, state: 'g' }],
   },
   {
     id: 'esterification',
@@ -176,5 +260,13 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     enthalpy: null,
     realWorldContext: 'This class of reactions is used to manufacture artificial fruit flavors and fragrances.',
     balancedEquation: 'CH₃COOH + C₂H₅OH →(H₂SO₄) CH₃COOC₂H₅ + H₂O',
+    reactants: [
+      { formula: 'CH₃COOH', coefficient: 1, state: 'l' },
+      { formula: 'C₂H₅OH', coefficient: 1, state: 'l' },
+    ],
+    products: [
+      { formula: 'CH₃COOC₂H₅', coefficient: 1, state: 'l' },
+      { formula: 'H₂O', coefficient: 1, state: 'l' },
+    ],
   },
 ];

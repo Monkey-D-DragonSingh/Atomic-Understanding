@@ -6,6 +6,12 @@ export type CuratedReactionType =
   | 'hydrogenation'
   | 'esterification';
 
+export interface ReactionParticipant {
+  formula: string;
+  coefficient: number;
+  state: 's' | 'l' | 'g' | 'aq';
+}
+
 export interface CuratedReaction {
   id: string;
   name: string;
@@ -16,4 +22,6 @@ export interface CuratedReaction {
   enthalpy: number | null;
   realWorldContext: string;
   balancedEquation: string;
+  reactants: ReactionParticipant[];
+  products: ReactionParticipant[];
 }
