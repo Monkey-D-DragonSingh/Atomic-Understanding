@@ -4,6 +4,7 @@ import { ELEMENTS } from '../../../data/elements';
 import { MOLECULES } from '../../../data/molecules';
 import { bondsNeeded, classifyBond, neutronCount } from '../../../lib/chemistry';
 import { CPK_COLORS } from '../../../data/constants';
+import { matchesMoleculeGraph, nextCanvasId } from '../../../data/moleculePresets';
 
 const BOND_DISTANCE = 110; // pixels
 const BREAK_DISTANCE = 180; // pixels
@@ -22,8 +23,6 @@ export function BuilderWorkspace() {
   const { canvasAtoms, setCanvasAtoms, canvasBonds, setCanvasBonds, setActiveCompound } = useAppStore();
   
   const [dragState, setDragState] = useState<DragState | null>(null);
-  const [nextAtomId, setNextAtomId] = useState(1);
-  const [nextBondId, setNextBondId] = useState(1);
 
   const [warningMessage, setWarningMessage] = useState<{ text: string, x: number, y: number, id: number } | null>(null);
 
@@ -68,7 +67,7 @@ export function BuilderWorkspace() {
       elementCounts[a.symbol] = (elementCounts[a.symbol] || 0) + 1;
     });
 
-    // Rough formula generation. This won't perfectly match Hill system but is good enough for our curated 60 set
+    // Use the formula to narrow candidates before checking bond topology.
     const formulaStrs: string[] = [];
     if (elementCounts['C']) {
       formulaStrs.push(`C${elementCounts['C'] > 1 ? elementCounts['C'] : ''}`);
@@ -83,7 +82,10 @@ export function BuilderWorkspace() {
     }
     const derivedHill = formulaStrs.join('');
     
-    const matched = MOLECULES.find(m => m.hillFormula === derivedHill);
+    const active = useAppStore.getState().activeCompound;
+    const matched = active && matchesMoleculeGraph(canvasAtoms, canvasBonds, active)
+      ? active
+      : MOLECULES.find(m => m.hillFormula === derivedHill && matchesMoleculeGraph(canvasAtoms, canvasBonds, m));
     if (matched) {
       setActiveCompound(matched);
     } else {
@@ -106,8 +108,9 @@ export function BuilderWorkspace() {
       const clientX = detail?.clientX || 0;
       const clientY = detail?.clientY || 0;
 
+      const currentAtoms = useAppStore.getState().canvasAtoms;
       const newAtom: PlacedAtom = {
-        id: nextAtomId,
+        id: nextCanvasId(currentAtoms),
         symbol: el.symbol,
         x: clientX - rect.left,
         y: clientY - rect.top,
@@ -115,8 +118,7 @@ export function BuilderWorkspace() {
         bondsUsed: 0
       };
 
-      setCanvasAtoms([...useAppStore.getState().canvasAtoms, newAtom]);
-      setNextAtomId(n => n + 1);
+      setCanvasAtoms([...currentAtoms, newAtom]);
       
       setDragState({
         atomId: newAtom.id,
@@ -128,16 +130,16 @@ export function BuilderWorkspace() {
 
     window.addEventListener('atom-drag-start', handleTrayDrag);
     return () => window.removeEventListener('atom-drag-start', handleTrayDrag);
-  }, [nextAtomId, setCanvasAtoms]);
+  }, [setCanvasAtoms]);
 
   // Bonding Engine
-  const executeBondingLogic = (movingId: number, x: number, y: number) => {
+  const executeBondingLogic = useCallback((movingId: number, x: number, y: number) => {
     const state = useAppStore.getState();
     const atoms = [...state.canvasAtoms];
     const bonds = [...state.canvasBonds];
     
     let stateChanged = false;
-    let nextBId = nextBondId;
+    let nextBId = nextCanvasId(bonds);
     let currentWarning = null;
 
     const movingAtom = atoms.find(a => a.id === movingId);
@@ -216,12 +218,11 @@ export function BuilderWorkspace() {
     }
 
     if (stateChanged) {
-      setNextBondId(nextBId);
       setCanvasBonds(bonds);
     }
     // Always update positions
     setCanvasAtoms(atoms);
-  };
+  }, [setCanvasAtoms, setCanvasBonds]);
 
   // Pointer Events
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -502,35 +503,37 @@ export function BuilderWorkspace() {
       window.removeEventListener('pointermove', handleWinMove);
       window.removeEventListener('pointerup', handleWinUp);
     };
-  }, [dragState]);
+  }, [dragState, executeBondingLogic]);
 
   return (
-    <div className="flex-1 relative bg-bg" ref={containerRef}>
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full touch-none"
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
-        onDoubleClick={handleDoubleClick}
-      />
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDIiIGhlaWdodD0iNDAyIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIG9wYWNpdHk9Ii4wNSI+PHBhdGggZD0iTTIwMCAyMDBoMnYyaC0yem01MC01MGgydjJoLTJ6bS0xMDAtMTBoMnYyaC0yeiIvPjwvZz48L3N2Zz4=')] opacity-20 pointer-events-none" />
-      
-      {warningMessage && (
-        <div 
-          className="absolute bg-red-500/20 border border-red-500/50 text-red-200 text-xs px-2 py-1 rounded animate-fade-in pointer-events-none z-10 whitespace-nowrap"
-          style={{ left: warningMessage.x, top: warningMessage.y - 60, transform: 'translateX(-50%)' }}
-        >
-          {warningMessage.text}
-        </div>
-      )}
+    <div className="flex-1 min-h-0 overflow-auto bg-bg">
+      <div className="relative w-full h-full min-w-[440px] min-h-[520px]" ref={containerRef}>
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full touch-none"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          onDoubleClick={handleDoubleClick}
+        />
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDIiIGhlaWdodD0iNDAyIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIG9wYWNpdHk9Ii4wNSI+PHBhdGggZD0iTTIwMCAyMDBoMnYyaC0yem01MC01MGgydjJoLTJ6bS0xMDAtMTBoMnYyaC0yeiIvPjwvZz48L3N2Zz4=')] opacity-20 pointer-events-none" />
 
-      {useAppStore.getState().activeCompound && (
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 pointer-events-none">
-           <div className="absolute inset-0 rounded-full shadow-[0_0_50px_rgba(250,204,21,0.3)] animate-pulse" />
-        </div>
-      )}
+        {warningMessage && (
+          <div
+            className="absolute bg-red-500/20 border border-red-500/50 text-red-200 text-xs px-2 py-1 rounded animate-fade-in pointer-events-none z-10 whitespace-nowrap"
+            style={{ left: warningMessage.x, top: warningMessage.y - 60, transform: 'translateX(-50%)' }}
+          >
+            {warningMessage.text}
+          </div>
+        )}
+
+        {useAppStore.getState().activeCompound && (
+          <div className="absolute top-6 left-1/2 -translate-x-1/2 pointer-events-none">
+            <div className="absolute inset-0 rounded-full shadow-[0_0_50px_rgba(250,204,21,0.3)] animate-pulse" />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

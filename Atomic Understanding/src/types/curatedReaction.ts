@@ -24,6 +24,8 @@ export interface CuratedReaction {
   isExothermic: boolean | null;
   description: string;
   conditions?: string;
+  /** Alternative single builder selectors; [] needs none. Other conditions still apply. */
+  builderOptions: string[];
   enthalpy: number | null;
   realWorldContext: string;
   balancedEquation: string;

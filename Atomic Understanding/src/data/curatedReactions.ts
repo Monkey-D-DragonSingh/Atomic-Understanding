@@ -3,6 +3,7 @@ import { CuratedReaction } from '../types/curatedReaction';
 export const CURATED_REACTIONS: CuratedReaction[] = [
   {
     id: "formation-of-water",
+    builderOptions: ["heat"],
     name: "Formation of Water",
     type: "synthesis",
     isExothermic: true,
@@ -21,6 +22,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "combustion-of-methane",
+    builderOptions: ["heat"],
     name: "Combustion of Methane",
     type: "combustion",
     isExothermic: true,
@@ -40,6 +42,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "synthesis-of-nacl",
+    builderOptions: [],
     name: "Synthesis of Sodium Chloride",
     type: "synthesis",
     isExothermic: true,
@@ -58,6 +61,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "decomposition-of-calcium-carbonate",
+    builderOptions: ["heat"],
     name: "Decomposition of Calcium Carbonate",
     type: "decomposition",
     isExothermic: false,
@@ -76,6 +80,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "single-displacement-zn-hcl",
+    builderOptions: [],
     name: "Reaction of Zinc with Hydrochloric Acid",
     type: "single-displacement",
     isExothermic: true,
@@ -95,6 +100,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "precipitation-agcl",
+    builderOptions: [],
     name: "Precipitation of Silver Chloride",
     type: "precipitation",
     isExothermic: true,
@@ -114,6 +120,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "neutralization-hcl-naoh",
+    builderOptions: [],
     name: "Neutralization of HCl and NaOH",
     type: "acid-base",
     isExothermic: true,
@@ -133,11 +140,12 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "decomposition-of-hydrogen-peroxide",
+    builderOptions: ["manganese-dioxide", "catalase", "platinum-catalyst", "potassium-iodide", "silver-catalyst"],
     name: "Decomposition of Hydrogen Peroxide",
     type: "decomposition",
     isExothermic: true,
     description: "Hydrogen peroxide naturally decomposes into water and oxygen gas, drastically sped up by catalysts.",
-    conditions: "catalyst (e.g. MnO₂ or catalase)",
+    conditions: "MnO₂, catalase, Pt, Ag, or dissolved KI (iodide ions); aqueous peroxide, enzyme-compatible conditions for catalase",
     enthalpy: -196,
     realWorldContext: "This is why peroxide bubbles when applied to a cut; blood contains the enzyme catalase.",
     balancedEquation: "2H₂O₂ → 2H₂O + O₂",
@@ -151,6 +159,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "formation-of-ozone",
+    builderOptions: ["uv-light", "electricity"],
     name: "Formation of Ozone",
     type: "synthesis",
     isExothermic: false,
@@ -168,6 +177,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "haber-process",
+    builderOptions: ["iron-catalyst"],
     name: "Haber-Bosch Process",
     type: "synthesis",
     isExothermic: true,
@@ -186,6 +196,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "photosynthesis",
+    builderOptions: ["sunlight-chlorophyll"],
     name: "Photosynthesis",
     type: "redox",
     isExothermic: false,
@@ -205,6 +216,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "cellular-respiration",
+    builderOptions: ["biological-enzymes"],
     name: "Cellular Respiration",
     type: "combustion",
     isExothermic: true,
@@ -224,6 +236,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "rusting-of-iron",
+    builderOptions: [],
     name: "Rusting of Iron",
     type: "synthesis",
     isExothermic: true,
@@ -242,6 +255,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "combustion-of-propane",
+    builderOptions: ["heat"],
     name: "Combustion of Propane",
     type: "combustion",
     isExothermic: true,
@@ -261,6 +275,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "thermite-reaction",
+    builderOptions: ["heat"],
     name: "Thermite Reaction",
     type: "single-displacement",
     isExothermic: true,
@@ -280,6 +295,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "decomposition-of-water",
+    builderOptions: ["electricity"],
     name: "Electrolysis of Water",
     type: "decomposition",
     isExothermic: false,
@@ -298,6 +314,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "combustion-of-ethanol",
+    builderOptions: ["heat"],
     name: "Combustion of Ethanol",
     type: "combustion",
     isExothermic: true,
@@ -317,6 +334,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "formation-of-ammonia-nitrate",
+    builderOptions: [],
     name: "Formation of Ammonium Nitrate",
     type: "acid-base",
     isExothermic: true,
@@ -335,6 +353,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "reaction-na-h2o",
+    builderOptions: [],
     name: "Sodium in Water",
     type: "single-displacement",
     isExothermic: true,
@@ -354,6 +373,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "decomposition-of-potassium-chlorate",
+    builderOptions: ["manganese-dioxide"],
     name: "Decomposition of Potassium Chlorate",
     type: "decomposition",
     isExothermic: true,
@@ -372,6 +392,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "contact-process-so3",
+    builderOptions: ["vanadium-pentoxide"],
     name: "Oxidation of Sulfur Dioxide",
     type: "synthesis",
     isExothermic: true,
@@ -390,6 +411,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "synthesis-of-sulfuric-acid",
+    builderOptions: [],
     name: "Hydration of Sulfur Trioxide",
     type: "synthesis",
     isExothermic: true,
@@ -408,6 +430,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "lead-nitrate-ki",
+    builderOptions: [],
     name: "Golden Rain Reaction",
     type: "precipitation",
     isExothermic: null,
@@ -427,6 +450,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "copper-nitric-acid",
+    builderOptions: [],
     name: "Copper and Nitric Acid",
     type: "redox",
     isExothermic: true,
@@ -447,11 +471,12 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "formation-of-carbonic-acid",
+    builderOptions: [],
     name: "Formation of Carbonic Acid",
     type: "synthesis",
     isExothermic: true,
-    description: "Carbon dioxide dissolves in water to form weak carbonic acid.",
-    conditions: "dissolved under pressure",
+    description: "Dissolved carbon dioxide establishes an equilibrium with a small amount of weak carbonic acid.",
+    conditions: "aqueous equilibrium at ambient pressure; most dissolved CO₂ remains unhydrated",
     enthalpy: null,
     realWorldContext: "This gives carbonated beverages their tangy taste and causes ocean acidification.",
     balancedEquation: "CO₂ + H₂O → H₂CO₃",
@@ -465,6 +490,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "baking-soda-vinegar",
+    builderOptions: [],
     name: "Baking Soda and Vinegar",
     type: "acid-base",
     isExothermic: false,
@@ -485,6 +511,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "combustion-of-magnesium",
+    builderOptions: ["heat"],
     name: "Combustion of Magnesium",
     type: "combustion",
     isExothermic: true,
@@ -503,6 +530,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "calcination-of-limestone",
+    builderOptions: ["heat"],
     name: "Calcination of Limestone",
     type: "decomposition",
     isExothermic: false,
@@ -521,11 +549,12 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "hydrogenation-of-ethene",
+    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst", "raney-nickel"],
     name: "Hydrogenation of Ethene",
-    type: "synthesis",
+    type: "hydrogenation",
     isExothermic: true,
     description: "Addition of hydrogen across the double bond of ethene forms ethane.",
-    conditions: "Ni or Pt catalyst, 150 °C",
+    conditions: "Ni, Pt, Pd, or Raney Ni catalyst; temperature and hydrogen pressure depend on the catalyst formulation",
     enthalpy: -137,
     realWorldContext: "The same process is used to turn liquid vegetable oils into solid margarine.",
     balancedEquation: "C₂H₄ + H₂ → C₂H₆",
@@ -539,6 +568,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "saponification-of-fat",
+    builderOptions: ["heat"],
     name: "Saponification (Simplified)",
     type: "double-displacement",
     isExothermic: true,
@@ -558,6 +588,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "combustion-of-butane",
+    builderOptions: ["heat"],
     name: "Combustion of Butane",
     type: "combustion",
     isExothermic: true,
@@ -577,6 +608,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "combustion-of-octane",
+    builderOptions: ["heat"],
     name: "Combustion of Octane",
     type: "combustion",
     isExothermic: true,
@@ -596,6 +628,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "combustion-of-acetylene",
+    builderOptions: ["heat"],
     name: "Combustion of Acetylene",
     type: "combustion",
     isExothermic: true,
@@ -615,6 +648,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "combustion-of-sulfur",
+    builderOptions: ["heat"],
     name: "Combustion of Sulfur",
     type: "combustion",
     isExothermic: true,
@@ -633,6 +667,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "neutralization-h2so4-koh",
+    builderOptions: [],
     name: "Neutralization of Sulfuric Acid",
     type: "acid-base",
     isExothermic: true,
@@ -652,6 +687,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "neutralization-hno3-caoh2",
+    builderOptions: [],
     name: "Nitric Acid and Lime Water",
     type: "acid-base",
     isExothermic: true,
@@ -671,6 +707,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "antacid-reaction",
+    builderOptions: [],
     name: "Antacid Neutralizing Stomach Acid",
     type: "acid-base",
     isExothermic: true,
@@ -690,6 +727,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "calcium-carbonate-hcl",
+    builderOptions: [],
     name: "Limestone and Acid",
     type: "acid-base",
     isExothermic: true,
@@ -710,6 +748,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "slaking-of-lime",
+    builderOptions: [],
     name: "Slaking of Lime",
     type: "synthesis",
     isExothermic: true,
@@ -728,6 +767,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "limewater-test",
+    builderOptions: [],
     name: "Limewater Test for CO₂",
     type: "precipitation",
     isExothermic: true,
@@ -747,6 +787,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "decomposition-baking-soda",
+    builderOptions: ["heat"],
     name: "Thermal Decomposition of Baking Soda",
     type: "decomposition",
     isExothermic: false,
@@ -766,6 +807,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "decomposition-ammonium-nitrate",
+    builderOptions: ["heat"],
     name: "Decomposition of Ammonium Nitrate",
     type: "decomposition",
     isExothermic: true,
@@ -784,6 +826,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "displacement-cu-agno3",
+    builderOptions: [],
     name: "Copper Displacing Silver",
     type: "single-displacement",
     isExothermic: true,
@@ -803,6 +846,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "displacement-fe-cuso4",
+    builderOptions: [],
     name: "Iron Displacing Copper",
     type: "single-displacement",
     isExothermic: true,
@@ -822,6 +866,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "displacement-zn-cuso4",
+    builderOptions: [],
     name: "Zinc Displacing Copper",
     type: "single-displacement",
     isExothermic: true,
@@ -841,6 +886,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "displacement-cl2-ki",
+    builderOptions: [],
     name: "Chlorine Displacing Iodine",
     type: "single-displacement",
     isExothermic: true,
@@ -860,6 +906,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "precipitation-baso4",
+    builderOptions: [],
     name: "Precipitation of Barium Sulfate",
     type: "precipitation",
     isExothermic: true,
@@ -879,6 +926,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "copper-hydroxide-precipitate",
+    builderOptions: [],
     name: "Precipitation of Copper Hydroxide",
     type: "double-displacement",
     isExothermic: true,
@@ -898,11 +946,12 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "ostwald-process",
+    builderOptions: ["platinum-rhodium", "platinum-catalyst"],
     name: "Ostwald Process (Step 1)",
     type: "redox",
     isExothermic: true,
     description: "Ammonia is catalytically oxidized to nitric oxide over a platinum gauze.",
-    conditions: "Pt-Rh catalyst, ~900 °C",
+    conditions: "Pt-Rh or Pt gauze catalyst, ~900 °C",
     enthalpy: -905.2,
     realWorldContext: "The first step of industrial nitric acid production for fertilizers and explosives.",
     balancedEquation: "4NH₃ + 5O₂ → 4NO + 6H₂O",
@@ -917,6 +966,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "no-to-no2",
+    builderOptions: [],
     name: "Oxidation of Nitric Oxide",
     type: "synthesis",
     isExothermic: true,
@@ -935,11 +985,12 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "water-gas-shift",
+    builderOptions: ["iron-catalyst", "copper-catalyst", "copper-zinc-oxide"],
     name: "Water-Gas Shift Reaction",
     type: "redox",
     isExothermic: true,
     description: "Carbon monoxide reacts with steam to produce hydrogen gas.",
-    conditions: "Fe or Cu catalyst, 200-450 °C",
+    conditions: "iron-oxide-based high-temperature shift catalyst (350-450 °C), or supported Cu/Cu-ZnO low-temperature shift catalyst (200-250 °C); steam present",
     enthalpy: -41.2,
     realWorldContext: "A major industrial source of hydrogen for ammonia synthesis and fuel cells.",
     balancedEquation: "CO + H₂O → CO₂ + H₂",
@@ -954,6 +1005,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "steam-reforming",
+    builderOptions: ["nickel-catalyst"],
     name: "Steam Reforming of Methane",
     type: "redox",
     isExothermic: false,
@@ -973,6 +1025,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "fermentation-of-glucose",
+    builderOptions: ["yeast-enzymes"],
     name: "Fermentation of Glucose",
     type: "decomposition",
     isExothermic: true,
@@ -991,11 +1044,12 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "esterification",
+    builderOptions: ["sulfuric-acid-catalyst", "tosic-acid"],
     name: "Esterification (Fischer)",
-    type: "double-displacement",
+    type: "esterification",
     isExothermic: null,
     description: "A carboxylic acid and an alcohol combine to form a sweet-smelling ester.",
-    conditions: "concentrated H₂SO₄ catalyst, reflux",
+    conditions: "H₂SO₄ or p-toluenesulfonic acid catalyst, heating under reflux; reversible reaction, water removal favors ester formation",
     enthalpy: null,
     realWorldContext: "Esters made this way give fruits, perfumes, and candies their smells.",
     balancedEquation: "CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + H₂O",
@@ -1010,6 +1064,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "oxidation-of-ethanol",
+    builderOptions: ["acetobacter"],
     name: "Oxidation of Ethanol",
     type: "redox",
     isExothermic: true,
@@ -1029,6 +1084,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "chlorination-of-methane",
+    builderOptions: ["uv-light"],
     name: "Chlorination of Methane",
     type: "single-displacement",
     isExothermic: true,
@@ -1048,6 +1104,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "synthesis-of-hcl",
+    builderOptions: ["uv-light", "heat"],
     name: "Synthesis of Hydrogen Chloride",
     type: "synthesis",
     isExothermic: true,
@@ -1066,6 +1123,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "synthesis-of-ammonium-chloride",
+    builderOptions: [],
     name: "White Smoke Reaction",
     type: "synthesis",
     isExothermic: true,
@@ -1084,6 +1142,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "aluminum-oxide-formation",
+    builderOptions: [],
     name: "Oxidation of Aluminum",
     type: "synthesis",
     isExothermic: true,
@@ -1102,6 +1161,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "burning-of-hydrogen-sulfide",
+    builderOptions: ["heat"],
     name: "Combustion of Hydrogen Sulfide",
     type: "combustion",
     isExothermic: true,
@@ -1121,6 +1181,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "sodium-bromine-synthesis",
+    builderOptions: [],
     name: "Sodium and Bromine",
     type: "synthesis",
     isExothermic: true,
@@ -1139,6 +1200,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "nitrogen-fixation-lightning",
+    builderOptions: ["electricity", "heat"],
     name: "Nitrogen Fixation by Lightning",
     type: "synthesis",
     isExothermic: false,
@@ -1157,6 +1219,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "roasting-zinc-sulfide",
+    builderOptions: ["heat"],
     name: "Roasting of Zinc Sulfide",
     type: "redox",
     isExothermic: true,
@@ -1176,6 +1239,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "reduction-of-copper-oxide",
+    builderOptions: ["heat"],
     name: "Reduction of Copper Oxide",
     type: "redox",
     isExothermic: true,
@@ -1195,6 +1259,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "silver-tarnishing",
+    builderOptions: [],
     name: "Tarnishing of Silver",
     type: "redox",
     isExothermic: true,
@@ -1215,11 +1280,12 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "decomposition-silver-chloride",
+    builderOptions: ["uv-light"],
     name: "Photodecomposition of Silver Chloride",
     type: "decomposition",
     isExothermic: false,
     description: "Light splits silver chloride into dark metallic silver and chlorine.",
-    conditions: "sunlight",
+    conditions: "UV light, including the UV component of sunlight",
     enthalpy: 254,
     realWorldContext: "The light-sensitive chemistry that made photographic film possible.",
     balancedEquation: "2AgCl → 2Ag + Cl₂",
@@ -1229,6 +1295,435 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
     products: [
       { formula: "Ag", coefficient: 2, state: "s" },
       { formula: "Cl₂", coefficient: 1, state: "g", moleculeId: "chlorine" },
+    ],
+  },
+  {
+    id: "catalytic-oxidation-of-carbon-monoxide",
+    builderOptions: ["platinum-catalyst", "palladium-catalyst"],
+    name: "Catalytic Oxidation of Carbon Monoxide",
+    type: "redox",
+    isExothermic: true,
+    description: "Carbon monoxide is oxidized to carbon dioxide on a platinum or palladium catalyst surface.",
+    conditions: "supported Pt or Pd catalyst at its operating temperature; oxygen present",
+    enthalpy: null,
+    realWorldContext: "Catalytic converters use this reaction to reduce toxic carbon monoxide in exhaust.",
+    balancedEquation: "2CO + O₂ → 2CO₂",
+    reactants: [
+      { formula: "CO", coefficient: 2, state: "g", moleculeId: "carbon-monoxide" },
+      { formula: "O₂", coefficient: 1, state: "g", moleculeId: "oxygen" },
+    ],
+    products: [
+      { formula: "CO₂", coefficient: 2, state: "g", moleculeId: "carbon-dioxide" },
+    ],
+  },
+  {
+    id: "sabatier-reaction",
+    builderOptions: ["nickel-catalyst", "ruthenium-catalyst"],
+    name: "Sabatier Reaction",
+    type: "hydrogenation",
+    isExothermic: true,
+    description: "Carbon dioxide reacts with hydrogen over nickel or ruthenium to form methane and water vapor.",
+    conditions: "supported Ni or Ru catalyst, catalyst-dependent elevated temperature and controlled industrial gas conditions",
+    enthalpy: null,
+    realWorldContext: "Sabatier systems recover water from carbon dioxide in spacecraft life support and can produce synthetic methane.",
+    balancedEquation: "CO₂ + 4H₂ → CH₄ + 2H₂O",
+    reactants: [
+      { formula: "CO₂", coefficient: 1, state: "g", moleculeId: "carbon-dioxide" },
+      { formula: "H₂", coefficient: 4, state: "g", moleculeId: "hydrogen" },
+    ],
+    products: [
+      { formula: "CH₄", coefficient: 1, state: "g", moleculeId: "methane" },
+      { formula: "H₂O", coefficient: 2, state: "g", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "methanol-synthesis-from-carbon-monoxide",
+    builderOptions: ["copper-zinc-oxide"],
+    name: "Methanol Synthesis from Carbon Monoxide",
+    type: "hydrogenation",
+    isExothermic: true,
+    description: "Carbon monoxide and hydrogen form methanol over a copper-zinc oxide catalyst.",
+    conditions: "Cu/ZnO-based catalyst, elevated temperature and pressure; reversible gas-phase synthesis",
+    enthalpy: null,
+    realWorldContext: "This equation represents a key reaction in industrial synthesis-gas conversion to methanol.",
+    balancedEquation: "CO + 2H₂ → CH₃OH",
+    reactants: [
+      { formula: "CO", coefficient: 1, state: "g", moleculeId: "carbon-monoxide" },
+      { formula: "H₂", coefficient: 2, state: "g", moleculeId: "hydrogen" },
+    ],
+    products: [
+      { formula: "CH₃OH", coefficient: 1, state: "g", moleculeId: "methanol" },
+    ],
+  },
+  {
+    id: "hydration-of-ethene",
+    builderOptions: ["phosphoric-acid-catalyst"],
+    name: "Hydration of Ethene",
+    type: "synthesis",
+    isExothermic: true,
+    description: "Steam adds across the double bond of ethene to form ethanol in a reversible reaction.",
+    conditions: "supported phosphoric acid catalyst, steam, elevated temperature and pressure",
+    enthalpy: null,
+    realWorldContext: "Direct hydration is an industrial route to ethanol that does not rely on fermentation.",
+    balancedEquation: "C₂H₄ + H₂O → C₂H₅OH",
+    reactants: [
+      { formula: "C₂H₄", coefficient: 1, state: "g", moleculeId: "ethene" },
+      { formula: "H₂O", coefficient: 1, state: "g", moleculeId: "water" },
+    ],
+    products: [
+      { formula: "C₂H₅OH", coefficient: 1, state: "g", moleculeId: "ethanol" },
+    ],
+  },
+  {
+    id: "dehydration-of-ethanol-alumina",
+    builderOptions: ["alumina"],
+    name: "Ethanol Dehydration over Alumina",
+    type: "decomposition",
+    isExothermic: false,
+    description: "Ethanol loses water over solid alumina to form ethene.",
+    conditions: "ethanol vapor over heated alumina; gas-phase conditions favoring ethene rather than ether",
+    enthalpy: null,
+    realWorldContext: "Catalytic dehydration can turn bioethanol into ethene for polymer manufacturing.",
+    balancedEquation: "C₂H₅OH → C₂H₄ + H₂O",
+    reactants: [
+      { formula: "C₂H₅OH", coefficient: 1, state: "g", moleculeId: "ethanol" },
+    ],
+    products: [
+      { formula: "C₂H₄", coefficient: 1, state: "g", moleculeId: "ethene" },
+      { formula: "H₂O", coefficient: 1, state: "g", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "dehydration-of-ethanol-sulfuric-acid",
+    builderOptions: ["sulfuric-acid-catalyst"],
+    name: "Acid-Catalyzed Ethanol Dehydration",
+    type: "decomposition",
+    isExothermic: null,
+    description: "Acid-catalyzed elimination removes water from ethanol, yielding ethene rather than the ether favored by milder conditions.",
+    conditions: "concentrated sulfuric acid in a heated liquid-phase setup favoring ethene elimination; distinct from vapor-phase alumina catalysis",
+    enthalpy: null,
+    realWorldContext: "This textbook reaction illustrates how acid catalysis and reaction conditions control alcohol dehydration products.",
+    balancedEquation: "C₂H₅OH → C₂H₄ + H₂O",
+    reactants: [
+      { formula: "C₂H₅OH", coefficient: 1, state: "l", moleculeId: "ethanol" },
+    ],
+    products: [
+      { formula: "C₂H₄", coefficient: 1, state: "g", moleculeId: "ethene" },
+      { formula: "H₂O", coefficient: 1, state: "g", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "full-hydrogenation-of-acetylene",
+    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst"],
+    name: "Full Hydrogenation of Acetylene",
+    type: "hydrogenation",
+    isExothermic: true,
+    description: "Two molecules of hydrogen add across acetylene's triple bond to give fully saturated ethane.",
+    conditions: "active Ni, Pt, or Pd catalyst with sufficient hydrogen for full saturation; not a poisoned partial-hydrogenation catalyst",
+    enthalpy: null,
+    realWorldContext: "This contrasts full alkyne hydrogenation with selective industrial processes that stop at ethene.",
+    balancedEquation: "C₂H₂ + 2H₂ → C₂H₆",
+    reactants: [
+      { formula: "C₂H₂", coefficient: 1, state: "g", moleculeId: "ethyne" },
+      { formula: "H₂", coefficient: 2, state: "g", moleculeId: "hydrogen" },
+    ],
+    products: [
+      { formula: "C₂H₆", coefficient: 1, state: "g", moleculeId: "ethane" },
+    ],
+  },
+  {
+    id: "hydrogenation-of-benzene",
+    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst"],
+    name: "Hydrogenation of Benzene",
+    type: "hydrogenation",
+    isExothermic: true,
+    description: "Hydrogenation of benzene saturates its aromatic ring to form cyclohexane.",
+    conditions: "Ni, Pt, or Pd catalyst under hydrogen pressure; temperature and pressure appropriate to the chosen catalyst",
+    enthalpy: null,
+    realWorldContext: "Cyclohexane is an important starting material for nylon production.",
+    balancedEquation: "C₆H₆ + 3H₂ → C₆H₁₂",
+    reactants: [
+      { formula: "C₆H₆", coefficient: 1, state: "l", moleculeId: "benzene" },
+      { formula: "H₂", coefficient: 3, state: "g", moleculeId: "hydrogen" },
+    ],
+    products: [
+      { formula: "C₆H₁₂", coefficient: 1, state: "l", moleculeId: "cyclohexane" },
+    ],
+  },
+  {
+    id: "hydrogenation-of-acetone",
+    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst", "raney-nickel"],
+    name: "Hydrogenation of Acetone",
+    type: "hydrogenation",
+    isExothermic: true,
+    description: "Hydrogen reduces acetone's carbonyl group to give the secondary alcohol isopropanol.",
+    conditions: "Ni, Pt, Pd, or Raney Ni hydrogenation catalyst; catalyst-dependent temperature and hydrogen pressure for carbonyl reduction",
+    enthalpy: null,
+    realWorldContext: "Acetone hydrogenation is one industrial route to the widely used solvent isopropanol.",
+    balancedEquation: "C₃H₆O + H₂ → C₃H₈O",
+    reactants: [
+      { formula: "C₃H₆O", coefficient: 1, state: "l", moleculeId: "acetone" },
+      { formula: "H₂", coefficient: 1, state: "g", moleculeId: "hydrogen" },
+    ],
+    products: [
+      { formula: "C₃H₈O", coefficient: 1, state: "l", moleculeId: "isopropanol" },
+    ],
+  },
+  {
+    id: "catalytic-oxidation-of-methanol",
+    builderOptions: ["copper-catalyst", "silver-catalyst"],
+    name: "Catalytic Oxidation of Methanol",
+    type: "redox",
+    isExothermic: true,
+    description: "Partial oxidation of methanol on a copper-based or silver catalyst produces formaldehyde and water rather than complete-combustion products.",
+    conditions: "heated copper-based or silver catalyst; controlled gas-phase partial oxidation, not complete combustion; the equation represents the oxidation pathway",
+    enthalpy: null,
+    realWorldContext: "Alcohol oxidation illustrates the role of catalyst selectivity; formaldehyde is a toxic industrial feedstock for resins.",
+    balancedEquation: "2CH₃OH + O₂ → 2CH₂O + 2H₂O",
+    reactants: [
+      { formula: "CH₃OH", coefficient: 2, state: "g", moleculeId: "methanol" },
+      { formula: "O₂", coefficient: 1, state: "g", moleculeId: "oxygen" },
+    ],
+    products: [
+      { formula: "CH₂O", coefficient: 2, state: "g", moleculeId: "formaldehyde" },
+      { formula: "H₂O", coefficient: 2, state: "g", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "claus-sulfur-recovery",
+    builderOptions: ["alumina", "titania"],
+    name: "Claus Sulfur Recovery",
+    type: "redox",
+    isExothermic: true,
+    description: "Hydrogen sulfide reacts with sulfur dioxide over alumina or titania to produce elemental sulfur and water; sulfur is represented as S₈ after cooling.",
+    conditions: "heated industrial alumina or titania catalyst bed; equation includes downstream sulfur cooling and collection",
+    enthalpy: null,
+    realWorldContext: "Refineries use the Claus process to recover sulfur from toxic acid-gas streams instead of releasing them.",
+    balancedEquation: "16H₂S + 8SO₂ → 3S₈ + 16H₂O",
+    reactants: [
+      { formula: "H₂S", coefficient: 16, state: "g", moleculeId: "hydrogen-sulfide" },
+      { formula: "SO₂", coefficient: 8, state: "g", moleculeId: "sulfur-dioxide" },
+    ],
+    products: [
+      { formula: "S₈", coefficient: 3, state: "s", moleculeId: "octasulfur" },
+      { formula: "H₂O", coefficient: 16, state: "l", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "selective-hydrogenation-of-acetylene",
+    builderOptions: ["lindlar-catalyst"],
+    name: "Selective Hydrogenation of Acetylene",
+    type: "hydrogenation",
+    isExothermic: true,
+    description: "A poisoned palladium catalyst allows acetylene hydrogenation to stop at ethene rather than continuing to ethane.",
+    conditions: "Lindlar catalyst (poisoned Pd on CaCO₃), controlled hydrogen supply and catalyst contact to favor partial hydrogenation",
+    enthalpy: null,
+    realWorldContext: "Selective alkyne hydrogenation demonstrates how catalyst formulation controls the degree of saturation.",
+    balancedEquation: "C₂H₂ + H₂ → C₂H₄",
+    reactants: [
+      { formula: "C₂H₂", coefficient: 1, state: "g", moleculeId: "ethyne" },
+      { formula: "H₂", coefficient: 1, state: "g", moleculeId: "hydrogen" },
+    ],
+    products: [
+      { formula: "C₂H₄", coefficient: 1, state: "g", moleculeId: "ethene" },
+    ],
+  },
+  {
+    id: "enzyme-catalyzed-carbon-dioxide-hydration",
+    builderOptions: ["carbonic-anhydrase"],
+    name: "Enzyme-Catalyzed Carbon Dioxide Hydration",
+    type: "synthesis",
+    isExothermic: null,
+    description: "Carbonic anhydrase accelerates the reversible hydration of carbon dioxide. Carbonic acid subsequently equilibrates with bicarbonate and hydrogen ions depending on pH.",
+    conditions: "aqueous carbon dioxide, active carbonic anhydrase, enzyme-compatible pH and temperature; equilibrium is unchanged by the catalyst",
+    enthalpy: null,
+    realWorldContext: "Carbonic anhydrase helps the body transport carbon dioxide and regulate blood pH.",
+    balancedEquation: "CO₂ + H₂O ⇌ H₂CO₃",
+    reactants: [
+      { formula: "CO₂", coefficient: 1, state: "aq", moleculeId: "carbon-dioxide" },
+      { formula: "H₂O", coefficient: 1, state: "l", moleculeId: "water" },
+    ],
+    products: [
+      { formula: "H₂CO₃", coefficient: 1, state: "aq", moleculeId: "carbonic-acid" },
+    ],
+  },
+  {
+    id: "pressurized-carbonation",
+    builderOptions: ["pressure"],
+    name: "Pressurized Carbonation",
+    type: "synthesis",
+    isExothermic: true,
+    description: "Increased carbon dioxide pressure raises the amount dissolved in water; a small fraction hydrates reversibly to carbonic acid.",
+    conditions: "elevated CO₂ partial pressure over liquid water; dissolution and hydration equilibria, not complete conversion",
+    enthalpy: null,
+    realWorldContext: "Beverage carbonation uses pressure to keep more carbon dioxide dissolved until the container is opened.",
+    balancedEquation: "CO₂ + H₂O → H₂CO₃",
+    reactants: [
+      { formula: "CO₂", coefficient: 1, state: "g", moleculeId: "carbon-dioxide" },
+      { formula: "H₂O", coefficient: 1, state: "l", moleculeId: "water" },
+    ],
+    products: [
+      { formula: "H₂CO₃", coefficient: 1, state: "aq", moleculeId: "carbonic-acid" },
+    ],
+  },
+  {
+    id: "neutralization-hno3-naoh",
+    builderOptions: [],
+    name: "Nitric Acid and Sodium Hydroxide",
+    type: "acid-base",
+    isExothermic: true,
+    description: "Aqueous nitric acid and sodium hydroxide neutralize to form sodium nitrate and water.",
+    conditions: "aqueous acid-base neutralization",
+    enthalpy: null,
+    realWorldContext: "This is another example of the common net ionic reaction between hydrogen and hydroxide ions.",
+    balancedEquation: "HNO₃ + NaOH → NaNO₃ + H₂O",
+    reactants: [
+      { formula: "HNO₃", coefficient: 1, state: "aq", moleculeId: "nitric-acid" },
+      { formula: "NaOH", coefficient: 1, state: "aq", moleculeId: "sodium-hydroxide" },
+    ],
+    products: [
+      { formula: "NaNO₃", coefficient: 1, state: "aq", moleculeId: "sodium-nitrate" },
+      { formula: "H₂O", coefficient: 1, state: "l", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "neutralization-h2so4-naoh",
+    builderOptions: [],
+    name: "Sulfuric Acid and Sodium Hydroxide",
+    type: "acid-base",
+    isExothermic: true,
+    description: "Complete neutralization of sulfuric acid consumes two equivalents of sodium hydroxide.",
+    conditions: "aqueous solutions; sufficient base for complete neutralization of both acidic protons",
+    enthalpy: null,
+    realWorldContext: "Diprotic acid neutralization is important in industrial pH control and chemical analysis.",
+    balancedEquation: "H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O",
+    reactants: [
+      { formula: "H₂SO₄", coefficient: 1, state: "aq", moleculeId: "sulfuric-acid" },
+      { formula: "NaOH", coefficient: 2, state: "aq", moleculeId: "sodium-hydroxide" },
+    ],
+    products: [
+      { formula: "Na₂SO₄", coefficient: 1, state: "aq", moleculeId: "sodium-sulfate" },
+      { formula: "H₂O", coefficient: 2, state: "l", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "neutralization-hcl-koh",
+    builderOptions: [],
+    name: "Hydrochloric Acid and Potassium Hydroxide",
+    type: "acid-base",
+    isExothermic: true,
+    description: "Hydrochloric acid neutralizes potassium hydroxide to produce potassium chloride and water.",
+    conditions: "aqueous acid-base neutralization",
+    enthalpy: null,
+    realWorldContext: "Changing the spectator metal ion leaves the underlying strong-acid/strong-base chemistry unchanged.",
+    balancedEquation: "HCl + KOH → KCl + H₂O",
+    reactants: [
+      { formula: "HCl", coefficient: 1, state: "aq", moleculeId: "hydrogen-chloride" },
+      { formula: "KOH", coefficient: 1, state: "aq", moleculeId: "potassium-hydroxide" },
+    ],
+    products: [
+      { formula: "KCl", coefficient: 1, state: "aq", moleculeId: "potassium-chloride" },
+      { formula: "H₂O", coefficient: 1, state: "l", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "precipitation-magnesium-hydroxide",
+    builderOptions: [],
+    name: "Precipitation of Magnesium Hydroxide",
+    type: "precipitation",
+    isExothermic: null,
+    description: "Magnesium sulfate and sodium hydroxide solutions form sparingly soluble magnesium hydroxide.",
+    conditions: "aqueous solutions with ion concentrations sufficient for precipitation",
+    enthalpy: null,
+    realWorldContext: "Hydroxide precipitation is used in water treatment and magnesium compound production.",
+    balancedEquation: "MgSO₄ + 2NaOH → Mg(OH)₂ + Na₂SO₄",
+    reactants: [
+      { formula: "MgSO₄", coefficient: 1, state: "aq", moleculeId: "magnesium-sulfate" },
+      { formula: "NaOH", coefficient: 2, state: "aq", moleculeId: "sodium-hydroxide" },
+    ],
+    products: [
+      { formula: "Mg(OH)₂", coefficient: 1, state: "s", moleculeId: "magnesium-hydroxide" },
+      { formula: "Na₂SO₄", coefficient: 1, state: "aq", moleculeId: "sodium-sulfate" },
+    ],
+  },
+  {
+    id: "precipitation-calcium-carbonate",
+    builderOptions: [],
+    name: "Precipitation of Calcium Carbonate",
+    type: "precipitation",
+    isExothermic: null,
+    description: "Calcium chloride and sodium carbonate solutions produce a white calcium carbonate precipitate.",
+    conditions: "aqueous solutions with ion concentrations sufficient for precipitation",
+    enthalpy: null,
+    realWorldContext: "Carbonate precipitation underlies water softening and the formation of mineral scale.",
+    balancedEquation: "CaCl₂ + Na₂CO₃ → CaCO₃ + 2NaCl",
+    reactants: [
+      { formula: "CaCl₂", coefficient: 1, state: "aq", moleculeId: "calcium-chloride" },
+      { formula: "Na₂CO₃", coefficient: 1, state: "aq", moleculeId: "sodium-carbonate" },
+    ],
+    products: [
+      { formula: "CaCO₃", coefficient: 1, state: "s", moleculeId: "calcium-carbonate" },
+      { formula: "NaCl", coefficient: 2, state: "aq", moleculeId: "sodium-chloride" },
+    ],
+  },
+  {
+    id: "combustion-of-methanol",
+    builderOptions: ["heat"],
+    name: "Combustion of Methanol",
+    type: "combustion",
+    isExothermic: true,
+    description: "Complete combustion of methanol produces carbon dioxide and water vapor, unlike catalytic partial oxidation to formaldehyde.",
+    conditions: "ignition with sufficient oxygen for complete combustion",
+    enthalpy: null,
+    realWorldContext: "Methanol is used as a fuel in some engines and industrial energy systems.",
+    balancedEquation: "2CH₃OH + 3O₂ → 2CO₂ + 4H₂O",
+    reactants: [
+      { formula: "CH₃OH", coefficient: 2, state: "l", moleculeId: "methanol" },
+      { formula: "O₂", coefficient: 3, state: "g", moleculeId: "oxygen" },
+    ],
+    products: [
+      { formula: "CO₂", coefficient: 2, state: "g", moleculeId: "carbon-dioxide" },
+      { formula: "H₂O", coefficient: 4, state: "g", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "combustion-of-ethane",
+    builderOptions: ["heat"],
+    name: "Combustion of Ethane",
+    type: "combustion",
+    isExothermic: true,
+    description: "Ethane burns completely in oxygen to form carbon dioxide and water vapor.",
+    conditions: "ignition with sufficient oxygen for complete combustion",
+    enthalpy: null,
+    realWorldContext: "Ethane is a component of natural gas and contributes to its heating value.",
+    balancedEquation: "2C₂H₆ + 7O₂ → 4CO₂ + 6H₂O",
+    reactants: [
+      { formula: "C₂H₆", coefficient: 2, state: "g", moleculeId: "ethane" },
+      { formula: "O₂", coefficient: 7, state: "g", moleculeId: "oxygen" },
+    ],
+    products: [
+      { formula: "CO₂", coefficient: 4, state: "g", moleculeId: "carbon-dioxide" },
+      { formula: "H₂O", coefficient: 6, state: "g", moleculeId: "water" },
+    ],
+  },
+  {
+    id: "combustion-of-ethene",
+    builderOptions: ["heat"],
+    name: "Combustion of Ethene",
+    type: "combustion",
+    isExothermic: true,
+    description: "Ethene undergoes complete combustion in oxygen to form carbon dioxide and water vapor.",
+    conditions: "ignition with sufficient oxygen for complete combustion",
+    enthalpy: null,
+    realWorldContext: "Comparing ethene and ethane combustion illustrates how hydrogen content changes oxygen demand.",
+    balancedEquation: "C₂H₄ + 3O₂ → 2CO₂ + 2H₂O",
+    reactants: [
+      { formula: "C₂H₄", coefficient: 1, state: "g", moleculeId: "ethene" },
+      { formula: "O₂", coefficient: 3, state: "g", moleculeId: "oxygen" },
+    ],
+    products: [
+      { formula: "CO₂", coefficient: 2, state: "g", moleculeId: "carbon-dioxide" },
+      { formula: "H₂O", coefficient: 2, state: "g", moleculeId: "water" },
     ],
   },
 ];

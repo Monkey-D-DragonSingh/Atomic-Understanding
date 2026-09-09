@@ -93,6 +93,28 @@
 }
 
 @layer utilities {
+  .reaction-scrollbar {
+    color-scheme: dark;
+    scrollbar-width: thin;
+    scrollbar-color: #343b49 var(--bg);
+  }
+  .reaction-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .reaction-scrollbar::-webkit-scrollbar-track,
+  .reaction-scrollbar::-webkit-scrollbar-corner {
+    background: var(--bg);
+  }
+  .reaction-scrollbar::-webkit-scrollbar-thumb {
+    background: #343b49;
+    border: 2px solid var(--bg);
+    border-radius: 99px;
+  }
+  .reaction-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #4b5568;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 7px;
     height: 7px;

@@ -27,7 +27,7 @@ export function ReactionWorkspace() {
   };
 
   return (
-    <div className="flex-1 relative bg-bg overflow-y-auto">
+    <div className="flex-1 relative bg-bg overflow-y-auto reaction-scrollbar">
       <div className="max-w-2xl mx-auto p-6 pt-20 flex flex-col gap-8">
         {/* Reactant chips + arrow */}
         <div className="flex flex-wrap items-center justify-center gap-3">

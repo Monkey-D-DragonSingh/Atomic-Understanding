@@ -34,16 +34,15 @@ export function ReactionResultPanel() {
   }
 
   if (reactionResult.status === 'catalyst-missing' || reactionResult.status === 'wrong-catalyst') {
-    const { reaction, neededSymbol } = reactionResult;
+    const { neededSymbol } = reactionResult;
     return (
       <div className="h-full flex flex-col items-center justify-center p-6 text-center gap-3">
         <AlertTriangle className="w-10 h-10 text-yellow-400" />
         <p className="text-sm font-semibold text-text">
-          {reactionResult.status === 'catalyst-missing' ? 'Catalyst needed' : 'Wrong catalyst'}
+          {reactionResult.status === 'catalyst-missing' ? 'Catalyst or condition needed' : 'Different setup needed'}
         </p>
         <p className="text-xs text-text-dim">
-          <span className="font-semibold text-text">{reaction.name}</span> needs{' '}
-          <span className="font-mono text-accent">{neededSymbol}</span> to proceed.
+          For these reactants, choose <span className="text-accent">{neededSymbol}</span> to explore a supported setup.
         </p>
       </div>
     );
@@ -51,7 +50,8 @@ export function ReactionResultPanel() {
 
   // valid
   const { reaction } = reactionResult;
-  const firstProduct = MOLECULES.find((m) => m.formula === reaction.products[0]?.formula);
+  const product = reaction.products[0];
+  const firstProduct = MOLECULES.find(m => product?.moleculeId ? m.id === product.moleculeId : m.formula === product?.formula);
 
   return (
     <div className="h-full flex flex-col">
@@ -77,6 +77,9 @@ export function ReactionResultPanel() {
           <p className="text-xs text-text-dim mt-1">ΔH = {reaction.enthalpy} kJ/mol</p>
         )}
         <p className="text-xs text-text-dim mt-2">{reaction.description}</p>
+        {reaction.conditions && (
+          <p className="text-xs text-text-dim mt-2"><span className="font-semibold text-text">Full conditions: </span>{reaction.conditions}</p>
+        )}
       </div>
 
       <div className="flex-1 min-h-[220px] relative">
@@ -96,7 +99,7 @@ export function ReactionResultPanel() {
           </h3>
           <div className="flex flex-col gap-1.5">
             {reaction.products.map((p) => {
-              const mol = MOLECULES.find((m) => m.formula === p.formula);
+               const mol = MOLECULES.find(m => p.moleculeId ? m.id === p.moleculeId : m.formula === p.formula);
               return (
                 <div key={p.formula} className="flex justify-between items-center text-sm">
                   <span className="text-text">{mol?.name ?? p.formula}</span>

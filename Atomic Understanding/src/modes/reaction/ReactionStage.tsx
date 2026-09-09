@@ -1,24 +1,7 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { Play, Pause, RotateCcw } from 'lucide-react';
-
-// Helper to parse "H₂O" into {H: 2, O: 1}
-function parseFormula(formula: string): Record<string, number> {
-  const counts: Record<string, number> = {};
-  const normalized = formula
-    .replace(/₂/g, '2').replace(/₃/g, '3').replace(/₄/g, '4').replace(/₅/g, '5')
-    .replace(/₆/g, '6').replace(/₇/g, '7').replace(/₈/g, '8');
-  
-  const regex = /([A-Z][a-z]*)(\d*)/g;
-  let match;
-  while ((match = regex.exec(normalized)) !== null) {
-    const sym = match[1];
-    if (!sym) continue;
-    const count = match[2] ? parseInt(match[2]) : 1;
-    counts[sym] = (counts[sym] || 0) + count;
-  }
-  return counts;
-}
+import { parseFormula } from '../../lib/parseFormula';
 
 export function ReactionStage() {
   const { activeCuratedReaction } = useAppStore();
