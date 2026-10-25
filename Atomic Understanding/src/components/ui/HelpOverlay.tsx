@@ -59,6 +59,7 @@ export function HelpOverlay() {
               <li><strong className="text-text">Periodic Table:</strong> Click/Tap elements to view details. Hover for quick stats.</li>
               <li><strong className="text-text">3D Viewer:</strong> Drag to rotate, scroll/pinch to zoom. Auto-fits bounds on load.</li>
               <li><strong className="text-text">Molecule Builder:</strong> Drag elements from the tray. Move them close to form bonds automatically. Drag apart to break bonds.</li>
+              <li><strong className="text-text">Reaction Builder:</strong> Pick reactants, set catalysts (heat, metals, enzymes), and click React to simulate products in 3D.</li>
             </ul>
           </section>
 

@@ -6209,5 +6209,3146 @@ export const MOLECULES: Molecule[] = [
         { "from": 9, "to": 12, "order": 1, "type": "covalent" },
         { "from": 10, "to": 13, "order": 1, "type": "covalent" }
       ]
-  }
+  },
+{
+  "id": "guanine",
+  "name": "Guanine",
+  "iupacName": "2-amino-1,9-dihydro-6H-purin-6-one",
+  "formula": "C₅H₅N₅O",
+  "hillFormula": "C5H5N5O",
+  "molarMass": 151.13,
+  "category": "nucleobase",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "none",
+  "bondAngle": "N/A",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 633,
+  "boilingPoint": null,
+  "uses": "One of the fundamental nucleobases in DNA and RNA, pairing specifically with cytosine via three hydrogen bonds.",
+  "fact": "Guanine was named after guano (seabird droppings), from which it was first isolated in 1844.",
+  "isSpecial": true,
+  "atoms": [
+    {
+      "id": 1,
+      "element": "O",
+      "x": 1.94,
+      "y": 2.45,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "N",
+      "x": 0.05,
+      "y": 1.25,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "N",
+      "x": -1.98,
+      "y": -0.06,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "N",
+      "x": -2.04,
+      "y": 2.08,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "N",
+      "x": 2.12,
+      "y": 0.12,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "N",
+      "x": 0.18,
+      "y": -2.31,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": 1.25,
+      "y": 1.28,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": 0.06,
+      "y": -0.11,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "C",
+      "x": -1.18,
+      "y": 0.91,
+      "z": 0
+    },
+    {
+      "id": 10,
+      "element": "C",
+      "x": 1.28,
+      "y": -1.02,
+      "z": 0
+    },
+    {
+      "id": 11,
+      "element": "C",
+      "x": -2.99,
+      "y": 0.99,
+      "z": 0
+    },
+    {
+      "id": 12,
+      "element": "H",
+      "x": -0.78,
+      "y": 1.77,
+      "z": 0
+    },
+    {
+      "id": 13,
+      "element": "H",
+      "x": -3.99,
+      "y": 1.15,
+      "z": 0
+    },
+    {
+      "id": 14,
+      "element": "H",
+      "x": 3.09,
+      "y": 0.28,
+      "z": 0
+    },
+    {
+      "id": 15,
+      "element": "H",
+      "x": 0.98,
+      "y": -2.89,
+      "z": 0
+    },
+    {
+      "id": 16,
+      "element": "H",
+      "x": -0.68,
+      "y": -2.78,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 7,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 11,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 10,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 15,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 16,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 11,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "cytosine",
+  "name": "Cytosine",
+  "iupacName": "4-aminopyrimidin-2(1H)-one",
+  "formula": "C₄H₅N₃O",
+  "hillFormula": "C4H5N3O",
+  "molarMass": 111.1,
+  "category": "nucleobase",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "none",
+  "bondAngle": "N/A",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 593,
+  "boilingPoint": null,
+  "uses": "Pyrimidine nucleobase that pairs with guanine in DNA and RNA, maintaining genetic code integrity.",
+  "fact": "Cytosine spontaneously deaminates into uracil at a low rate, a major reason DNA uses thymine instead of uracil.",
+  "isSpecial": true,
+  "atoms": [
+    {
+      "id": 1,
+      "element": "O",
+      "x": -2.25,
+      "y": 0.01,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "N",
+      "x": -0.62,
+      "y": 1.76,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "N",
+      "x": -0.58,
+      "y": -1.18,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "N",
+      "x": 2.29,
+      "y": 1.48,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": -1.19,
+      "y": 0.49,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "C",
+      "x": 0.74,
+      "y": 1.62,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": 1.54,
+      "y": 0.44,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": 0.77,
+      "y": -0.92,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "H",
+      "x": -1.18,
+      "y": -1.97,
+      "z": 0
+    },
+    {
+      "id": 10,
+      "element": "H",
+      "x": 1.25,
+      "y": 2.56,
+      "z": 0
+    },
+    {
+      "id": 11,
+      "element": "H",
+      "x": 1.26,
+      "y": -1.87,
+      "z": 0
+    },
+    {
+      "id": 12,
+      "element": "H",
+      "x": 2.76,
+      "y": 2.34,
+      "z": 0
+    },
+    {
+      "id": 13,
+      "element": "H",
+      "x": 2.82,
+      "y": 0.64,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 5,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 6,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "thymine",
+  "name": "Thymine",
+  "iupacName": "5-methylpyrimidine-2,4(1H,3H)-dione",
+  "formula": "C₅H₆N₂O₂",
+  "hillFormula": "C5H6N2O2",
+  "molarMass": 126.11,
+  "category": "nucleobase",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "none",
+  "bondAngle": "N/A",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 589,
+  "boilingPoint": null,
+  "uses": "One of the four bases in DNA, pairing exclusively with adenine to encode biological information.",
+  "fact": "Ultraviolet light creates thymine dimers, chemically linking two adjacent thymines and halting replication.",
+  "isSpecial": true,
+  "atoms": [
+    {
+      "id": 1,
+      "element": "O",
+      "x": -2.31,
+      "y": 0.81,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "O",
+      "x": 1.82,
+      "y": 2.21,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "N",
+      "x": -0.82,
+      "y": -1.02,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "N",
+      "x": -0.38,
+      "y": 1.68,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": -1.22,
+      "y": 0.38,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "C",
+      "x": 0.98,
+      "y": 1.25,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": 1.25,
+      "y": -0.19,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": 0.44,
+      "y": -1.18,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "C",
+      "x": 2.68,
+      "y": -0.62,
+      "z": 0
+    },
+    {
+      "id": 10,
+      "element": "H",
+      "x": -1.49,
+      "y": -1.74,
+      "z": 0
+    },
+    {
+      "id": 11,
+      "element": "H",
+      "x": -0.71,
+      "y": 2.62,
+      "z": 0
+    },
+    {
+      "id": 12,
+      "element": "H",
+      "x": 0.74,
+      "y": -2.21,
+      "z": 0
+    },
+    {
+      "id": 13,
+      "element": "H",
+      "x": 3.28,
+      "y": 0.28,
+      "z": 0
+    },
+    {
+      "id": 14,
+      "element": "H",
+      "x": 2.87,
+      "y": -1.22,
+      "z": 0.88
+    },
+    {
+      "id": 15,
+      "element": "H",
+      "x": 2.87,
+      "y": -1.22,
+      "z": -0.88
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 5,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 6,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 6,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 9,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 9,
+      "to": 14,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 9,
+      "to": 15,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "uracil",
+  "name": "Uracil",
+  "iupacName": "pyrimidine-2,4(1H,3H)-dione",
+  "formula": "C₄H₄N₂O₂",
+  "hillFormula": "C4H4N2O2",
+  "molarMass": 112.09,
+  "category": "nucleobase",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "none",
+  "bondAngle": "N/A",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 611,
+  "boilingPoint": null,
+  "uses": "Primary pyrimidine nucleobase in RNA, where it replaces thymine and base-pairs with adenine.",
+  "fact": "RNA uses uracil instead of thymine because it is energetically cheaper to produce for transient messages.",
+  "isSpecial": true,
+  "atoms": [
+    {
+      "id": 1,
+      "element": "O",
+      "x": -2.25,
+      "y": 0.82,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "O",
+      "x": 1.76,
+      "y": 2.15,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "N",
+      "x": -0.81,
+      "y": -0.99,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "N",
+      "x": -0.34,
+      "y": 1.66,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": -1.18,
+      "y": 0.39,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "C",
+      "x": 0.94,
+      "y": 1.21,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": 1.22,
+      "y": -0.19,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": 0.41,
+      "y": -1.16,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "H",
+      "x": -1.48,
+      "y": -1.71,
+      "z": 0
+    },
+    {
+      "id": 10,
+      "element": "H",
+      "x": -0.66,
+      "y": 2.61,
+      "z": 0
+    },
+    {
+      "id": 11,
+      "element": "H",
+      "x": 2.27,
+      "y": -0.42,
+      "z": 0
+    },
+    {
+      "id": 12,
+      "element": "H",
+      "x": 0.69,
+      "y": -2.2,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 5,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 6,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 6,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "alanine",
+  "name": "Alanine",
+  "iupacName": "(2S)-2-aminopropanoic acid",
+  "formula": "C₃H₇NO₂",
+  "hillFormula": "C3H7NO2",
+  "molarMass": 89.09,
+  "category": "amino acid",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "sp3",
+  "bondAngle": "109.5°",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 570,
+  "boilingPoint": null,
+  "uses": "Fundamental amino acid used in protein synthesis and the cellular glucose-alanine cycle.",
+  "fact": "Alanine makes up nearly 8% of all primary protein sequences, making it second only to leucine in abundance.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "C",
+      "x": 0.05,
+      "y": 0.32,
+      "z": 0.01
+    },
+    {
+      "id": 2,
+      "element": "C",
+      "x": 1.48,
+      "y": -0.21,
+      "z": -0.02
+    },
+    {
+      "id": 3,
+      "element": "C",
+      "x": -0.92,
+      "y": -0.84,
+      "z": 0.03
+    },
+    {
+      "id": 4,
+      "element": "N",
+      "x": -0.16,
+      "y": 1.25,
+      "z": 1.13
+    },
+    {
+      "id": 5,
+      "element": "O",
+      "x": 1.76,
+      "y": -1.38,
+      "z": -0.06
+    },
+    {
+      "id": 6,
+      "element": "O",
+      "x": 2.39,
+      "y": 0.76,
+      "z": 0.02
+    },
+    {
+      "id": 7,
+      "element": "H",
+      "x": -0.12,
+      "y": 0.88,
+      "z": -0.91
+    },
+    {
+      "id": 8,
+      "element": "H",
+      "x": -0.76,
+      "y": -1.45,
+      "z": 0.92
+    },
+    {
+      "id": 9,
+      "element": "H",
+      "x": -0.77,
+      "y": -1.48,
+      "z": -0.84
+    },
+    {
+      "id": 10,
+      "element": "H",
+      "x": -1.95,
+      "y": -0.48,
+      "z": 0.05
+    },
+    {
+      "id": 11,
+      "element": "H",
+      "x": 0.58,
+      "y": 1.93,
+      "z": 1.16
+    },
+    {
+      "id": 12,
+      "element": "H",
+      "x": -1.06,
+      "y": 1.71,
+      "z": 1.14
+    },
+    {
+      "id": 13,
+      "element": "H",
+      "x": 3.28,
+      "y": 0.4,
+      "z": 0.01
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 2,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 3,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 4,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 5,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 6,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "cysteine",
+  "name": "Cysteine",
+  "iupacName": "(2R)-2-amino-3-sulfanylpropanoic acid",
+  "formula": "C₃H₇NO₂S",
+  "hillFormula": "C3H7NO2S",
+  "molarMass": 121.16,
+  "category": "amino acid",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "sp3",
+  "bondAngle": "109.5°",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 513,
+  "boilingPoint": null,
+  "uses": "Sulfur-containing amino acid critical for forming disulfide bonds that stabilize tertiary protein structures.",
+  "fact": "The curliness of human hair directly depends on cross-linking disulfide bonds between cysteine residues in keratin.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "C",
+      "x": 0.35,
+      "y": 0.42,
+      "z": 0.12
+    },
+    {
+      "id": 2,
+      "element": "C",
+      "x": 1.76,
+      "y": -0.16,
+      "z": -0.05
+    },
+    {
+      "id": 3,
+      "element": "C",
+      "x": -0.68,
+      "y": -0.66,
+      "z": -0.19
+    },
+    {
+      "id": 4,
+      "element": "S",
+      "x": -2.35,
+      "y": -0.04,
+      "z": 0.28
+    },
+    {
+      "id": 5,
+      "element": "N",
+      "x": 0.16,
+      "y": 1.63,
+      "z": -0.69
+    },
+    {
+      "id": 6,
+      "element": "O",
+      "x": 2.11,
+      "y": -1.29,
+      "z": 0.18
+    },
+    {
+      "id": 7,
+      "element": "O",
+      "x": 2.58,
+      "y": 0.81,
+      "z": -0.49
+    },
+    {
+      "id": 8,
+      "element": "H",
+      "x": 0.28,
+      "y": 0.72,
+      "z": 1.17
+    },
+    {
+      "id": 9,
+      "element": "H",
+      "x": -0.61,
+      "y": -0.99,
+      "z": -1.23
+    },
+    {
+      "id": 10,
+      "element": "H",
+      "x": -0.56,
+      "y": -1.54,
+      "z": 0.44
+    },
+    {
+      "id": 11,
+      "element": "H",
+      "x": -2.96,
+      "y": -1.14,
+      "z": -0.22
+    },
+    {
+      "id": 12,
+      "element": "H",
+      "x": 0.89,
+      "y": 2.29,
+      "z": -0.52
+    },
+    {
+      "id": 13,
+      "element": "H",
+      "x": -0.73,
+      "y": 2.05,
+      "z": -0.52
+    },
+    {
+      "id": 14,
+      "element": "H",
+      "x": 3.49,
+      "y": 0.46,
+      "z": -0.42
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 2,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 3,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 6,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 14,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "sodium-hypochlorite",
+  "name": "Sodium Hypochlorite",
+  "iupacName": "sodium hypochlorite",
+  "formula": "NaClO",
+  "hillFormula": "ClNaO",
+  "molarMass": 74.44,
+  "category": "salt",
+  "bondType": "ionic / covalent",
+  "geometry": "linear",
+  "hybridization": "none",
+  "bondAngle": "180°",
+  "polarity": "ionic",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 291,
+  "boilingPoint": 374,
+  "uses": "Active antimicrobial and oxidizing agent in household bleach, municipal water disinfection, and endodontics.",
+  "fact": "Known historically as Eau de Javel, discovered in 1789 by Claude Berthollet in the Javel district of Paris.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "Na",
+      "x": -2.12,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "O",
+      "x": 0.15,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "Cl",
+      "x": 1.84,
+      "y": 0,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 2,
+      "order": 1,
+      "type": "ionic"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "order": 1,
+      "type": "polar-covalent"
+    }
+  ]
+},
+{
+  "id": "sodium-acetate",
+  "name": "Sodium Acetate",
+  "iupacName": "sodium ethanoate",
+  "formula": "CH₃COONa",
+  "hillFormula": "C2H3NaO2",
+  "molarMass": 82.03,
+  "category": "organic salt",
+  "bondType": "ionic / covalent",
+  "geometry": "none",
+  "hybridization": "none",
+  "bondAngle": "120°",
+  "polarity": "ionic",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 597,
+  "boilingPoint": 1154,
+  "uses": "Used in reusable chemical heating pads (\"hot ice\"), buffer solutions, and as seasoning for salt and vinegar chips.",
+  "fact": "Supercooled sodium acetate solutions crystallize instantaneously upon perturbation, releasing warm latent heat.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "Na",
+      "x": -2.48,
+      "y": 0.02,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "O",
+      "x": -0.62,
+      "y": 1.15,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "O",
+      "x": -0.65,
+      "y": -1.16,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "C",
+      "x": 0.04,
+      "y": 0.01,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": 1.55,
+      "y": -0.01,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "H",
+      "x": 1.94,
+      "y": 1.01,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "H",
+      "x": 1.92,
+      "y": -0.52,
+      "z": 0.89
+    },
+    {
+      "id": 8,
+      "element": "H",
+      "x": 1.92,
+      "y": -0.52,
+      "z": -0.89
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 2,
+      "order": 1,
+      "type": "ionic"
+    },
+    {
+      "from": 2,
+      "to": 4,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "magnesium-carbonate",
+  "name": "Magnesium Carbonate",
+  "iupacName": "magnesium carbonate",
+  "formula": "MgCO₃",
+  "hillFormula": "CMgO3",
+  "molarMass": 84.31,
+  "category": "carbonate",
+  "bondType": "ionic / covalent",
+  "geometry": "trigonal-planar",
+  "hybridization": "sp2",
+  "bondAngle": "120°",
+  "polarity": "ionic",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 623,
+  "boilingPoint": null,
+  "uses": "Known as \"gym chalk\" to dry hand sweat and increase friction for gymnasts and climbers; also an antacid.",
+  "fact": "Gymnasts and rock climbers coat their hands in magnesium carbonate because it absorbs moisture without turning slippery.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "Mg",
+      "x": -2.05,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "C",
+      "x": 0.65,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "O",
+      "x": -0.45,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "O",
+      "x": 1.35,
+      "y": 1.15,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "O",
+      "x": 1.35,
+      "y": -1.15,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 3,
+      "order": 1,
+      "type": "ionic"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "order": 1,
+      "type": "polar-covalent"
+    },
+    {
+      "from": 2,
+      "to": 4,
+      "order": 2,
+      "type": "polar-covalent"
+    },
+    {
+      "from": 2,
+      "to": 5,
+      "order": 1,
+      "type": "polar-covalent"
+    }
+  ]
+},
+{
+  "id": "zinc-chloride",
+  "name": "Zinc Chloride",
+  "iupacName": "zinc dichloride",
+  "formula": "ZnCl₂",
+  "hillFormula": "Cl2Zn",
+  "molarMass": 136.3,
+  "category": "halide",
+  "bondType": "ionic",
+  "geometry": "linear",
+  "hybridization": "sp",
+  "bondAngle": "180°",
+  "polarity": "ionic",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 563,
+  "boilingPoint": 1005,
+  "uses": "Used as a metallurgical soldering flux, in dry cell batteries, and in the Lucas reagent for organic alcohol testing.",
+  "fact": "Zinc chloride is intensely hygroscopic and can even dissolve cellulose fibers like paper and cotton.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "Zn",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "Cl",
+      "x": -2.08,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "Cl",
+      "x": 2.08,
+      "y": 0,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 2,
+      "order": 1,
+      "type": "ionic"
+    },
+    {
+      "from": 1,
+      "to": 3,
+      "order": 1,
+      "type": "ionic"
+    }
+  ]
+},
+{
+  "id": "silver-bromide",
+  "name": "Silver Bromide",
+  "iupacName": "silver bromide",
+  "formula": "AgBr",
+  "hillFormula": "AgBr",
+  "molarMass": 187.77,
+  "category": "halide",
+  "bondType": "ionic",
+  "geometry": "linear",
+  "hybridization": "none",
+  "bondAngle": "180°",
+  "polarity": "ionic",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 705,
+  "boilingPoint": 973,
+  "uses": "Light-sensitive photographic salt that served as the foundation of film photography and cinema for over a century.",
+  "fact": "A single photon of light can initiate the photoreduction of silver ions in AgBr crystals to form metallic latent image specks.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "Ag",
+      "x": -1.25,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "Br",
+      "x": 1.25,
+      "y": 0,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 2,
+      "order": 1,
+      "type": "ionic"
+    }
+  ]
+},
+{
+  "id": "calcium-phosphate",
+  "name": "Calcium Phosphate",
+  "iupacName": "tricalcium diphosphate",
+  "formula": "Ca₃(PO₄)₂",
+  "hillFormula": "Ca3O8P2",
+  "molarMass": 310.18,
+  "category": "phosphate",
+  "bondType": "ionic",
+  "geometry": "none",
+  "hybridization": "sp3",
+  "bondAngle": "109.5°",
+  "polarity": "ionic",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 1943,
+  "boilingPoint": null,
+  "uses": "Principal structural mineral of human bones and teeth; also used as a nutritional supplement and fertilizer source.",
+  "fact": "Roughly 70% of human bone weight consists of a calcium phosphate mineral phase known as hydroxyapatite.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "Ca",
+      "x": -3.2,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "Ca",
+      "x": 0,
+      "y": 0,
+      "z": 1.2
+    },
+    {
+      "id": 3,
+      "element": "Ca",
+      "x": 3.2,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "P",
+      "x": -1.6,
+      "y": 1.4,
+      "z": -0.5
+    },
+    {
+      "id": 5,
+      "element": "O",
+      "x": -1.6,
+      "y": 2.8,
+      "z": -0.5
+    },
+    {
+      "id": 6,
+      "element": "O",
+      "x": -0.3,
+      "y": 0.9,
+      "z": -1.2
+    },
+    {
+      "id": 7,
+      "element": "O",
+      "x": -2.8,
+      "y": 0.8,
+      "z": -1.2
+    },
+    {
+      "id": 8,
+      "element": "O",
+      "x": -1.6,
+      "y": 0.8,
+      "z": 0.9
+    },
+    {
+      "id": 9,
+      "element": "P",
+      "x": 1.6,
+      "y": -1.4,
+      "z": -0.5
+    },
+    {
+      "id": 10,
+      "element": "O",
+      "x": 1.6,
+      "y": -2.8,
+      "z": -0.5
+    },
+    {
+      "id": 11,
+      "element": "O",
+      "x": 2.8,
+      "y": -0.8,
+      "z": -1.2
+    },
+    {
+      "id": 12,
+      "element": "O",
+      "x": 0.3,
+      "y": -0.9,
+      "z": -1.2
+    },
+    {
+      "id": 13,
+      "element": "O",
+      "x": 1.6,
+      "y": -0.8,
+      "z": 0.9
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 7,
+      "order": 1,
+      "type": "ionic"
+    },
+    {
+      "from": 2,
+      "to": 8,
+      "order": 1,
+      "type": "ionic"
+    },
+    {
+      "from": 2,
+      "to": 13,
+      "order": 1,
+      "type": "ionic"
+    },
+    {
+      "from": 3,
+      "to": 11,
+      "order": 1,
+      "type": "ionic"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "order": 2,
+      "type": "polar-covalent"
+    },
+    {
+      "from": 4,
+      "to": 6,
+      "order": 1,
+      "type": "polar-covalent"
+    },
+    {
+      "from": 4,
+      "to": 7,
+      "order": 1,
+      "type": "polar-covalent"
+    },
+    {
+      "from": 4,
+      "to": 8,
+      "order": 1,
+      "type": "polar-covalent"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "order": 2,
+      "type": "polar-covalent"
+    },
+    {
+      "from": 9,
+      "to": 11,
+      "order": 1,
+      "type": "polar-covalent"
+    },
+    {
+      "from": 9,
+      "to": 12,
+      "order": 1,
+      "type": "polar-covalent"
+    },
+    {
+      "from": 9,
+      "to": 13,
+      "order": 1,
+      "type": "polar-covalent"
+    }
+  ]
+},
+{
+  "id": "melatonin",
+  "name": "Melatonin",
+  "iupacName": "N-[2-(5-methoxy-1H-indol-3-yl)ethyl]acetamide",
+  "formula": "C₁₃H₁₆N₂O₂",
+  "hillFormula": "C13H16N2O2",
+  "molarMass": 232.28,
+  "category": "hormone",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "none",
+  "bondAngle": "N/A",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 389,
+  "boilingPoint": null,
+  "uses": "Circadian regulator secreted by the pineal gland to control the sleep-wake cycle; taken as a sleep supplement.",
+  "fact": "Melatonin secretion is triggered by darkness and strongly inhibited by blue light waves from screens and daylight.",
+  "isSpecial": true,
+  "atoms": [
+    {
+      "id": 1,
+      "element": "O",
+      "x": -4.25,
+      "y": 0.42,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "O",
+      "x": 4.62,
+      "y": 0.35,
+      "z": 0.1
+    },
+    {
+      "id": 3,
+      "element": "N",
+      "x": -1.15,
+      "y": -1.82,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "N",
+      "x": 3.15,
+      "y": -1.22,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": -4.95,
+      "y": 1.65,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "C",
+      "x": -2.88,
+      "y": 0.32,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": -2.18,
+      "y": 1.55,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": -0.78,
+      "y": 1.45,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "C",
+      "x": -0.12,
+      "y": 0.22,
+      "z": 0
+    },
+    {
+      "id": 10,
+      "element": "C",
+      "x": -0.85,
+      "y": -0.98,
+      "z": 0
+    },
+    {
+      "id": 11,
+      "element": "C",
+      "x": -2.25,
+      "y": -0.92,
+      "z": 0
+    },
+    {
+      "id": 12,
+      "element": "C",
+      "x": 1.25,
+      "y": -0.15,
+      "z": 0
+    },
+    {
+      "id": 13,
+      "element": "C",
+      "x": 2.25,
+      "y": -0.05,
+      "z": 0
+    },
+    {
+      "id": 14,
+      "element": "C",
+      "x": 4.28,
+      "y": -0.85,
+      "z": 0
+    },
+    {
+      "id": 15,
+      "element": "C",
+      "x": 5.25,
+      "y": -1.95,
+      "z": 0
+    },
+    {
+      "id": 16,
+      "element": "C",
+      "x": -0.32,
+      "y": -2.35,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 6,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 14,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 16,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 14,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 9,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "acetylcholine",
+  "name": "Acetylcholine",
+  "iupacName": "2-acetyloxyethyl-trimethylazanium",
+  "formula": "C₇H₁₆NO₂⁺",
+  "hillFormula": "C7H16NO2",
+  "molarMass": 146.21,
+  "category": "neurotransmitter",
+  "bondType": "covalent / ionic",
+  "geometry": "none",
+  "hybridization": "sp3",
+  "bondAngle": "109.5°",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 423,
+  "boilingPoint": null,
+  "uses": "Major neurotransmitter of both the central and parasympathetic nervous systems; drives neuromuscular contraction.",
+  "fact": "Acetylcholine was the first neurotransmitter ever identified, discovered in 1914 by pharmacologist Henry Dale.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "O",
+      "x": 0.45,
+      "y": 0.12,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "O",
+      "x": 1.82,
+      "y": 1.78,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "N",
+      "x": -2.35,
+      "y": -0.15,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "C",
+      "x": 1.55,
+      "y": 0.62,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": 2.75,
+      "y": -0.28,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "C",
+      "x": 0.25,
+      "y": 1.45,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": -0.95,
+      "y": 0.65,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": -3.55,
+      "y": 0.75,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "C",
+      "x": -2.45,
+      "y": -1.15,
+      "z": 1.15
+    },
+    {
+      "id": 10,
+      "element": "C",
+      "x": -2.45,
+      "y": -1.15,
+      "z": -1.15
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 4,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 6,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 4,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "histamine",
+  "name": "Histamine",
+  "iupacName": "2-(1H-imidazol-4-yl)ethanamine",
+  "formula": "C₅H₉N₃",
+  "hillFormula": "C5H9N3",
+  "molarMass": 111.15,
+  "category": "amine",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "none",
+  "bondAngle": "N/A",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 357,
+  "boilingPoint": 482,
+  "uses": "Biogenic amine that mediates local immune responses, allergic inflammation, and stimulates stomach acid production.",
+  "fact": "Seasonal allergy symptoms like sneezing, hives, and itchy eyes occur when mast cells release histamine in response to pollen.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "N",
+      "x": -1.45,
+      "y": 1.15,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "N",
+      "x": -2.12,
+      "y": -0.95,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "N",
+      "x": 2.75,
+      "y": -0.22,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "C",
+      "x": -2.35,
+      "y": 0.35,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": -0.92,
+      "y": -0.85,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "C",
+      "x": -0.48,
+      "y": 0.42,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": 0.88,
+      "y": 0.95,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": 1.95,
+      "y": -0.05,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "H",
+      "x": -3.35,
+      "y": 0.72,
+      "z": 0
+    },
+    {
+      "id": 10,
+      "element": "H",
+      "x": -0.42,
+      "y": -1.78,
+      "z": 0
+    },
+    {
+      "id": 11,
+      "element": "H",
+      "x": 0.95,
+      "y": 1.62,
+      "z": 0.88
+    },
+    {
+      "id": 12,
+      "element": "H",
+      "x": 0.95,
+      "y": 1.62,
+      "z": -0.88
+    },
+    {
+      "id": 13,
+      "element": "H",
+      "x": 3.68,
+      "y": 0.18,
+      "z": 0
+    },
+    {
+      "id": 14,
+      "element": "H",
+      "x": 2.68,
+      "y": -1.22,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 4,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 6,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 4,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 14,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "salicylic-acid",
+  "name": "Salicylic Acid",
+  "iupacName": "2-hydroxybenzoic acid",
+  "formula": "C₇H₆O₃",
+  "hillFormula": "C7H6O3",
+  "molarMass": 138.12,
+  "category": "acid",
+  "bondType": "covalent",
+  "geometry": "trigonal-planar",
+  "hybridization": "sp2",
+  "bondAngle": "120°",
+  "polarity": "polar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 432,
+  "boilingPoint": 484,
+  "uses": "Beta-hydroxy acid (BHA) widely formulated in acne cleansers, wart removers, and the key synthetic precursor to aspirin.",
+  "fact": "Willow bark tea was used by ancient civilizations as an anti-inflammatory, thanks to naturally occurring salicylic glycosides.",
+  "isSpecial": true,
+  "atoms": [
+    {
+      "id": 1,
+      "element": "O",
+      "x": 1.45,
+      "y": 2.15,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "O",
+      "x": 2.78,
+      "y": 0.35,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "O",
+      "x": 1.25,
+      "y": -1.82,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "C",
+      "x": 1.55,
+      "y": 0.88,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": 0.28,
+      "y": 0.08,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "C",
+      "x": 0.18,
+      "y": -1.32,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": -1.02,
+      "y": -2.05,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": -2.18,
+      "y": -1.35,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "C",
+      "x": -2.12,
+      "y": 0.05,
+      "z": 0
+    },
+    {
+      "id": 10,
+      "element": "C",
+      "x": -0.92,
+      "y": 0.75,
+      "z": 0
+    },
+    {
+      "id": 11,
+      "element": "H",
+      "x": 3.52,
+      "y": 0.98,
+      "z": 0
+    },
+    {
+      "id": 12,
+      "element": "H",
+      "x": 2.05,
+      "y": -1.28,
+      "z": 0
+    },
+    {
+      "id": 13,
+      "element": "H",
+      "x": -1.05,
+      "y": -3.12,
+      "z": 0
+    },
+    {
+      "id": 14,
+      "element": "H",
+      "x": -3.12,
+      "y": -1.88,
+      "z": 0
+    },
+    {
+      "id": 15,
+      "element": "H",
+      "x": -3.02,
+      "y": 0.62,
+      "z": 0
+    },
+    {
+      "id": 16,
+      "element": "H",
+      "x": -0.88,
+      "y": 1.82,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 4,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 4,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 6,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 7,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 14,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 9,
+      "to": 15,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 10,
+      "to": 16,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "retinol",
+  "name": "Retinol (Vitamin A)",
+  "iupacName": "(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraen-1-ol",
+  "formula": "C₂₀H₃₀O",
+  "hillFormula": "C20H30O",
+  "molarMass": 286.45,
+  "category": "vitamin",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "none",
+  "bondAngle": "N/A",
+  "polarity": "nonpolar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 336,
+  "boilingPoint": 410,
+  "uses": "Essential fat-soluble vitamin oxidized to retinal for photoreceptor rhodopsin in eyes, and used in skincare.",
+  "fact": "A severe deficiency in Vitamin A causes nyctalopia (night blindness) because eye rods cannot synthesize rhodopsin.",
+  "atoms": [
+    {
+      "id": 1,
+      "element": "O",
+      "x": 8.52,
+      "y": -0.22,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "C",
+      "x": -4.25,
+      "y": 0.15,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "C",
+      "x": -3.85,
+      "y": 1.55,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "C",
+      "x": -2.35,
+      "y": 1.72,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": -1.55,
+      "y": 0.45,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "C",
+      "x": -2.05,
+      "y": -0.82,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": -3.55,
+      "y": -0.95,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": -0.15,
+      "y": 0.62,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "C",
+      "x": 0.85,
+      "y": -0.28,
+      "z": 0
+    },
+    {
+      "id": 10,
+      "element": "C",
+      "x": 2.22,
+      "y": -0.05,
+      "z": 0
+    },
+    {
+      "id": 11,
+      "element": "C",
+      "x": 3.25,
+      "y": -0.92,
+      "z": 0
+    },
+    {
+      "id": 12,
+      "element": "C",
+      "x": 4.62,
+      "y": -0.68,
+      "z": 0
+    },
+    {
+      "id": 13,
+      "element": "C",
+      "x": 5.65,
+      "y": -1.55,
+      "z": 0
+    },
+    {
+      "id": 14,
+      "element": "C",
+      "x": 7.02,
+      "y": -1.32,
+      "z": 0
+    },
+    {
+      "id": 15,
+      "element": "C",
+      "x": 7.98,
+      "y": -0.15,
+      "z": 0
+    },
+    {
+      "id": 16,
+      "element": "C",
+      "x": 2.65,
+      "y": 1.38,
+      "z": 0
+    },
+    {
+      "id": 17,
+      "element": "C",
+      "x": 5.08,
+      "y": 0.75,
+      "z": 0
+    },
+    {
+      "id": 18,
+      "element": "C",
+      "x": -1.25,
+      "y": -2.08,
+      "z": 0
+    },
+    {
+      "id": 19,
+      "element": "C",
+      "x": -4.85,
+      "y": -0.28,
+      "z": 1.32
+    },
+    {
+      "id": 20,
+      "element": "C",
+      "x": -4.85,
+      "y": -0.28,
+      "z": -1.32
+    },
+    {
+      "id": 21,
+      "element": "H",
+      "x": 9.42,
+      "y": -0.05,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 15,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 1,
+      "to": 21,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 19,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 20,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 8,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 18,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 10,
+      "to": 16,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 12,
+      "to": 17,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+},
+{
+  "id": "cholecalciferol",
+  "name": "Vitamin D3 (Cholecalciferol)",
+  "iupacName": "(1S,3Z)-3-[(2E)-2-[(1R,3aS,7aR)-7a-methyl-1-[(2R)-6-methylheptan-2-yl]-2,3,3a,5,6,7-hexahydro-1H-inden-4-ylidene]ethylidene]-4-methylidenecyclohexan-1-ol",
+  "formula": "C₂₇H₄₄O",
+  "hillFormula": "C27H44O",
+  "molarMass": 384.64,
+  "category": "vitamin",
+  "bondType": "covalent",
+  "geometry": "none",
+  "hybridization": "none",
+  "bondAngle": "N/A",
+  "polarity": "nonpolar",
+  "dipoleMoment": null,
+  "standardState": "solid",
+  "meltingPoint": 357,
+  "boilingPoint": 769,
+  "uses": "Secosteroid prohormone synthesized endogenously when sunlight UVB hits skin 7-dehydrocholesterol; regulates calcium.",
+  "fact": "Although classified historically as a vitamin, D3 acts as a steroid prehormone affecting hundreds of human genes.",
+  "isSpecial": true,
+  "atoms": [
+    {
+      "id": 1,
+      "element": "O",
+      "x": -4.85,
+      "y": -1.85,
+      "z": 0
+    },
+    {
+      "id": 2,
+      "element": "C",
+      "x": -3.85,
+      "y": -0.85,
+      "z": 0
+    },
+    {
+      "id": 3,
+      "element": "C",
+      "x": -4.25,
+      "y": 0.55,
+      "z": 0
+    },
+    {
+      "id": 4,
+      "element": "C",
+      "x": -3.15,
+      "y": 1.48,
+      "z": 0
+    },
+    {
+      "id": 5,
+      "element": "C",
+      "x": -1.82,
+      "y": 1.15,
+      "z": 0
+    },
+    {
+      "id": 6,
+      "element": "C",
+      "x": -1.45,
+      "y": -0.28,
+      "z": 0
+    },
+    {
+      "id": 7,
+      "element": "C",
+      "x": -2.48,
+      "y": -1.18,
+      "z": 0
+    },
+    {
+      "id": 8,
+      "element": "C",
+      "x": -0.15,
+      "y": -0.75,
+      "z": 0
+    },
+    {
+      "id": 9,
+      "element": "C",
+      "x": 0.98,
+      "y": -0.05,
+      "z": 0
+    },
+    {
+      "id": 10,
+      "element": "C",
+      "x": 2.25,
+      "y": -0.62,
+      "z": 0
+    },
+    {
+      "id": 11,
+      "element": "C",
+      "x": 3.45,
+      "y": 0.12,
+      "z": 0
+    },
+    {
+      "id": 12,
+      "element": "C",
+      "x": 4.75,
+      "y": -0.55,
+      "z": 0
+    },
+    {
+      "id": 13,
+      "element": "C",
+      "x": 5.85,
+      "y": 0.28,
+      "z": 0
+    },
+    {
+      "id": 14,
+      "element": "C",
+      "x": 7.25,
+      "y": -0.42,
+      "z": 0
+    },
+    {
+      "id": 15,
+      "element": "C",
+      "x": 8.35,
+      "y": 0.45,
+      "z": 0
+    },
+    {
+      "id": 16,
+      "element": "C",
+      "x": 9.68,
+      "y": -0.25,
+      "z": 0
+    },
+    {
+      "id": 17,
+      "element": "C",
+      "x": 8.25,
+      "y": 1.82,
+      "z": 0
+    },
+    {
+      "id": 18,
+      "element": "C",
+      "x": -1.15,
+      "y": 2.25,
+      "z": 0
+    }
+  ],
+  "bonds": [
+    {
+      "from": 1,
+      "to": 2,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 2,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 5,
+      "to": 18,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 6,
+      "to": 8,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "order": 2,
+      "type": "covalent"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 15,
+      "to": 16,
+      "order": 1,
+      "type": "covalent"
+    },
+    {
+      "from": 15,
+      "to": 17,
+      "order": 1,
+      "type": "covalent"
+    }
+  ]
+}
 ];

@@ -216,7 +216,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "cellular-respiration",
-    builderOptions: ["biological-enzymes"],
+    builderOptions: ["biological-enzymes", "amylase", "dna-polymerase"],
     name: "Cellular Respiration",
     type: "combustion",
     isExothermic: true,
@@ -549,7 +549,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "hydrogenation-of-ethene",
-    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst", "raney-nickel"],
+    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst", "raney-nickel", "wilkinson-catalyst", "platinum-carbon", "ziegler-natta", "grubbs-catalyst"],
     name: "Hydrogenation of Ethene",
     type: "hydrogenation",
     isExothermic: true,
@@ -1044,7 +1044,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "esterification",
-    builderOptions: ["sulfuric-acid-catalyst", "tosic-acid"],
+    builderOptions: ["sulfuric-acid-catalyst", "tosic-acid", "lipase"],
     name: "Esterification (Fischer)",
     type: "esterification",
     isExothermic: null,
@@ -1084,7 +1084,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "chlorination-of-methane",
-    builderOptions: ["uv-light"],
+    builderOptions: ["uv-light", "aluminium-chloride-catalyst", "iron-iii-chloride-catalyst"],
     name: "Chlorination of Methane",
     type: "single-displacement",
     isExothermic: true,
@@ -1376,7 +1376,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "dehydration-of-ethanol-alumina",
-    builderOptions: ["alumina"],
+    builderOptions: ["alumina", "zeolite-catalyst"],
     name: "Ethanol Dehydration over Alumina",
     type: "decomposition",
     isExothermic: false,
@@ -1433,7 +1433,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "hydrogenation-of-benzene",
-    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst"],
+    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst", "platinum-carbon"],
     name: "Hydrogenation of Benzene",
     type: "hydrogenation",
     isExothermic: true,
@@ -1452,7 +1452,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "hydrogenation-of-acetone",
-    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst", "raney-nickel"],
+    builderOptions: ["nickel-catalyst", "platinum-catalyst", "palladium-catalyst", "raney-nickel", "platinum-carbon"],
     name: "Hydrogenation of Acetone",
     type: "hydrogenation",
     isExothermic: true,
@@ -1471,7 +1471,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "catalytic-oxidation-of-methanol",
-    builderOptions: ["copper-catalyst", "silver-catalyst"],
+    builderOptions: ["copper-catalyst", "silver-catalyst", "copper-i-catalyst"],
     name: "Catalytic Oxidation of Methanol",
     type: "redox",
     isExothermic: true,
@@ -1491,7 +1491,7 @@ export const CURATED_REACTIONS: CuratedReaction[] = [
   },
   {
     id: "claus-sulfur-recovery",
-    builderOptions: ["alumina", "titania"],
+    builderOptions: ["alumina", "titania", "cobalt-molybdenum"],
     name: "Claus Sulfur Recovery",
     type: "redox",
     isExothermic: true,

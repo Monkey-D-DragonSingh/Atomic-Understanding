@@ -65,7 +65,7 @@ export function deriveElectronConfig(atomicNumber: number): {
     .join(' ');
 
   // Format semantic (noble gas shorthand)
-  let nobleGas = NOBLE_GASES.slice()
+  const nobleGas = NOBLE_GASES.slice()
     .reverse()
     .find((ng) => ng.z < atomicNumber);
   let semantic = full;

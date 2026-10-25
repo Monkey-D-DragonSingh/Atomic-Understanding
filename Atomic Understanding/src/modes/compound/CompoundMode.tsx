@@ -1,5 +1,6 @@
 import { ThreePanelLayout } from '../../components/layout/ThreePanelLayout';
 import { CompoundSearch } from './CompoundSearch';
+import { CompoundSidebar } from './CompoundSidebar';
 import { CompoundVisualizer } from './CompoundVisualizer';
 import { CompoundInfo } from './CompoundInfo';
 
@@ -12,7 +13,7 @@ export function CompoundMode() {
       <div className="flex-1 min-h-0 relative">
         <ThreePanelLayout
           offsetTop={0}
-          leftPanel={null}
+          leftPanel={<CompoundSidebar />}
           centerPanel={<CompoundVisualizer />}
           rightPanel={<CompoundInfo />}
         />

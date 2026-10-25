@@ -4,6 +4,7 @@ import { SearchInput } from '../../components/ui/SearchInput';
 import * as PubChem from '../../lib/pubchem';
 import { useAppStore } from '../../store/useAppStore';
 import { MOLECULES } from '../../data/molecules';
+import { toSubscript } from '../../lib/format';
 
 export function CompoundSearch() {
   const [query, setQuery] = useState('');
@@ -12,6 +13,13 @@ export function CompoundSearch() {
   
   const { setActiveCompound, searchHistory, addSearchHistory } = useAppStore();
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const localSuggestions = query.trim()
+    ? MOLECULES.filter(m =>
+        m.name.toLowerCase().includes(query.toLowerCase()) ||
+        m.formula.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 8)
+    : [];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -95,6 +103,40 @@ export function CompoundSearch() {
       {isFetching && (
         <div className="absolute right-12 top-1/2 -translate-y-1/2">
           <div className="w-4 h-4 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+        </div>
+      )}
+
+      {/* Local Matching Suggestions */}
+      {isFocused && query.trim() && localSuggestions.length > 0 && (
+        <div className="absolute top-full left-0 right-0 mt-2 bg-panel border border-border rounded-lg shadow-2xl z-50 overflow-hidden divide-y divide-border/50">
+          <div className="px-3 py-2 bg-white/5 text-xs text-text-dim flex justify-between items-center">
+            <span>Matching Compounds ({localSuggestions.length})</span>
+            <span className="text-[10px] text-accent">Quick Select</span>
+          </div>
+          <ul className="max-h-60 overflow-y-auto custom-scrollbar">
+            {localSuggestions.map((mol) => (
+              <li key={mol.id}>
+                <button
+                  type="button"
+                  className="w-full text-left px-4 py-2.5 text-sm hover:bg-white/10 transition-colors flex items-center justify-between gap-2"
+                  onMouseDown={(e) => {
+                    // onMouseDown fires before onBlur
+                    e.preventDefault();
+                    setActiveCompound(mol as any);
+                    addSearchHistory(mol.name);
+                    setQuery('');
+                    setIsFocused(false);
+                  }}
+                >
+                  <div className="flex flex-col">
+                    <span className="text-text font-medium">{mol.name}</span>
+                    <span className="text-[10px] text-text-dim capitalize">{mol.category || mol.bondType}</span>
+                  </div>
+                  <span className="font-mono text-xs text-accent font-semibold">{toSubscript(mol.formula)}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 

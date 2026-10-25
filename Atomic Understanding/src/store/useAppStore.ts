@@ -83,6 +83,10 @@ export interface AppState {
 
   onboardingSeen: boolean;
   setOnboardingSeen: (seen: boolean) => void;
+  reactionTourSeen: boolean;
+  setReactionTourSeen: (seen: boolean) => void;
+  reactionTourOpen: boolean;
+  setReactionTourOpen: (open: boolean) => void;
   helpOpen: boolean;
   setHelpOpen: (open: boolean) => void;
 }
@@ -164,6 +168,10 @@ export const useAppStore = create<AppState>()(
 
       onboardingSeen: false,
       setOnboardingSeen: (onboardingSeen) => set({ onboardingSeen }),
+      reactionTourSeen: false,
+      setReactionTourSeen: (reactionTourSeen) => set({ reactionTourSeen }),
+      reactionTourOpen: false,
+      setReactionTourOpen: (reactionTourOpen) => set({ reactionTourOpen }),
       helpOpen: false,
       setHelpOpen: (helpOpen) => set({ helpOpen }),
     }),
@@ -172,6 +180,7 @@ export const useAppStore = create<AppState>()(
       partialize: (state) => ({
         searchHistory: state.searchHistory,
         onboardingSeen: state.onboardingSeen,
+        reactionTourSeen: state.reactionTourSeen,
         leftCollapsed: state.leftCollapsed,
         rightCollapsed: state.rightCollapsed,
       }),

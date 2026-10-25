@@ -1,9 +1,10 @@
-import { X, ArrowRight, FlaskConical, RotateCcw } from 'lucide-react';
+import { X, ArrowRight, FlaskConical, RotateCcw, Sparkles } from 'lucide-react';
 import { ALL_REACTANTS } from '../../data/allReactants';
 import { CATALYSTS } from '../../data/catalysts';
 import { useAppStore } from '../../store/useAppStore';
 import { matchReaction } from '../../lib/reactionMatcher';
 import { CatalystSelector } from './CatalystSelector';
+import { ReactionBuilderTour } from './ReactionBuilderTour';
 import type { Molecule } from '../../types/molecule';
 
 export function ReactionWorkspace() {
@@ -13,6 +14,7 @@ export function ReactionWorkspace() {
     clearReactants,
     selectedCatalystId,
     setReactionResult,
+    setReactionTourOpen,
   } = useAppStore();
 
   const reactantMolecules = selectedReactantIds
@@ -29,6 +31,24 @@ export function ReactionWorkspace() {
   return (
     <div className="flex-1 relative bg-bg overflow-y-auto reaction-scrollbar">
       <div className="max-w-2xl mx-auto p-6 pt-20 flex flex-col gap-8">
+        {/* Top Header Row with Tour Launcher */}
+        <div className="flex items-center justify-between border-b border-border/60 pb-3">
+          <div className="flex items-center gap-2">
+            <FlaskConical className="w-4 h-4 text-accent" />
+            <h2 className="text-xs font-bold text-accent uppercase tracking-wider">
+              Reaction Workspace
+            </h2>
+          </div>
+          <button
+            onClick={() => setReactionTourOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-accent/40 bg-accent/10 hover:bg-accent/20 text-accent text-xs font-semibold shadow-sm transition-all"
+            title="Start Reaction Builder Tour"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Tour: How to Build</span>
+          </button>
+        </div>
+
         {/* Reactant chips + arrow */}
         <div className="flex flex-wrap items-center justify-center gap-3">
           {reactantMolecules.length === 0 && (
@@ -91,6 +111,8 @@ export function ReactionWorkspace() {
           </>
         )}
       </div>
+
+      <ReactionBuilderTour />
     </div>
   );
 }

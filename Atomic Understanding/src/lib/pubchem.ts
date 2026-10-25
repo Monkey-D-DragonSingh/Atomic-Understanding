@@ -114,6 +114,7 @@ export async function fetch2DRecord(cid: number): Promise<ParsedStructure | null
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function parseRecord(record: any): ParsedStructure {
   const structure: ParsedStructure = { atoms: [], bonds: [] };
   const pcCompound = record?.PC_Compounds?.[0];

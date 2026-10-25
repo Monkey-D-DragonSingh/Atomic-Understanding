@@ -3,7 +3,7 @@ import { fmt } from '../../lib/format';
 
 export interface PropertyItem {
   label: string;
-  value: any;
+  value: unknown;
   suffix?: string;
 }
 

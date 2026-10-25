@@ -1,4 +1,4 @@
-export function fmt(value: any, suffix: string = ''): string {
+export function fmt(value: unknown, suffix: string = ''): string {
   if (value === null || value === undefined) return '—';
   if (typeof value === 'number') {
     if (!Number.isFinite(value)) return '—';
