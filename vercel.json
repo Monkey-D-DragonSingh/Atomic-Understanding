@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "buildCommand": "cd 'Atomic Understanding' && npm install && npm run build",
-  "outputDirectory": "Atomic Understanding/dist",
+  "buildCommand": "cd 'Vilox' && npm install && npm run build",
+  "outputDirectory": "Vilox/dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
