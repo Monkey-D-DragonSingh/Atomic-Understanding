@@ -96,9 +96,10 @@ function StageMolecule({ molecule, opacity }: { molecule: Molecule; opacity: num
 }
 
 export function ReactionStage() {
-  const { activeCuratedReaction } = useAppStore();
+  const { activeCuratedReaction, reactionProgress, setReactionProgress } = useAppStore();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0); // 0 to 1
+  const progress = reactionProgress; // 0 to 1, shared with the Energy Diagram
+  const setProgress = setReactionProgress;
   const rafRef = useRef<number>();
 
   // Reset animation when reaction changes
@@ -129,7 +130,9 @@ export function ReactionStage() {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [isPlaying, progress]);
+    // Only re-run when play/pause state changes — NOT on every progress frame,
+    // otherwise the animation timer restarts every frame and glitches.
+  }, [isPlaying]);
 
   // Resolve the actual 3D molecules for each side of the reaction.
   const stageSpecies = useMemo(() => {

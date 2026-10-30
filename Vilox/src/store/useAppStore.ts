@@ -64,6 +64,9 @@ export interface AppState {
   reactionResult: ReactionMatchResult | null;
   setReactionResult: (result: ReactionMatchResult | null) => void;
 
+  reactionProgress: number;
+  setReactionProgress: (progress: number) => void;
+
   searchHistory: string[];
   addSearchHistory: (query: string) => void;
   clearSearchHistory: () => void;
@@ -142,6 +145,9 @@ export const useAppStore = create<AppState>()(
 
       reactionResult: null,
       setReactionResult: (reactionResult) => set({ reactionResult }),
+
+      reactionProgress: 0,
+      setReactionProgress: (reactionProgress) => set({ reactionProgress }),
 
       searchHistory: [],
       addSearchHistory: (query) =>

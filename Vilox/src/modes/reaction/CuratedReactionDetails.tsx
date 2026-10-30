@@ -4,7 +4,7 @@ import { Badge } from '../../components/ui/Badge';
 import { EnergyDiagram } from './EnergyDiagram';
 
 export function CuratedReactionDetails() {
-  const { activeCuratedReaction } = useAppStore();
+  const { activeCuratedReaction, reactionProgress } = useAppStore();
 
   return (
     <Panel className="h-full border-0 md:border-l rounded-none flex flex-col">
@@ -56,7 +56,11 @@ export function CuratedReactionDetails() {
               </p>
             </div>
 
-            <EnergyDiagram enthalpy={activeCuratedReaction.enthalpy} />
+            <EnergyDiagram
+              enthalpy={activeCuratedReaction.enthalpy}
+              isExothermic={activeCuratedReaction.isExothermic}
+              progress={reactionProgress}
+            />
 
             <div>
               <h3 className="text-xs font-bold text-text-dim uppercase tracking-wider mb-1">
