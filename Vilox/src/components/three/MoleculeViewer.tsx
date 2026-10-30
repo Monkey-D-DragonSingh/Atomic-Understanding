@@ -4,6 +4,7 @@ import { OrbitControls, Bounds, useBounds, AdaptiveDpr, Html } from '@react-thre
 import * as THREE from 'three';
 import { CPK_COLORS, COVALENT_RADII, VDW_RADII } from '../../data/constants';
 import { MoleculeAtom, MoleculeBond } from '../../types/molecule';
+import { SceneEnvironment } from './SceneEnvironment';
 
 export interface MoleculeViewerProps {
   atoms: MoleculeAtom[];
@@ -132,7 +133,9 @@ export function MoleculeViewer({ atoms, bonds, viewMode, highlightId, onAtomClic
         <ambientLight intensity={0.45} />
         <directionalLight position={[100, 100, 100]} intensity={0.85} />
         <directionalLight position={[-100, -50, -100]} intensity={0.3} color="#4488ff" />
-        
+
+        <SceneEnvironment />
+
         <OrbitControls enableDamping dampingFactor={isHighAtomCount ? 0.15 : 0.08} />
 
         <Bounds fit clip observe margin={1.2}>

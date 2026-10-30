@@ -5,6 +5,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Html, AdaptiveDpr } from '@react-three/drei';
 import * as THREE from 'three';
 import { CATEGORY_COLORS } from '../../data/constants';
+import { SceneEnvironment } from '../../components/three/SceneEnvironment';
 
 function Nucleus({ atomicNumber, atomicMass, categoryColor }: { atomicNumber: number, atomicMass: number, categoryColor: string }) {
   const meshRef = useRef<THREE.Group>(null);
@@ -348,6 +349,7 @@ export function AtomVisualizer() {
             <AdaptiveDpr />
             <ambientLight intensity={0.4} />
             <directionalLight position={[10, 10, 10]} intensity={0.8} />
+            <SceneEnvironment />
             <OrbitControls enableDamping dampingFactor={0.05} />
             
             <Nucleus 

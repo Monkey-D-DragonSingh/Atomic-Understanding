@@ -38,14 +38,16 @@ function App() {
       <Header />
       
       <main className="h-full w-full">
-        <ErrorBoundary>
-          {mode === 'atom' && <AtomMode />}
-          {mode === 'molecule' && <MoleculeMode />}
-          {mode === 'compound' && <CompoundMode />}
-          {mode === 'reaction' && <ReactionMode />}
-          {mode === 'quiz' && <QuizMode />}
-          
-        </ErrorBoundary>
+        {/* key remounts the active mode so it replays the mode-in transition on switch */}
+        <div key={mode} className="h-full w-full animate-mode-in">
+          <ErrorBoundary>
+            {mode === 'atom' && <AtomMode />}
+            {mode === 'molecule' && <MoleculeMode />}
+            {mode === 'compound' && <CompoundMode />}
+            {mode === 'reaction' && <ReactionMode />}
+            {mode === 'quiz' && <QuizMode />}
+          </ErrorBoundary>
+        </div>
       </main>
       
       <OnboardingTour />
