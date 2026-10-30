@@ -1,7 +1,99 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { Bounds, useBounds, OrbitControls, Html } from '@react-three/drei';
 import { useAppStore } from '../../store/useAppStore';
+import { MOLECULES } from '../../data/molecules';
+import { CPK_COLORS, COVALENT_RADII } from '../../data/constants';
+import { Molecule } from '../../types';
+import { ReactionParticipant } from '../../types/curatedReaction';
+import { SceneEnvironment } from '../../components/three/SceneEnvironment';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 import { parseFormula } from '../../lib/parseFormula';
+import * as THREE from 'three';
+
+const ANIMATION_DURATION = 2000; // ms — keep in sync with the playback timer below
+
+/** Smoothstep easing so opacity/scale transitions feel organic rather than linear. */
+function smoothstep(t: number): number {
+  return t * t * (3 - 2 * t);
+}
+
+function FitBounds() {
+  const bounds = useBounds();
+  useEffect(() => {
+    bounds.refresh().fit();
+  }, [bounds]);
+  return null;
+}
+
+interface StageSpecies {
+  participant: ReactionParticipant;
+  molecule: Molecule;
+}
+
+/**
+ * A single molecular species rendered as real 3D geometry (CPK spheres + bonds).
+ * Opacity drives the in/out crossfade during the reaction animation.
+ */
+function StageMolecule({ molecule, opacity }: { molecule: Molecule; opacity: number }) {
+  const atoms = molecule.atoms;
+  const bonds = molecule.bonds;
+  const o = Math.max(0, opacity);
+
+  return (
+    <group>
+      {atoms.map((a) => (
+        <mesh key={a.id} position={[a.x, a.y, a.z]}>
+          <sphereGeometry args={[(COVALENT_RADII[a.element] || 70) / 100 * 0.35, 20, 20]} />
+          <meshStandardMaterial
+            color={CPK_COLORS[a.element] || '#FF1493'}
+            opacity={o}
+            transparent={o < 1}
+            roughness={0.35}
+            metalness={0.05}
+            emissive={o > 0.95 ? CPK_COLORS[a.element] || '#FFFFFF' : '#000000'}
+            emissiveIntensity={o > 0.95 ? 0.35 : 0}
+          />
+        </mesh>
+      ))}
+
+      {bonds.map((b, i) => {
+        const from = atoms.find((x) => x.id === b.from);
+        const to = atoms.find((x) => x.id === b.to);
+        if (!from || !to) return null;
+        const p1 = new THREE.Vector3(from.x, from.y, from.z);
+        const p2 = new THREE.Vector3(to.x, to.y, to.z);
+        const dir = p2.clone().sub(p1);
+        const len = dir.length();
+        if (len === 0) return null;
+        const quat = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+        const mid = p1.clone().add(p2).multiplyScalar(0.5);
+        const perp = new THREE.Vector3(1, 0, 0).applyQuaternion(quat).normalize();
+        const order = Math.min(3, Math.max(1, Math.round(b.order)));
+        const lines = [];
+        for (let j = 0; j < order; j++) {
+          const pos = mid.clone();
+          if (order === 2) pos.add(perp.clone().multiplyScalar(j === 0 ? 0.12 : -0.12));
+          if (order === 3) {
+            if (j === 0) pos.add(perp.clone().multiplyScalar(0.12));
+            if (j === 2) pos.add(perp.clone().multiplyScalar(-0.12));
+          }
+          lines.push(
+            <mesh key={`b-${i}-${j}`} position={pos} quaternion={quat} scale={[1, len, 1]}>
+              <cylinderGeometry args={[0.045, 0.045, 1, 10]} />
+              <meshStandardMaterial color="#9CA3AF" opacity={o} transparent roughness={0.4} />
+            </mesh>
+          );
+        }
+        return (
+          <group key={`b-${i}`}>
+            {lines}
+          </group>
+        );
+      })}
+    </group>
+  );
+}
 
 export function ReactionStage() {
   const { activeCuratedReaction } = useAppStore();
@@ -19,10 +111,10 @@ export function ReactionStage() {
   useEffect(() => {
     if (!isPlaying) return;
 
-    const startTime = performance.now() - progress * 2000;
-    
+    const startTime = performance.now() - progress * ANIMATION_DURATION;
+
     const animate = (time: number) => {
-      let p = (time - startTime) / 2000;
+      let p = (time - startTime) / ANIMATION_DURATION;
       if (p > 1) p = 1;
       setProgress(p);
 
@@ -39,6 +131,56 @@ export function ReactionStage() {
     };
   }, [isPlaying, progress]);
 
+  // Resolve the actual 3D molecules for each side of the reaction.
+  const stageSpecies = useMemo(() => {
+    if (!activeCuratedReaction) return { reactants: [] as StageSpecies[], products: [] as StageSpecies[] };
+
+    const resolve = (p: ReactionParticipant): StageSpecies | null => {
+      let molecule: Molecule | null = null;
+      if (p.moleculeId) {
+        molecule = MOLECULES.find((m) => m.id === p.moleculeId) ?? null;
+      }
+      if (!molecule) {
+        // Fallback for element-only participants (e.g. Na, Zn, Fe, Mg, Al, Cu, Ag):
+        // render them as a single atom so the stage still shows the species.
+        const sym = /^([A-Z][a-z]?)/.exec(p.formula.trim())?.[1];
+        if (!sym) return null;
+        molecule = {
+          id: `stage-atom-${p.formula}-${p.coefficient}`,
+          name: `${sym} atom`,
+          formula: p.formula,
+          hillFormula: p.formula,
+          molarMass: 0,
+          category: 'element',
+          bondType: 'covalent',
+          geometry: 'atomic',
+          hybridization: 'none',
+          bondAngle: 'N/A',
+          polarity: 'nonpolar',
+          dipoleMoment: null,
+          standardState: p.state === 's' ? 'solid' : p.state === 'l' ? 'liquid' : p.state === 'g' ? 'gas' : 'liquid',
+          meltingPoint: null,
+          boilingPoint: null,
+          uses: '',
+          fact: '',
+          atoms: [{ id: 1, element: sym, x: 0, y: 0, z: 0 }],
+          bonds: [],
+        };
+      }
+      if (!molecule.atoms || molecule.atoms.length === 0) return null;
+      return { participant: p, molecule };
+    };
+
+    const reactants = activeCuratedReaction.reactants
+      .map(resolve)
+      .filter((x): x is StageSpecies => x !== null);
+    const products = activeCuratedReaction.products
+      .map(resolve)
+      .filter((x): x is StageSpecies => x !== null);
+
+    return { reactants, products };
+  }, [activeCuratedReaction]);
+
   // Compute Conservation Banner
   const conservation = useMemo(() => {
     if (!activeCuratedReaction) return null;
@@ -46,21 +188,21 @@ export function ReactionStage() {
     const left: Record<string, number> = {};
     const right: Record<string, number> = {};
 
-    activeCuratedReaction.reactants.forEach(r => {
+    activeCuratedReaction.reactants.forEach((r) => {
       const parts = parseFormula(r.formula);
       for (const [sym, count] of Object.entries(parts)) {
         left[sym] = (left[sym] || 0) + count * r.coefficient;
       }
     });
 
-    activeCuratedReaction.products.forEach(p => {
+    activeCuratedReaction.products.forEach((p) => {
       const parts = parseFormula(p.formula);
       for (const [sym, count] of Object.entries(parts)) {
         right[sym] = (right[sym] || 0) + count * p.coefficient;
       }
     });
 
-    const formatCounts = (record: Record<string, number>) => 
+    const formatCounts = (record: Record<string, number>) =>
       Object.entries(record)
         .sort((a, b) => a[0].localeCompare(b[0]))
         .map(([sym, count]) => `${count}${sym}`)
@@ -85,29 +227,34 @@ export function ReactionStage() {
     );
   }
 
-  // Generate participant cards
-  const renderParticipant = (p: typeof activeCuratedReaction.reactants[0], i: number, isProduct: boolean) => {
-    const opacity = isProduct ? Math.pow(progress, 2) : Math.pow(1 - progress, 2);
-    const scale = isProduct ? 0.8 + progress * 0.2 : 1 - progress * 0.2;
-    const tx = isProduct ? (1 - progress) * -50 : progress * 50;
+  const fade = smoothstep(progress); // 0 → reactants fully visible, → 1 products fully visible
+
+  const renderSpecies = (
+    side: 'reactant' | 'product',
+    s: StageSpecies
+  ) => {
+    const opacity = side === 'reactant' ? 1 - fade : fade;
+    const scale = side === 'reactant' ? 1 - 0.25 * progress : 0.7 + 0.3 * progress;
+    const labelColor = CPK_COLORS[s.molecule.atoms.find((a) => a.element !== 'H')?.element ?? s.molecule.atoms[0]?.element ?? ''] ?? '#9CA3AF';
+    const maxY = Math.max(...s.molecule.atoms.map((a) => a.y));
+    const count = s.molecule.atoms.length;
+    const centroidX = s.molecule.atoms.reduce((sum, a) => sum + a.x, 0) / count;
+    const centroidZ = s.molecule.atoms.reduce((sum, a) => sum + a.z, 0) / count;
+
+    if (opacity <= 0.05) return null;
 
     return (
-      <div 
-        key={i} 
-        className="flex items-center gap-2 transition-transform duration-75"
-        style={{ 
-          opacity, 
-          transform: `scale(${scale}) translateX(${tx}px)` 
-        }}
-      >
-        {p.coefficient > 1 && <span className="text-2xl font-bold text-accent">{p.coefficient}</span>}
-        <div className="relative w-20 h-20 bg-panel border border-border rounded-xl flex items-center justify-center shadow-lg">
-          <span className="text-xl font-mono font-bold text-text">{p.formula}</span>
-          <span className="absolute -bottom-2 -right-2 text-[10px] bg-black/60 px-1 rounded border border-border/50 text-text-dim">
-            ({p.state})
-          </span>
-        </div>
-      </div>
+      <group key={`${side}-${s.participant.formula}-${s.molecule.id}`} scale={scale}>
+        <StageMolecule molecule={s.molecule} opacity={opacity} />
+        <Html position={[centroidX, maxY + 0.55, centroidZ]} center className="pointer-events-none" zIndexRange={[100, 0]}>
+          <div
+            className="px-2.5 py-1 rounded-full bg-black/85 border text-[10px] font-bold tracking-wide whitespace-nowrap"
+            style={{ borderColor: labelColor, color: labelColor }}
+          >
+            {s.molecule.formula}
+          </div>
+        </Html>
+      </group>
     );
   };
 
@@ -125,8 +272,8 @@ export function ReactionStage() {
       {/* Conservation Banner */}
       {conservation && (
         <div className={`absolute top-24 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-xs font-mono font-bold border backdrop-blur z-20 flex gap-4 ${
-          conservation.isBalanced 
-            ? 'bg-green-500/10 border-green-500/30 text-green-400' 
+          conservation.isBalanced
+            ? 'bg-green-500/10 border-green-500/30 text-green-400'
             : 'bg-red-500/10 border-red-500/30 text-red-400'
         }`}>
           <span>Left: {conservation.leftStr}</span>
@@ -134,42 +281,34 @@ export function ReactionStage() {
         </div>
       )}
 
-      {/* Stage Area */}
-      <div className="flex-1 flex items-center justify-center relative px-8">
-        {/* Schematic layout */}
-        <div className="flex items-center gap-8 w-full max-w-3xl justify-between">
-          
-          {/* Reactants */}
-          <div className="flex gap-4 flex-wrap justify-center flex-1">
-            {activeCuratedReaction.reactants.map((r, i) => (
-              <div key={`r-${i}`} className="flex items-center gap-4">
-                {i > 0 && <span className="text-2xl font-bold text-text-dim" style={{ opacity: 1 - progress }}>+</span>}
-                {renderParticipant(r, i, false)}
-              </div>
-            ))}
+      {/* 3D Stage Area */}
+      <div className="flex-1 min-h-0 relative z-0">
+        <Canvas camera={{ position: [0, 0, 15], fov: 45 }} dpr={[1, 2]}>
+          <ambientLight intensity={0.45} />
+          <directionalLight position={[100, 100, 100]} intensity={0.85} />
+          <directionalLight position={[-100, -50, -100]} intensity={0.3} color="#4488ff" />
+
+          <SceneEnvironment />
+
+          <Bounds fit clip margin={1.2}>
+            <FitBounds />
+            {stageSpecies.reactants.map((s) => renderSpecies('reactant', s))}
+            {stageSpecies.products.map((s) => renderSpecies('product', s))}
+          </Bounds>
+
+          <OrbitControls enableDamping dampingFactor={0.08} />
+        </Canvas>
+
+        {/* Hint */}
+        {progress === 0 && (
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-text-dim glass px-4 py-2 rounded-full pointer-events-none">
+            Drag to orbit · Scroll to zoom · Press Play to run the simulation
           </div>
-
-          {/* Arrow */}
-          <div className="text-4xl text-accent font-bold px-4">→</div>
-
-          {/* Products */}
-          <div className="flex gap-4 flex-wrap justify-center flex-1">
-            {activeCuratedReaction.products.map((p, i) => (
-              <div key={`p-${i}`} className="flex items-center gap-4">
-                {i > 0 && <span className="text-2xl font-bold text-text-dim" style={{ opacity: progress }}>+</span>}
-                {renderParticipant(p, i, true)}
-              </div>
-            ))}
-          </div>
-
-        </div>
-
-        {/* Progress Bar background effect */}
-        <div 
-          className="absolute bottom-0 left-0 h-1 bg-accent/20 transition-all duration-75" 
-          style={{ width: `${progress * 100}%` }}
-        />
+        )}
       </div>
+
+      {/* Progress Bar background effect */}
+      <div className="absolute bottom-0 left-0 h-1 bg-accent/20 transition-all duration-75" style={{ width: `${progress * 100}%` }} />
 
       {/* Controls */}
       <div className="p-6 flex justify-center gap-4 bg-gradient-to-t from-bg to-transparent z-10">
@@ -193,7 +332,6 @@ export function ReactionStage() {
           <RotateCcw className="w-5 h-5" />
         </button>
       </div>
-
     </div>
   );
 }
