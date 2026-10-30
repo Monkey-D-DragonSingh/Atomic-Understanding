@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Bounds, useBounds, OrbitControls, Html } from '@react-three/drei';
+import { Bounds, useBounds, OrbitControls, Html, Sparkles } from '@react-three/drei';
 import { useAppStore } from '../../store/useAppStore';
 import { MOLECULES } from '../../data/molecules';
 import { CPK_COLORS, COVALENT_RADII } from '../../data/constants';
 import { Molecule } from '../../types';
 import { ReactionParticipant } from '../../types/curatedReaction';
 import { SceneEnvironment } from '../../components/three/SceneEnvironment';
-import { Play, Pause, RotateCcw } from 'lucide-react';
+import { Play, Pause, RotateCcw, Gauge } from 'lucide-react';
 import { parseFormula } from '../../lib/parseFormula';
 import * as THREE from 'three';
 
@@ -24,6 +24,18 @@ function FitBounds() {
     bounds.refresh().fit();
   }, [bounds]);
   return null;
+}
+
+/**
+ * One-shot particle burst at a world position (used for bond break / bond form).
+ * Remounted via key so each new burst starts fresh.
+ */
+function ParticleBurst({ burstKey, position, color }: { burstKey: number; position: [number, number, number]; color: string }) {
+  return (
+    <group position={position}>
+      <Sparkles key={burstKey} count={50} scale={[2.5, 2.5, 2.5]} size={0.16} speed={0.45} opacity={0.95} color={color} />
+    </group>
+  );
 }
 
 interface StageSpecies {
@@ -98,24 +110,32 @@ function StageMolecule({ molecule, opacity }: { molecule: Molecule; opacity: num
 export function ReactionStage() {
   const { activeCuratedReaction, reactionProgress, setReactionProgress } = useAppStore();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [speed, setSpeed] = useState(1); // playback speed multiplier (0.5x - 3x)
   const progress = reactionProgress; // 0 to 1, shared with the Energy Diagram
   const setProgress = setReactionProgress;
   const rafRef = useRef<number>();
+  const [bursts, setBursts] = useState<{ id: number; pos: [number, number, number]; color: string }[]>([]);
+  const burstIdRef = useRef(0);
+  const lastFiredRef = useRef<Record<string, number>>({});
 
   // Reset animation when reaction changes
   useEffect(() => {
     setIsPlaying(false);
     setProgress(0);
+    lastFiredRef.current = {};
+    setBursts([]);
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
   }, [activeCuratedReaction]);
 
   useEffect(() => {
     if (!isPlaying) return;
 
-    const startTime = performance.now() - progress * ANIMATION_DURATION;
+    const duration = ANIMATION_DURATION / speed;
+
+    const startTime = performance.now() - progress * duration;
 
     const animate = (time: number) => {
-      let p = (time - startTime) / ANIMATION_DURATION;
+      let p = (time - startTime) / duration;
       if (p > 1) p = 1;
       setProgress(p);
 
@@ -130,9 +150,9 @@ export function ReactionStage() {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-    // Only re-run when play/pause state changes — NOT on every progress frame,
+    // Only re-run when play/pause (or speed) state changes — NOT on every progress frame,
     // otherwise the animation timer restarts every frame and glitches.
-  }, [isPlaying]);
+  }, [isPlaying, speed]);
 
   // Resolve the actual 3D molecules for each side of the reaction.
   const stageSpecies = useMemo(() => {
@@ -218,6 +238,31 @@ export function ReactionStage() {
     return { leftStr, rightStr, isBalanced };
   }, [activeCuratedReaction]);
 
+  // Fire a particle burst when the reaction progress crosses the midpoint
+  // (reactants → products transition zone) for any product that becomes visible.
+  useEffect(() => {
+    if (!activeCuratedReaction) return;
+    for (const s of stageSpecies.products) {
+      const key = `${s.participant.formula}-${s.molecule.id}`;
+      const fade = smoothstep(Math.min(1, Math.max(0, progress)));
+      if (fade > 0.5) {
+        const last = lastFiredRef.current[key];
+        if (last === undefined || progress - last > 0.005) {
+          lastFiredRef.current[key] = progress;
+          const atoms = s.molecule.atoms;
+          const lead = atoms.find((a) => a.element !== 'H') ?? atoms[0];
+          const color = CPK_COLORS[lead?.element ?? ''] ?? '#FFFFFF';
+          const scale = 0.7 + 0.3 * progress;
+          const count = atoms.length || 1;
+          const cx = atoms.reduce((sum, a) => sum + a.x, 0) / count * scale;
+          const cz = atoms.reduce((sum, a) => sum + a.z, 0) / count * scale;
+          const maxY = Math.max(...atoms.map((a) => a.y));
+          setBursts((prev) => [...prev, { id: ++burstIdRef.current, pos: [cx, maxY * scale + 0.35, cz], color }]);
+        }
+      }
+    }
+  }, [progress, stageSpecies, activeCuratedReaction]);
+
   if (!activeCuratedReaction) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center p-8 bg-bg relative">
@@ -299,6 +344,10 @@ export function ReactionStage() {
             {stageSpecies.products.map((s) => renderSpecies('product', s))}
           </Bounds>
 
+          {bursts.map((b) => (
+            <ParticleBurst key={b.id} burstKey={b.id} position={b.pos} color={b.color} />
+          ))}
+
           <OrbitControls enableDamping dampingFactor={0.08} />
         </Canvas>
 
@@ -315,9 +364,28 @@ export function ReactionStage() {
 
       {/* Controls */}
       <div className="p-6 flex justify-center gap-4 bg-gradient-to-t from-bg to-transparent z-10">
+        {/* Reaction speed control */}
+        <div className="flex items-center gap-2 px-3 py-2 bg-panel border border-border rounded-xl">
+          <Gauge className="w-4 h-4 text-text-dim" />
+          <input
+            type="range"
+            min={0.5}
+            max={3}
+            step={0.5}
+            value={speed}
+            onChange={(e) => setSpeed(parseFloat(e.target.value))}
+            className="w-24 accent-accent"
+            aria-label="Reaction speed"
+          />
+          <span className="text-xs font-mono font-bold text-accent w-8">{speed}x</span>
+        </div>
         <button
           onClick={() => {
             if (progress >= 1) setProgress(0);
+            if (!isPlaying) {
+              lastFiredRef.current = {};
+              setBursts([]);
+            }
             setIsPlaying(!isPlaying);
           }}
           className="flex items-center gap-2 px-6 py-3 bg-accent text-bg rounded-xl font-bold hover:bg-accent/90 transition-transform active:scale-95 shadow-[0_0_20px_rgba(79,195,247,0.3)]"
@@ -329,6 +397,8 @@ export function ReactionStage() {
           onClick={() => {
             setIsPlaying(false);
             setProgress(0);
+            lastFiredRef.current = {};
+            setBursts([]);
           }}
           className="p-3 bg-panel border border-border text-text hover:text-accent rounded-xl transition-colors"
         >
