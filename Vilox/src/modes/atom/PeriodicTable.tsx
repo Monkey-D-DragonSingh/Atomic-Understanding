@@ -83,7 +83,7 @@ export function PeriodicTable() {
   return (
     <div className="flex flex-col h-full overflow-y-auto px-4 py-6 md:px-8 custom-scrollbar items-center">
       <div className="w-full max-w-[960px] flex flex-col items-center">
-        <div className="w-full max-w-sm mb-6 shrink-0">
+        <div className="w-full max-w-sm mb-4 sm:mb-6 shrink-0 px-1">
           <SearchInput
             value={search}
             onChange={setSearch}
@@ -91,10 +91,10 @@ export function PeriodicTable() {
           />
         </div>
 
-        <div className="w-full">
+        <div className="w-full overflow-x-auto custom-scrollbar [-webkit-overflow-scrolling:touch] pb-2">
           <div
-            className="grid gap-1.5 w-full mx-auto"
-            style={{ gridTemplateColumns: 'repeat(18, minmax(0, 1fr))', gridAutoRows: 'minmax(0, 1fr)' }}
+            className="grid gap-1 sm:gap-1.5 mx-auto"
+            style={{ gridTemplateColumns: 'repeat(18, minmax(2.1rem, 1fr))', gridAutoRows: 'minmax(0, 1fr)', minWidth: '720px', width: '100%' }}
           >
             {ELEMENTS.map((el, index) => {
               const isMatch =

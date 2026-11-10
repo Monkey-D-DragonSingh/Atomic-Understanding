@@ -27,8 +27,8 @@ export function SegmentedControl<T extends string>({
             onClick={() => !isDisabled && onChange(opt.value)}
             disabled={isDisabled}
             aria-disabled={isDisabled}
-            className={`flex-1 transition-all duration-200 rounded-full font-medium flex items-center justify-center whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
-              isSm ? 'px-3.5 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+            className={`flex-none sm:flex-1 transition-all duration-200 rounded-full font-medium flex items-center justify-center whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
+              isSm ? 'px-3 sm:px-3.5 py-1.5 text-xs' : 'px-4 py-2 text-sm'
             } ${
               isDisabled
                 ? 'opacity-40 cursor-not-allowed text-text-dim'

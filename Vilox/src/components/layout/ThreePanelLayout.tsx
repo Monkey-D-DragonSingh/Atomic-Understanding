@@ -106,7 +106,8 @@ export function ThreePanelLayout({ leftPanel, centerPanel, rightPanel, offsetTop
       {hasLeft && (
         <button
           onClick={() => setLeftDrawerOpen(!leftDrawerOpen)}
-          className="absolute top-3 left-3 z-40 md:hidden glass-strong rounded-full p-2 text-text hover:text-accent transition-colors"
+          className="absolute top-2 left-2 z-40 md:hidden glass-strong rounded-full p-2.5 text-text hover:text-accent transition-colors shadow-glass"
+          aria-label={leftDrawerOpen ? 'Close panel' : 'Open panel'}
         >
           {leftDrawerOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -116,13 +117,13 @@ export function ThreePanelLayout({ leftPanel, centerPanel, rightPanel, offsetTop
         <>
           <aside
             className={`glass border-r border-border z-30 overflow-hidden
-              fixed left-0 top-[56px] bottom-0 w-[300px]
+              fixed left-0 top-[56px] bottom-0 w-[min(88vw,300px)]
               transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
               ${leftDrawerOpen ? 'translate-x-0' : '-translate-x-full'}
-              md:static md:top-auto md:bottom-auto md:h-full md:translate-x-0 md:transition-[width] md:duration-300 md:shrink-0
+              md:static md:top-auto md:bottom-auto md:h-full md:w-[300px] md:translate-x-0 md:transition-[width] md:duration-300 md:shrink-0
               ${leftCollapsed ? 'md:w-0' : 'md:w-[300px]'}`}
           >
-            <div className="h-full" style={{ width: 300 }}>
+            <div className="h-full w-full md:w-[300px]">
               {leftPanel}
             </div>
           </aside>
@@ -161,19 +162,20 @@ export function ThreePanelLayout({ leftPanel, centerPanel, rightPanel, offsetTop
 
           <button
             onClick={() => setRightDrawerOpen(!rightDrawerOpen)}
-            className="absolute top-3 right-3 z-40 lg:hidden glass-strong rounded-full p-2 text-text hover:text-accent transition-colors"
+            className="absolute top-2 right-2 z-40 lg:hidden glass-strong rounded-full p-2.5 text-text hover:text-accent transition-colors shadow-glass"
+            aria-label={rightDrawerOpen ? 'Close details' : 'Open details'}
           >
             {rightDrawerOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
 
           <aside
             className={`glass border-l border-border z-30 overflow-hidden
-              fixed right-0 top-[56px] bottom-0
+              fixed right-0 top-[56px] bottom-0 w-[min(92vw,360px)]
               transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
               ${rightDrawerOpen ? 'translate-x-0' : 'translate-x-full'}
-              lg:static lg:top-auto lg:bottom-auto lg:h-full lg:translate-x-0 lg:shrink-0
+              lg:static lg:top-auto lg:bottom-auto lg:h-full lg:w-auto lg:translate-x-0 lg:shrink-0
               ${rightCollapsed ? 'lg:transition-[width] lg:duration-300' : ''}`}
-            style={{ width: rightCollapsed ? 0 : currentWidth, maxWidth: '100%' }}
+            style={{ width: typeof window !== 'undefined' && window.innerWidth >= 1024 ? (rightCollapsed ? 0 : currentWidth) : undefined, maxWidth: '100%' }}
           >
             <div className="h-full relative">
               {!rightCollapsed && (

@@ -14,14 +14,16 @@ export function ReactionMode() {
   const [subMode, setSubMode] = useState<ReactionSubMode>('browse');
 
   const switcher = (
-    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
+    <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-5rem)] max-w-md px-1">
       <SegmentedControl<ReactionSubMode>
         options={[
-          { label: 'Browse Reactions', value: 'browse' },
-          { label: 'Build Reaction', value: 'build' },
+          { label: 'Browse', value: 'browse' },
+          { label: 'Build', value: 'build' },
         ]}
         value={subMode}
         onChange={setSubMode}
+        size="sm"
+        className="w-full"
       />
     </div>
   );

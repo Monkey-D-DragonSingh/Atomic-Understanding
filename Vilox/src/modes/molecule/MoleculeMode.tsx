@@ -13,14 +13,16 @@ export function MoleculeMode() {
   const [subMode, setSubMode] = useState<'gallery' | 'builder'>('builder');
 
   const switcher = (
-    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
+    <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-5rem)] max-w-md px-1">
       <SegmentedControl
         options={[
           { label: 'Gallery', value: 'gallery' },
-          { label: 'Interactive Builder', value: 'builder' }
+          { label: 'Builder', value: 'builder' }
         ]}
         value={subMode}
         onChange={setSubMode}
+        size="sm"
+        className="w-full"
       />
     </div>
   );
